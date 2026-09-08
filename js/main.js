@@ -6,6 +6,7 @@
 
 import CONFIG from './config.js?v=4';
 import { initChaos } from './chaos.js?v=4';
+import { initCRTAndThemes, initBGMPlayer, getConfetti } from './immersion.js?v=5';
 
 // ── State ──────────────────────────────────────────────
 let currentChapterId = 'ch-intro';
@@ -26,6 +27,9 @@ document.addEventListener('DOMContentLoaded', () => {
     bindWarning();
     bindStickerArchive();
     bindRevealSequence();
+    bindArchivistMascot();
+    initCRTAndThemes();
+    initBGMPlayer();
 });
 
 // ── Navigation ─────────────────────────────────────────
@@ -403,6 +407,10 @@ function bindRevealSequence() {
         document.getElementById('end-screen').classList.remove('hidden');
         document.getElementById('btn-show-end').classList.add('hidden');
     });
+
+    document.getElementById('btn-fire-confetti')?.addEventListener('click', () => {
+        getConfetti().fire(130);
+    });
 }
 
 function startRevealSequence() {
@@ -434,9 +442,12 @@ function startRevealSequence() {
         loadingEl.classList.add('hidden');
         revealEl.classList.remove('hidden');
 
+        // Launch Celebration Confetti Cannon!
+        getConfetti().fire(180);
+
         // Typewriter effect for "FILE FOUND" message
         typeWriter(fileMsg, `> FILE FOUND: BIRTHDAY_GIRL.EXE`, 50, () => {
-            showEndBtn.style.display = 'inline-block';
+            showEndBtn.style.display = 'inline-flex';
         });
     }, 3100);
 }
@@ -474,3 +485,134 @@ function buildAudioPlayer(src, label, id) {
         </div>
     `;
 }
+
+// ── Interactive Archivist Mascot ───────────────────────
+function bindArchivistMascot() {
+    const widget = document.getElementById('archivist-widget');
+    const bubbleText = document.getElementById('archivist-text');
+    const bubbleTag = document.getElementById('archivist-tag');
+    const bubbleCount = document.getElementById('archivist-count');
+    const avatar = document.getElementById('archivist-avatar');
+
+    if (!widget || !bubbleText || !avatar) return;
+
+    let clickCount = 0;
+    let quoteIndex = 0;
+
+    const ARCHIVIST_QUOTES = [
+        "Psst... I have catalogued every sticker in this database. 98% are completely unhinged.",
+        "Archivist Log: Extreme balls detected in sector 4. Proceed at your own peril.",
+        "I was hired to maintain order among the six witnesses. I have miserably failed.",
+        "CLASSIFIED INTEL: The WITS newsletter was rejected, but this archive is 100% verified.",
+        "Warning: The subject's sticker deployment rate exceeds international safety standards.",
+        "My surveillance report indicates zero normal conversations have occurred here.",
+        "Meow. (Archivist Translation: Prepare your emotional stability for the final chapter).",
+        "Top Secret: Six people spent way too much time compiling this evidence for [HER NAME].",
+        "File #042 status: 100% chance of falling cats, dogs, and questionable memories.",
+        "Stop interrogating me and hit 'ENTER THE ARCHIVES' already!"
+    ];
+
+    const AVATARS = ["🕵️🐱", "🔍😸", "⚡🙀", "🕶️😼", "📂😹", "🚨😾", "👑😺", "🛸🐱"];
+    const PARTICLES = ["🐾", "✨", "🔍", "⭐", "📂", "🐱", "🐶"];
+
+    // Procedural Web Audio Synth for retro squeaks/meows
+    let audioCtx = null;
+    function playArchivistBeep(frequency = 580, type = 'sine') {
+        try {
+            const AudioContext = window.AudioContext || window.webkitAudioContext;
+            if (!AudioContext) return;
+            if (!audioCtx) audioCtx = new AudioContext();
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.type = type;
+            
+            // Cute pitch sweep (meow / chirp effect)
+            const now = audioCtx.currentTime;
+            osc.frequency.setValueAtTime(frequency, now);
+            osc.frequency.exponentialRampToValueAtTime(frequency * 1.5, now + 0.08);
+            osc.frequency.exponentialRampToValueAtTime(frequency * 0.8, now + 0.18);
+
+            gain.gain.setValueAtTime(0.12, now);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + 0.2);
+
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.start(now);
+            osc.stop(now + 0.22);
+        } catch (e) {
+            // Audio context not allowed or unsupported; graceful ignore
+        }
+    }
+
+    // Spawn cute floating particle
+    function spawnSpark(e) {
+        const rect = widget.getBoundingClientRect();
+        const spark = document.createElement('div');
+        spark.className = 'archivist-spark';
+        spark.textContent = PARTICLES[Math.floor(Math.random() * PARTICLES.length)];
+
+        const x = (e?.clientX || rect.left + rect.width / 2);
+        const y = (e?.clientY || rect.top + rect.height / 2);
+
+        spark.style.left = `${x}px`;
+        spark.style.top = `${y}px`;
+
+        const tx = (Math.random() - 0.5) * 120;
+        const ty = -40 - Math.random() * 60;
+        const tr = (Math.random() - 0.5) * 90;
+
+        spark.style.setProperty('--tx', `${tx}px`);
+        spark.style.setProperty('--ty', `${ty}px`);
+        spark.style.setProperty('--tr', `${tr}deg`);
+
+        document.body.appendChild(spark);
+        setTimeout(() => spark.remove(), 750);
+    }
+
+    function handleInteraction(e) {
+        clickCount++;
+        quoteIndex = (quoteIndex + 1) % ARCHIVIST_QUOTES.length;
+
+        // Sound tone variation based on clicks
+        const baseFreq = 520 + (clickCount % 5) * 70;
+        playArchivistBeep(baseFreq, clickCount % 3 === 0 ? 'triangle' : 'sine');
+
+        // Avatar change & reaction animation
+        avatar.textContent = AVATARS[Math.floor(Math.random() * AVATARS.length)];
+        avatar.classList.remove('react-click');
+        void avatar.offsetWidth; // trigger reflow
+        avatar.classList.add('react-click');
+
+        // Update bubble text & count
+        if (bubbleCount) bubbleCount.textContent = `CLICKS: ${clickCount}`;
+        if (bubbleTag) {
+            const logNum = String(clickCount).padStart(3, '0');
+            bubbleTag.textContent = clickCount >= 10 ? `🚨 ARCHIVIST OVERLOAD #${logNum}` : `ARCHIVIST LOG #${logNum}`;
+        }
+
+        // Special milestone messages
+        if (clickCount === 5) {
+            bubbleText.textContent = "⚠️ EVIDENCE OVERLOAD: The Archivist is getting overwhelmed by your curiosity!";
+        } else if (clickCount >= 10 && clickCount % 5 === 0) {
+            bubbleText.textContent = "💥 MAXIMUM CHAOS REACHED: Enter the archives before the cat explodes!";
+        } else {
+            bubbleText.textContent = ARCHIVIST_QUOTES[quoteIndex];
+        }
+
+        // Spawn multiple particles
+        for (let i = 0; i < (clickCount >= 5 ? 4 : 2); i++) {
+            setTimeout(() => spawnSpark(e), i * 60);
+        }
+    }
+
+    widget.addEventListener('click', handleInteraction);
+    widget.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            handleInteraction(e);
+        }
+    });
+}
+

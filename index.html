@@ -8,10 +8,43 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600;700&family=Permanent+Marker&family=VT323&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/chapters.css">
+    <link rel="stylesheet" href="css/style.css?v=8">
+    <link rel="stylesheet" href="css/chapters.css?v=8">
 </head>
 <body>
+<!-- ░░░ IMMERSION LAYERS ░░░ -->
+<div id="crt-overlay" class="crt-overlay" aria-hidden="true"></div>
+<canvas id="confetti-canvas" class="confetti-canvas" aria-hidden="true"></canvas>
+
+<!-- ░░░ RETRO HUD & IMMERSION CONTROLS ░░░ -->
+<aside id="retro-hud" class="retro-hud" aria-label="System Immersion HUD">
+    <div class="hud-item cassette-item" id="hud-cassette" title="Retro 8-Bit Birthday Chiptune BGM">
+        <button id="btn-toggle-bgm" class="hud-btn bgm-btn" aria-label="Toggle Retro Birthday BGM">
+            <span class="cassette-icon">📼</span>
+            <span class="cassette-reels" aria-hidden="true">
+                <span class="reel reel-left"></span>
+                <span class="reel reel-right"></span>
+            </span>
+            <span class="hud-label">BGM: OFF</span>
+            <span class="eq-bars" aria-hidden="true">
+                <span class="eq-bar"></span><span class="eq-bar"></span><span class="eq-bar"></span>
+            </span>
+        </button>
+    </div>
+    <div class="hud-item">
+        <button id="btn-toggle-crt" class="hud-btn crt-btn" aria-label="Toggle CRT Scanline Filter">
+            <span class="hud-icon">📺</span>
+            <span class="hud-label">CRT: OFF</span>
+        </button>
+    </div>
+    <div class="hud-item">
+        <button id="btn-toggle-theme" class="hud-btn theme-btn" aria-label="Toggle Dossier Theme">
+            <span class="hud-icon">🎨</span>
+            <span class="hud-label">ORIGINAL</span>
+        </button>
+    </div>
+</aside>
+
 <div id="app-container">
 
     <!-- ░░░ CHAOS LAYER — floating background elements ░░░ -->
@@ -24,8 +57,8 @@
         <div class="content-wrapper centered">
             <p class="subtitle">LAST1S PRESENTS</p>
 
-            <h1 class="main-title glitch-heading" data-text="A Highly Unofficial Documentation of [HER NAME]">
-                A Highly Unofficial Documentation of <span class="placeholder">[HER NAME]</span>
+            <h1 class="main-title glitch-heading">
+                A Highly Unofficial Documentation of <span class="placeholder">ANANYA NIGGI</span>
             </h1>
 
             <p class="subtext">Six people. One questionable amount of evidence.</p>
@@ -34,7 +67,33 @@
                 ENTER THE ARCHIVES &rarr;
             </button>
 
-            <div class="mascot-area" title="The Archivist is watching" aria-hidden="true">🐱</div>
+            <!-- Interactive Archivist Mascot Widget -->
+            <div id="archivist-widget" class="archivist-widget" role="button" tabindex="0" aria-label="Interact with The Archivist" title="Click The Archivist for classified logs">
+                <div class="archivist-bubble" id="archivist-bubble">
+                    <div class="bubble-header">
+                        <span class="bubble-tag" id="archivist-tag">ARCHIVIST LOG #001</span>
+                        <span class="bubble-count" id="archivist-count">CLICKS: 0</span>
+                    </div>
+                    <p class="bubble-text" id="archivist-text">Psst... click me for classified intel.</p>
+                </div>
+                <div class="archivist-badge">
+                    <div class="archivist-avatar-frame">
+                        <div class="archivist-avatar" id="archivist-avatar">🕵️🐱</div>
+                        <span class="archivist-radar-ring" aria-hidden="true"></span>
+                    </div>
+                    <div class="archivist-details">
+                        <div class="archivist-header">
+                            <span class="archivist-name">THE ARCHIVIST</span>
+                            <span class="archivist-live-badge"><span class="status-dot"></span> LIVE</span>
+                        </div>
+                        <div class="archivist-dept">DEPT. OF QUESTIONABLE EVIDENCE</div>
+                    </div>
+                    <div class="archivist-tap-hint">
+                        <span>INTERROGATE</span>
+                        <span class="tap-icon">🔍</span>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -51,7 +110,7 @@
                     <li>excessive amounts of nonsense</li>
                     <li>questionable stickers</li>
                     <li>evidence collected without proper consent</li>
-                    <li>six people who think they know <span class="placeholder">[HER NAME]</span> very well</li>
+                    <li>six people who think they know <span class="placeholder">Ananya</span> very well</li>
                     <li>absolutely no objectivity whatsoever</li>
                     <li>balls</li>
                     <li>more balls</li>
@@ -255,23 +314,28 @@
             <div id="reveal-content" class="hidden" style="text-align:center;">
                 <p class="terminal-text" id="file-found-msg" style="font-size:1.4rem;"></p>
 
-                <h1 class="reveal-huge-title glitch-heading" id="reveal-title" data-text="HAPPY BIRTHDAY, [HER NAME]">
-                    HAPPY BIRTHDAY, <span class="placeholder">[HER NAME]</span>
+                <h1 class="reveal-huge-title" id="reveal-title">
+                    HAPPY BIRTHDAY, <span class="placeholder">ANANYA</span>
                 </h1>
 
                 <!-- Audio buttons injected by JS -->
                 <div id="bday-audio-players" style="margin: 1.5rem 0;"></div>
 
-                <button id="btn-show-end" class="primary-btn" style="display:none;">
-                    OPEN FINAL FILE &rarr;
-                </button>
+                <div class="reveal-actions">
+                    <button id="btn-fire-confetti" class="secondary-btn confetti-btn" aria-label="Re-fire Celebration Confetti">
+                        🎉 CELEBRATION CANNON 🎉
+                    </button>
+                    <button id="btn-show-end" class="primary-btn" style="display:none;">
+                        OPEN FINAL FILE &rarr;
+                    </button>
+                </div>
             </div>
 
             <!-- End screen shown last -->
             <div id="end-screen" class="hidden" style="text-align:center;">
                 <hr style="border-color: rgba(0,255,65,0.3); margin: 1.5rem 0;">
                 <p class="terminal-text">END OF DOCUMENTATION</p>
-                <p>Subject: <span class="placeholder">[HER NAME]</span></p>
+                <p>Subject: <span class="placeholder">ANANYA</span></p>
                 <p>Status: Still being monitored</p>
                 <p>Next update: Unknown</p>
                 <p>Happy Birthday.</p>
@@ -295,7 +359,7 @@
             </p>
             <h2>CERTIFICATE OF ACHIEVEMENT</h2>
             <p style="margin: 1.5rem 0; line-height: 1.8; font-size: 1.1rem;">
-                This certifies that <span class="placeholder">[HER NAME]</span>
+                This certifies that <span class="placeholder">ANANYA</span>
                 has successfully survived another year of being herself.
             </p>
             <p style="margin-bottom: 0.5rem;">
@@ -314,6 +378,6 @@
 
 </div><!-- #app-container -->
 
-<script type="module" src="js/main.js?v=4"></script>
+<script type="module" src="js/main.js?v=8"></script>
 </body>
 </html>
