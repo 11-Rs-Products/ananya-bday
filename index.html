@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Highly Unofficial Documentation</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/chapters.css">
+</head>
+<body>
+    <div id="app-container">
+        <!-- Audio Player (Hidden UI, managed by JS) -->
+        <audio id="global-audio-player"></audio>
+
+        <!-- Chapter 1: Intro / Opening Screen -->
+        <section id="ch-intro" class="chapter active">
+            <div class="content-wrapper centered">
+                <p class="subtitle">LAST1S PRESENTS</p>
+                <h1 class="main-title">A Highly Unofficial Documentation of <span class="placeholder">[HER NAME]</span></h1>
+                <p class="subtext">Six people. One questionable amount of evidence.</p>
+                <button id="btn-enter-archives" class="primary-btn">ENTER THE ARCHIVES &rarr;</button>
+            </div>
+        </section>
+
+        <!-- Chapter 2: Warning -->
+        <section id="ch-warning" class="chapter hidden">
+            <div class="content-wrapper centered chaotic">
+                <h2 class="warning-title">WARNING</h2>
+                <div class="warning-text">
+                    <p>The following website contains:</p>
+                    <ul>
+                        <li>excessive amounts of nonsense</li>
+                        <li>questionable stickers</li>
+                        <li>evidence collected without proper consent</li>
+                        <li>six people who think they know <span class="placeholder">[HER NAME]</span> very well</li>
+                        <li>absolutely no objectivity whatsoever</li>
+                    </ul>
+                </div>
+                <p class="proceed-text">Proceed?</p>
+                <div class="warning-actions">
+                    <button id="btn-warning-no" class="primary-btn no-btn">NO</button>
+                    <!-- Yes button will be injected/shown dynamically -->
+                    <button id="btn-warning-yes" class="primary-btn yes-btn hidden">YES, LET ME IN &rarr;</button>
+                </div>
+                <div id="fuck-you-msg" class="hidden">FUCK YOU.</div>
+            </div>
+        </section>
+
+        <!-- Chapter 3: The Subject -->
+        <section id="ch-subject" class="chapter hidden">
+            <div class="content-wrapper file-folder">
+                <h2>SUBJECT PROFILE</h2>
+                <!-- Filled by JS -->
+                <div id="subject-content"></div>
+                <button class="next-chapter-btn primary-btn" data-next="ch-stickers">NEXT &rarr;</button>
+            </div>
+        </section>
+
+        <!-- Chapter 4: Sticker Archives -->
+        <section id="ch-stickers" class="chapter hidden">
+            <div class="content-wrapper centered">
+                <h2>THE ARCHIVES</h2>
+                <p class="italic-text">"An investigation into the most important form of communication known to mankind."</p>
+                
+                <div id="sticker-display-area" class="hidden">
+                    <h3 id="sticker-category"></h3>
+                    <div class="sticker-container">
+                        <img id="current-sticker-img" src="" alt="Sticker Exhibit" style="max-width:200px; min-height:200px; background:#ddd;">
+                    </div>
+                    <p id="sticker-description"></p>
+                    <p id="sticker-audio-status" class="audio-status">Audio Playing...</p>
+                    <button id="btn-next-sticker" class="primary-btn hidden">CLICK TO CONTINUE</button>
+                </div>
+                
+                <button id="btn-start-stickers" class="primary-btn">BEGIN INVESTIGATION</button>
+                <button id="btn-finish-stickers" class="next-chapter-btn primary-btn hidden" data-next="ch-witnesses">PROCEED TO WITNESSES &rarr;</button>
+            </div>
+        </section>
+
+        <!-- Chapter 5: Witnesses -->
+        <section id="ch-witnesses" class="chapter hidden">
+            <div class="content-wrapper file-folder">
+                <h2>SIX PEOPLE WERE THERE.</h2>
+                <p>Six witnesses. Six perspectives. One birthday girl.</p>
+                <div id="witnesses-container" class="grid-layout">
+                    <!-- Filled by JS -->
+                </div>
+                <button class="next-chapter-btn primary-btn" data-next="ch-evidence">EXAMINE EVIDENCE &rarr;</button>
+            </div>
+        </section>
+
+        <!-- Chapter 6: The Evidence -->
+        <section id="ch-evidence" class="chapter hidden">
+            <div class="content-wrapper scrapbook">
+                <h2>THE EVIDENCE</h2>
+                <div id="evidence-board" class="masonry-layout">
+                    <!-- Filled by JS -->
+                </div>
+                <button class="next-chapter-btn primary-btn" data-next="ch-serious">PROCEED &rarr;</button>
+            </div>
+        </section>
+
+        <!-- Chapter 7: The Serious Part -->
+        <section id="ch-serious" class="chapter hidden calm-theme">
+            <div class="content-wrapper centered">
+                <div id="serious-text-container">
+                    <!-- Messages will appear one by one based on JS -->
+                </div>
+                <div class="audio-controls">
+                    <p id="serious-audio-status">Listen to voice notes</p>
+                    <button id="btn-play-serious-audio" class="secondary-btn">Play Message</button>
+                </div>
+                <button class="next-chapter-btn primary-btn" data-next="ch-lore">CONTINUE &rarr;</button>
+            </div>
+        </section>
+
+        <!-- Chapter 8: Last1s Lore -->
+        <section id="ch-lore" class="chapter hidden">
+            <div class="content-wrapper">
+                <h2>LAST1S</h2>
+                <p class="subtitle">One organization. Six idiots. Far too many memories.</p>
+                <div id="lore-timeline" class="timeline">
+                    <!-- Filled by JS -->
+                </div>
+                <p class="disclaimer">* Historical accuracy may be compromised.</p>
+                <button class="next-chapter-btn primary-btn" data-next="ch-future">THE FUTURE &rarr;</button>
+            </div>
+        </section>
+
+        <!-- Chapter 9: The Future -->
+        <section id="ch-future" class="chapter hidden calm-theme">
+            <div class="content-wrapper centered">
+                <div id="future-text-container">
+                    <!-- Filled by JS -->
+                </div>
+                <div id="friends-grid" class="friends-grid">
+                    <!-- Filled by JS -->
+                </div>
+                <button class="next-chapter-btn primary-btn" data-next="ch-reveal">INITIATE FINAL SEQUENCE</button>
+            </div>
+        </section>
+
+        <!-- Chapter 10: Birthday Reveal -->
+        <section id="ch-reveal" class="chapter hidden dramatic-theme">
+            <div class="content-wrapper centered">
+                <div id="loading-sequence">
+                    <p>FINAL FILE LOADING...</p>
+                    <div class="progress-bar"><div class="fill"></div></div>
+                </div>
+                <div id="reveal-content" class="hidden">
+                    <p class="system-msg">FILE FOUND: BIRTHDAY_GIRL.EXE</p>
+                    <h1 id="reveal-title" class="huge-title"></h1>
+                    <button id="btn-play-bday-audio" class="primary-btn">PLAY FINAL MESSAGE</button>
+                </div>
+                <div id="end-screen" class="hidden">
+                    <h2>END OF DOCUMENTATION</h2>
+                    <p>Subject: <span class="placeholder">[HER NAME]</span></p>
+                    <p>Status: Still being monitored</p>
+                    <p>Next update: Unknown</p>
+                    <p>Happy Birthday.<br>— The six idiots from Last1s</p>
+                    <button class="secondary-btn" onclick="location.reload()">Replay from beginning</button>
+                    <button id="btn-secret-file" class="secondary-btn">Open Secret File</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Chapter 11: Secret File -->
+        <section id="ch-secret" class="chapter hidden">
+            <div class="content-wrapper centered certificate">
+                <h2>CERTIFICATE OF ACHIEVEMENT</h2>
+                <p>This certifies that <span class="placeholder">[HER NAME]</span> has successfully survived another year of being herself.</p>
+                <p class="issued-by">Issued by: Last1s Department of Extremely Serious Affairs</p>
+            </div>
+        </section>
+
+    </div>
+
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>

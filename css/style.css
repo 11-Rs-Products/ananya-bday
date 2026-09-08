@@ -1,0 +1,179 @@
+/* css/style.css */
+:root {
+    --bg-color: #fcf9f2;
+    --text-color: #222;
+    --primary-color: #ff4757;
+    --secondary-color: #2f3542;
+    --font-main: 'Courier New', Courier, monospace;
+    --font-heading: 'Impact', sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-main);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+#app-container {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.chapter {
+    display: none;
+    width: 100%;
+    min-height: 100vh;
+    padding: 2rem 1rem;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.chapter.active {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.content-wrapper {
+    max-width: 800px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.centered {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Typography */
+h1.main-title {
+    font-family: var(--font-heading);
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+}
+
+h2 {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.subtitle, .subtext {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+ul {
+    text-align: left;
+    margin-left: 2rem;
+    margin-bottom: 1rem;
+}
+
+.placeholder {
+    background-color: yellow;
+    color: black;
+    padding: 0 5px;
+    font-weight: bold;
+}
+
+/* Buttons */
+.primary-btn, .secondary-btn {
+    padding: 12px 24px;
+    font-size: 1.2rem;
+    font-family: var(--font-main);
+    font-weight: bold;
+    cursor: pointer;
+    border: 2px solid var(--text-color);
+    background: transparent;
+    transition: all 0.2s;
+    margin-top: 1rem;
+}
+
+.primary-btn:hover {
+    background: var(--text-color);
+    color: var(--bg-color);
+}
+
+.secondary-btn {
+    border: 1px dashed var(--text-color);
+}
+
+.secondary-btn:hover {
+    background: #e0e0e0;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Specific layout styles */
+.grid-layout {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.masonry-layout {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+/* Warning Section Specific */
+#fuck-you-msg {
+    font-family: var(--font-heading);
+    font-size: 4rem;
+    color: var(--primary-color);
+    margin: 2rem 0;
+    animation: shake 0.5s;
+}
+
+.warning-text {
+    max-width: 400px;
+    margin: 0 auto;
+    text-align: left;
+    background: #fff;
+    padding: 1rem;
+    border: 1px solid red;
+}
+
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    50% { transform: translateX(10px); }
+    75% { transform: translateX(-10px); }
+    100% { transform: translateX(0); }
+}
+
+/* Mobile adjustments */
+@media (max-width: 600px) {
+    h1.main-title {
+        font-size: 2rem;
+    }
+    h2 {
+        font-size: 1.8rem;
+    }
+    .primary-btn {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}

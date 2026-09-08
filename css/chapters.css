@@ -1,0 +1,172 @@
+/* css/chapters.css */
+/* Visual distinctions between chapters */
+
+/* File Folder Style (Subject, Witnesses) */
+.file-folder {
+    background: #fff;
+    border: 2px solid #ccc;
+    padding: 2rem;
+    box-shadow: 5px 5px 0px rgba(0,0,0,0.1);
+    position: relative;
+    color: #333;
+}
+
+.file-folder::before {
+    content: "CONFIDENTIAL";
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: red;
+    border: 2px solid red;
+    padding: 2px 5px;
+    font-weight: bold;
+    transform: rotate(15deg);
+}
+
+.stat-bar-container {
+    margin: 10px 0;
+    text-align: left;
+}
+.stat-bar {
+    width: 100%;
+    background: #eee;
+    height: 20px;
+    border: 1px solid #333;
+    margin-top: 5px;
+}
+.stat-fill {
+    height: 100%;
+    background: var(--primary-color);
+}
+
+/* Scrapbook Style (Evidence) */
+.scrapbook {
+    background: #f4ecd8;
+    padding: 2rem;
+    border: 10px solid #fff;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    color: #333;
+}
+
+.polaroid {
+    background: white;
+    padding: 10px 10px 40px 10px;
+    box-shadow: 2px 4px 8px rgba(0,0,0,0.2);
+    transform: rotate(-2deg);
+    transition: transform 0.3s;
+    margin-bottom: 20px;
+}
+.polaroid:nth-child(even) {
+    transform: rotate(3deg);
+}
+.polaroid:hover {
+    transform: scale(1.05) rotate(0deg);
+    z-index: 10;
+    position: relative;
+}
+.polaroid img {
+    width: 100%;
+    height: auto;
+    border: 1px solid #ddd;
+}
+.polaroid-caption {
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    margin-top: 10px;
+    text-align: center;
+}
+
+/* Calm/Emotional Theme (Serious, Future) */
+.calm-theme {
+    background-color: #2f3542;
+    color: #f1f2f6;
+}
+.calm-theme .primary-btn {
+    border-color: #f1f2f6;
+    color: #f1f2f6;
+}
+.calm-theme .primary-btn:hover {
+    background: #f1f2f6;
+    color: #2f3542;
+}
+.calm-theme .placeholder {
+    background-color: rgba(255,255,255,0.2);
+    color: white;
+}
+
+/* Dramatic Theme (Reveal) */
+.dramatic-theme {
+    background-color: #000;
+    color: #0f0;
+}
+.dramatic-theme .primary-btn {
+    border-color: #0f0;
+    color: #0f0;
+}
+.dramatic-theme .primary-btn:hover {
+    background: #0f0;
+    color: #000;
+}
+
+.huge-title {
+    font-size: 4rem;
+    text-align: center;
+    text-shadow: 0 0 10px #0f0;
+    margin: 2rem 0;
+}
+.system-msg {
+    font-family: monospace;
+    font-size: 1.2rem;
+}
+.progress-bar {
+    width: 300px;
+    height: 20px;
+    border: 1px solid #0f0;
+    margin: 20px auto;
+}
+.progress-bar .fill {
+    width: 0%;
+    height: 100%;
+    background: #0f0;
+    animation: load 3s forwards;
+}
+@keyframes load {
+    to { width: 100%; }
+}
+
+/* Certificate (Easter Egg) */
+.certificate {
+    background: #fffbe0;
+    border: 10px double #c0a062;
+    padding: 3rem;
+    font-family: 'Times New Roman', Times, serif;
+    color: #333;
+}
+.issued-by {
+    margin-top: 2rem;
+    font-style: italic;
+}
+
+/* Audio Status */
+.audio-status {
+    color: var(--primary-color);
+    font-style: italic;
+    margin: 10px 0;
+    animation: blink 1s infinite;
+}
+@keyframes blink {
+    50% { opacity: 0.5; }
+}
+
+.timeline-item {
+    margin: 10px 0;
+    padding-left: 20px;
+    border-left: 2px solid var(--primary-color);
+    text-align: left;
+}
+.friends-grid {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin: 20px 0;
+    flex-wrap: wrap;
+}
