@@ -1,20 +1,63 @@
-import CONFIG from './config.js';
+/**
+ * js/main.js — Core application controller
+ * Handles: navigation, content population, warning logic,
+ * sticker archive, serious part text reveal, final reveal sequence.
+ */
 
-document.addEventListener("DOMContentLoaded", () => {
-    initNavigation();
-    populateContent();
-    setupWarningLogic();
-    setupStickerArchiveLogic();
-    setupAudioSystemPlaceholders();
-    setupFinalReveal();
+import CONFIG from './config.js?v=4';
+import { initChaos } from './chaos.js?v=4';
+
+// ── State ──────────────────────────────────────────────
+let currentChapterId = 'ch-intro';
+let currentStickerIndex = 0;
+let stickerAudioSimulationTimer = null;
+
+// ── Init ───────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+    initChaos();
+    populateSubject();
+    populateWitnesses();
+    populateEvidence();
+    populateSerious();
+    populateLore();
+    populateFuture();
+    populateBirthdayReveal();
+    bindNavigation();
+    bindWarning();
+    bindStickerArchive();
+    bindRevealSequence();
 });
 
-function initNavigation() {
-    const nextBtns = document.querySelectorAll('.next-chapter-btn');
-    nextBtns.forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            const nextId = e.target.getAttribute('data-next');
-            goToChapter(nextId);
+// ── Navigation ─────────────────────────────────────────
+function goToChapter(chapterId) {
+    const prev = document.getElementById(currentChapterId);
+    const next = document.getElementById(chapterId);
+    if (!next) return;
+
+    if (prev) {
+        prev.classList.remove('active');
+        prev.classList.add('hidden');
+    }
+
+    next.classList.remove('hidden');
+    next.classList.add('active');
+    currentChapterId = chapterId;
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    // Notify chaos engine
+    window.dispatchEvent(new CustomEvent('chapterChanged', { detail: { chapterId } }));
+
+    // Chapter-specific triggers
+    if (chapterId === 'ch-serious') triggerSeriousReveal();
+    if (chapterId === 'ch-future') triggerFutureReveal();
+}
+
+function bindNavigation() {
+    document.querySelectorAll('[data-next]').forEach(btn => {
+        btn.addEventListener('click', e => {
+            const target = e.currentTarget.getAttribute('data-next');
+            goToChapter(target);
         });
     });
 
@@ -22,106 +65,13 @@ function initNavigation() {
         goToChapter('ch-warning');
     });
 
-    document.getElementById('btn-secret-file').addEventListener('click', () => {
+    document.getElementById('btn-secret-file')?.addEventListener('click', () => {
         goToChapter('ch-secret');
     });
 }
 
-function goToChapter(chapterId) {
-    document.querySelectorAll('.chapter').forEach(ch => ch.classList.remove('active', 'hidden'));
-    document.querySelectorAll('.chapter').forEach(ch => {
-        if(ch.id !== chapterId) {
-            ch.classList.add('hidden');
-        } else {
-            ch.classList.add('active');
-        }
-    });
-    
-    // Auto-scroll to top when chapter changes
-    window.scrollTo(0,0);
-}
-
-function populateContent() {
-    // Subject Profile
-    const subContainer = document.getElementById('subject-content');
-    let statsHtml = CONFIG.subject.stats.map(s => `
-        <div class="stat-bar-container">
-            <p>${s.label}</p>
-            <div class="stat-bar"><div class="stat-fill" style="width: ${s.percentage}%"></div></div>
-        </div>
-    `).join('');
-    
-    subContainer.innerHTML = `
-        <br>
-        <h3>Known Aliases:</h3>
-        <p>${CONFIG.subject.aliases.join(', ')}</p>
-        <br>
-        <h3>Occupation:</h3>
-        <p>${CONFIG.subject.occupation}</p>
-        <br>
-        <h3>Special Abilities:</h3>
-        <ul>${CONFIG.subject.specialAbilities.map(a => `<li>${a}</li>`).join('')}</ul>
-        <br>
-        <h3>Statistics:</h3>
-        ${statsHtml}
-        <br>
-    `;
-
-    // Witnesses
-    const witContainer = document.getElementById('witnesses-container');
-    CONFIG.witnesses.forEach(w => {
-        witContainer.innerHTML += `
-            <div class="witness-card" style="border:1px solid #eee; padding:10px; margin-bottom:10px;">
-                <img src="${w.image}" alt="${w.name}" style="width:100px; height:100px; background:#ccc; border-radius:50%;">
-                <h4>${w.name}</h4>
-                <p><strong>${w.role}</strong></p>
-                <p><em>${w.context}</em></p>
-                <p>"${w.description}"</p>
-            </div>
-        `;
-    });
-
-    // Evidence Board
-    const evContainer = document.getElementById('evidence-board');
-    CONFIG.evidence.forEach(e => {
-        evContainer.innerHTML += `
-            <div class="polaroid">
-                <img src="${e.image}" alt="Evidence" style="min-height: 150px; background:#eee;">
-                <div class="polaroid-caption">
-                    <strong>${e.title}</strong><br>
-                    ${e.context}
-                </div>
-            </div>
-        `;
-    });
-
-    // Serious Part Text
-    const serContainer = document.getElementById('serious-text-container');
-    CONFIG.seriousPart.text.forEach(t => {
-        serContainer.innerHTML += `<p style="margin-bottom: 1rem;">${t}</p>`;
-    });
-
-    // Lore Timeline
-    const loreContainer = document.getElementById('lore-timeline');
-    CONFIG.last1sLore.forEach((l, index) => {
-        loreContainer.innerHTML += `<div class="timeline-item"><strong>Stage ${index + 1}:</strong> ${l}</div>`;
-    });
-
-    // Future Part Text
-    const futContainer = document.getElementById('future-text-container');
-    CONFIG.futurePart.text.forEach(t => {
-        futContainer.innerHTML += `<p style="margin-bottom: 1rem;">${t}</p>`;
-    });
-    const friendsGrid = document.getElementById('friends-grid');
-    CONFIG.witnesses.forEach(w => {
-        friendsGrid.innerHTML += `<div style="padding: 10px; border: 1px solid #fff;"><strong>${w.name}</strong></div>`;
-    });
-
-    // Reveal
-    document.getElementById('reveal-title').innerHTML = CONFIG.birthdayReveal.title;
-}
-
-function setupWarningLogic() {
+// ── Warning Screen Logic ───────────────────────────────
+function bindWarning() {
     const noBtn = document.getElementById('btn-warning-no');
     const yesBtn = document.getElementById('btn-warning-yes');
     const fuckYouMsg = document.getElementById('fuck-you-msg');
@@ -129,8 +79,12 @@ function setupWarningLogic() {
     noBtn.addEventListener('click', () => {
         // Show FUCK YOU
         fuckYouMsg.classList.remove('hidden');
-        
-        // Wait 1.5 seconds, then show YES
+
+        // Disable NO to prevent spam (but don't hide it)
+        noBtn.disabled = true;
+        noBtn.style.opacity = '0.5';
+
+        // After 1.5s reveal YES
         setTimeout(() => {
             yesBtn.classList.remove('hidden');
         }, 1500);
@@ -141,84 +95,382 @@ function setupWarningLogic() {
     });
 }
 
-function setupStickerArchiveLogic() {
-    const startBtn = document.getElementById('btn-start-stickers');
-    const finishBtn = document.getElementById('btn-finish-stickers');
-    const nextStickerBtn = document.getElementById('btn-next-sticker');
-    const displayArea = document.getElementById('sticker-display-area');
-    
-    let currentStickerIndex = 0;
+// ── Populate: Subject Profile ──────────────────────────
+function populateSubject() {
+    const container = document.getElementById('subject-content');
+    const { name, aliases, occupation, specialAbilities, stats } = CONFIG.subject;
+
+    const abilitiesHtml = specialAbilities.map(a => `<li>${a}</li>`).join('');
+    const statsHtml = stats.map(s => {
+        if (s.overflow) {
+            // Liquid dripping overflow bar
+            return `
+                <div class="stat-bar-container overflow-stat">
+                    <div class="stat-bar-header">
+                        <span class="stat-bar-label">
+                            ${s.label}
+                            <span class="overflow-label">⚠️ OVERFLOW (containment failed)</span>
+                        </span>
+                        <span class="stat-bar-value overflow-value">${s.percentage}%</span>
+                    </div>
+                    <div class="stat-overflow-wrapper">
+                        <div class="stat-bar overflow-bar">
+                            <div class="stat-fill overflow-fill" style="width:100%"></div>
+                        </div>
+                        <div class="liquid-drip-system" aria-hidden="true">
+                            <div class="drip-hang hang-1"></div>
+                            <div class="drip-hang hang-2"></div>
+                            <div class="liquid-drop drop-1"></div>
+                            <div class="liquid-drop drop-2"></div>
+                            <div class="liquid-drop drop-3"></div>
+                            <div class="liquid-drop drop-4"></div>
+                            <div class="liquid-splash"></div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+        return `
+            <div class="stat-bar-container">
+                <div class="stat-bar-header">
+                    <span class="stat-bar-label">${s.label}</span>
+                    <span class="stat-bar-value">${s.percentage}%</span>
+                </div>
+                <div class="stat-bar">
+                    <div class="stat-fill" style="width:${Math.min(s.percentage, 100)}%"></div>
+                </div>
+            </div>
+        `;
+    }).join('');
+
+    container.innerHTML = `
+        <p style="margin-bottom:1.2rem;">
+            <strong>FULL NAME:</strong> ${name}<br>
+            <strong>KNOWN ALIASES:</strong> ${aliases.join(', ')}<br>
+            <strong>OCCUPATION:</strong> ${occupation}
+        </p>
+
+        <h3>Special Abilities</h3>
+        <ul style="margin-bottom:1.5rem;">${abilitiesHtml}</ul>
+
+        <h3>Threat-Level Assessment</h3>
+        ${statsHtml}
+    `;
+}
+
+// ── Populate: Witnesses ────────────────────────────────
+function populateWitnesses() {
+    const container = document.getElementById('witnesses-container');
+    container.innerHTML = '';
+
+    CONFIG.witnesses.forEach(w => {
+        container.innerHTML += `
+            <div class="witness-card">
+                <img src="${w.image}"
+                     alt="Photo of ${w.name}"
+                     onerror="this.style.display='none'">
+                <h4>${w.name}</h4>
+                <span class="role-tag">${w.role}</span>
+                <p style="margin-top:0.5rem; font-size:0.8rem; opacity:0.65;">${w.context}</p>
+                <p style="margin-top:0.5rem; font-style:italic; font-size:0.85rem;">"${w.description}"</p>
+            </div>
+        `;
+    });
+}
+
+// ── Populate: Evidence Board ───────────────────────────
+function populateEvidence() {
+    const container = document.getElementById('evidence-board');
+    container.innerHTML = '';
+
+    CONFIG.evidence.forEach(ev => {
+        container.innerHTML += `
+            <div class="polaroid" tabindex="0" title="${ev.title}" onclick="openEvidence('${ev.id}')">
+                <div class="photo-area">
+                    <img src="${ev.image}" alt="${ev.title}"
+                         onerror="this.parentElement.innerHTML='📷'">
+                </div>
+                <div class="polaroid-caption">
+                    <strong>${ev.title}</strong><br>
+                    ${ev.context}
+                </div>
+                <p class="evidence-label">${ev.importance}</p>
+            </div>
+        `;
+    });
+}
+
+window.openEvidence = function(id) {
+    const item = CONFIG.evidence.find(e => e.id === id);
+    if (!item) return;
+    // Simple expand — for now just an alert; can be upgraded to a modal
+    alert(`${item.title}\n\n${item.context}\n\nImportance: ${item.importance}`);
+};
+
+// ── Populate: Serious Part ─────────────────────────────
+function populateSerious() {
+    const container = document.getElementById('serious-text-container');
+    container.innerHTML = '';
+
+    CONFIG.seriousPart.text.forEach(t => {
+        const p = document.createElement('p');
+        p.textContent = t;
+        container.appendChild(p);
+    });
+
+    // Audio players
+    const audioContainer = document.getElementById('serious-audio-players');
+    CONFIG.seriousPart.audioFiles.forEach((path, i) => {
+        audioContainer.innerHTML += buildAudioPlayer(path, `Motivation Message ${i + 1}`, `serious-audio-${i}`);
+    });
+}
+
+function triggerSeriousReveal() {
+    const paras = document.querySelectorAll('#serious-text-container p');
+    paras.forEach((p, i) => {
+        setTimeout(() => p.classList.add('visible'), i * 500);
+    });
+}
+
+// ── Populate: Lore Timeline ────────────────────────────
+function populateLore() {
+    const container = document.getElementById('lore-timeline');
+    container.innerHTML = '';
+
+    CONFIG.last1sLore.forEach((item, i) => {
+        const emoji = ['🌱', '🤔', '🏆', '🎪', '😅', '⭐', '🎂'][i] || '→';
+        container.innerHTML += `
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div>
+                    <span style="font-size:1.2rem;">${emoji}</span>
+                    <strong> ${item}</strong>
+                </div>
+            </div>
+        `;
+    });
+}
+
+// ── Populate: Future ───────────────────────────────────
+function populateFuture() {
+    const textContainer = document.getElementById('future-text-container');
+    textContainer.innerHTML = '';
+    CONFIG.futurePart.text.forEach(t => {
+        const p = document.createElement('p');
+        p.textContent = t;
+        textContainer.appendChild(p);
+    });
+
+    const grid = document.getElementById('friends-grid');
+    grid.innerHTML = '';
+    CONFIG.witnesses.forEach(w => {
+        grid.innerHTML += `<div class="friend-tag">${w.name}</div>`;
+    });
+}
+
+function triggerFutureReveal() {
+    const paras = document.querySelectorAll('#future-text-container p');
+    paras.forEach((p, i) => {
+        setTimeout(() => p.classList.add('visible'), i * 600);
+    });
+
+    // Friends appear after text
+    const tags = document.querySelectorAll('#friends-grid .friend-tag');
+    tags.forEach((tag, i) => {
+        tag.style.opacity = '0';
+        tag.style.transition = 'opacity 0.5s ease';
+        setTimeout(() => { tag.style.opacity = '1'; }, (paras.length * 600) + i * 300);
+    });
+}
+
+// ── Populate: Birthday Reveal ──────────────────────────
+function populateBirthdayReveal() {
+    document.getElementById('reveal-title').setAttribute('data-text', CONFIG.birthdayReveal.title);
+
+    const container = document.getElementById('bday-audio-players');
+    CONFIG.birthdayReveal.audioFiles.forEach((path, i) => {
+        container.innerHTML += buildAudioPlayer(path, `Birthday Wish ${i + 1}`, `bday-audio-${i}`);
+    });
+}
+
+// ── Sticker Archive Logic ──────────────────────────────
+function bindStickerArchive() {
+    const startBtn       = document.getElementById('btn-start-stickers');
+    const finishBtn      = document.getElementById('btn-finish-stickers');
+    const nextBtn        = document.getElementById('btn-next-sticker');
+    const displayArea    = document.getElementById('sticker-display-area');
+    const EXHIBIT_LETTERS = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
+
+    currentStickerIndex = 0;
 
     startBtn.addEventListener('click', () => {
         startBtn.classList.add('hidden');
         displayArea.classList.remove('hidden');
-        playStickerScene(0);
+        playSticker(0);
     });
 
-    nextStickerBtn.addEventListener('click', () => {
+    nextBtn.addEventListener('click', () => {
         currentStickerIndex++;
-        if(currentStickerIndex < CONFIG.stickers.length) {
-            playStickerScene(currentStickerIndex);
+        if (currentStickerIndex < CONFIG.stickers.length) {
+            playSticker(currentStickerIndex);
         } else {
-            // Finished
             displayArea.classList.add('hidden');
             finishBtn.classList.remove('hidden');
         }
     });
 
-    function playStickerScene(index) {
+    function playSticker(index) {
         const sticker = CONFIG.stickers[index];
-        nextStickerBtn.classList.add('hidden');
-        
-        document.getElementById('sticker-category').innerText = `EXHIBIT: ${sticker.category}`;
-        document.getElementById('current-sticker-img').src = sticker.image;
-        document.getElementById('sticker-description').innerText = sticker.description;
-        
-        const audioStatus = document.getElementById('sticker-audio-status');
-        audioStatus.classList.remove('hidden');
-        audioStatus.innerText = `[AUDIO PLAYING: ${sticker.narrationText}]`;
+        const imgWrapper   = document.getElementById('sticker-img-wrapper');
+        const imgEl        = document.getElementById('current-sticker-img');
+        const placeholderEl= document.getElementById('sticker-placeholder-emoji');
+        const categoryEl   = document.getElementById('sticker-category');
+        const descEl       = document.getElementById('sticker-description');
+        const statusEl     = document.getElementById('sticker-audio-status');
+        const exhibitEl    = document.getElementById('sticker-exhibit-num');
 
-        // Simulate audio duration (3 seconds placeholder)
+        // Reset
+        nextBtn.classList.add('hidden');
+        imgWrapper.classList.remove('revealed');
+        statusEl.style.display = 'block';
+
+        exhibitEl.textContent = `EXHIBIT ${EXHIBIT_LETTERS[index] || index + 1}`;
+        categoryEl.textContent = sticker.category;
+        descEl.textContent = sticker.description;
+        statusEl.textContent = `▶ NARRATION PLAYING: "${sticker.narrationText}"`;
+
+        // Attempt to load actual audio
+        const audio = document.getElementById('global-audio-player');
+        if (audio && sticker.audioPath) {
+            audio.src = sticker.audioPath;
+            audio.play().then(() => {
+                // Reveal sticker image mid-playback
+                setTimeout(() => {
+                    imgWrapper.classList.add('revealed');
+                    if (sticker.image && !sticker.image.includes('placeholder')) {
+                        imgEl.src = sticker.image;
+                        imgEl.style.display = 'block';
+                        placeholderEl.style.display = 'none';
+                    } else {
+                        imgEl.style.display = 'none';
+                        placeholderEl.style.display = 'block';
+                    }
+                }, 800);
+
+                audio.onended = () => {
+                    statusEl.style.display = 'none';
+                    nextBtn.classList.remove('hidden');
+                };
+            }).catch(() => {
+                // Fallback: simulate 3-second narration
+                simulateNarration(imgWrapper, imgEl, placeholderEl, sticker, statusEl);
+            });
+        } else {
+            simulateNarration(imgWrapper, imgEl, placeholderEl, sticker, statusEl);
+        }
+    }
+
+    function simulateNarration(imgWrapper, imgEl, placeholderEl, sticker, statusEl) {
+        // Image revealed after 1 second
         setTimeout(() => {
-            audioStatus.classList.add('hidden');
-            nextStickerBtn.classList.remove('hidden');
+            imgWrapper.classList.add('revealed');
+            imgEl.src = sticker.image;
+            placeholderEl.style.display = 'none';
+        }, 1000);
+
+        // "Narration ends" after 3 seconds → show CLICK TO CONTINUE
+        clearTimeout(stickerAudioSimulationTimer);
+        stickerAudioSimulationTimer = setTimeout(() => {
+            statusEl.style.display = 'none';
+            document.getElementById('btn-next-sticker').classList.remove('hidden');
         }, 3000);
     }
 }
 
-function setupAudioSystemPlaceholders() {
-    // Serious audio play button
-    const playSeriousBtn = document.getElementById('btn-play-serious-audio');
-    playSeriousBtn.addEventListener('click', () => {
-        document.getElementById('serious-audio-status').innerText = "[AUDIO PLAYING: Motivation Messages...]";
-        playSeriousBtn.disabled = true;
-        
-        setTimeout(() => {
-            document.getElementById('serious-audio-status').innerText = "[Audio Finished]";
-            playSeriousBtn.disabled = false;
-        }, 3000);
+// ── Final Reveal Sequence ──────────────────────────────
+function bindRevealSequence() {
+    const revealChapter = document.getElementById('ch-reveal');
+    let triggered = false;
+
+    window.addEventListener('chapterChanged', (e) => {
+        if (e.detail.chapterId === 'ch-reveal' && !triggered) {
+            triggered = true;
+            startRevealSequence();
+        }
+    });
+
+    document.getElementById('btn-show-end')?.addEventListener('click', () => {
+        document.getElementById('end-screen').classList.remove('hidden');
+        document.getElementById('btn-show-end').classList.add('hidden');
     });
 }
 
-function setupFinalReveal() {
-    const revealChapter = document.getElementById('ch-reveal');
-    // We need an observer or event when this chapter becomes active to start loading bar
-    const observer = new MutationObserver((mutations) => {
-        mutations.forEach((mutation) => {
-            if(mutation.target.classList.contains('active')) {
-                // It's active, wait for 3s CSS animation then reveal content
-                setTimeout(() => {
-                    document.getElementById('loading-sequence').classList.add('hidden');
-                    document.getElementById('reveal-content').classList.remove('hidden');
-                }, 3000);
-            }
+function startRevealSequence() {
+    const loadingEl = document.getElementById('loading-sequence');
+    const revealEl  = document.getElementById('reveal-content');
+    const fileMsg   = document.getElementById('file-found-msg');
+    const showEndBtn= document.getElementById('btn-show-end');
+
+    const statusMessages = [
+        'Decrypting classified birthday archives...',
+        'Loading evidence database...',
+        'Compiling six years of chaos...',
+        'Almost there...',
+        'FILE FOUND ✓'
+    ];
+
+    let msgIndex = 0;
+    const statusEl = document.getElementById('loading-status');
+    const msgInterval = setInterval(() => {
+        if (msgIndex < statusMessages.length) {
+            statusEl.textContent = statusMessages[msgIndex++];
+        } else {
+            clearInterval(msgInterval);
+        }
+    }, 600);
+
+    // After 3 seconds, hide loading and show reveal
+    setTimeout(() => {
+        loadingEl.classList.add('hidden');
+        revealEl.classList.remove('hidden');
+
+        // Typewriter effect for "FILE FOUND" message
+        typeWriter(fileMsg, `> FILE FOUND: BIRTHDAY_GIRL.EXE`, 50, () => {
+            showEndBtn.style.display = 'inline-block';
         });
-    });
+    }, 3100);
+}
 
-    observer.observe(revealChapter, { attributes: true, attributeFilter: ['class'] });
+function typeWriter(el, text, speed, callback) {
+    let i = 0;
+    el.textContent = '';
+    const timer = setInterval(() => {
+        el.textContent += text[i];
+        i++;
+        if (i >= text.length) {
+            clearInterval(timer);
+            if (callback) callback();
+        }
+    }, speed);
+}
 
-    document.getElementById('btn-play-bday-audio').addEventListener('click', () => {
-        alert("[AUDIO PLAYING: Final Birthday Messages...]");
-        document.getElementById('end-screen').classList.remove('hidden');
-    });
+// ── Audio Player Builder ───────────────────────────────
+/**
+ * Builds an accessible <audio> player UI.
+ * Falls back gracefully if file doesn't exist.
+ */
+function buildAudioPlayer(src, label, id) {
+    return `
+        <div style="margin: 0.8rem 0; text-align: center;" id="${id}-wrapper">
+            <p style="font-size: 0.85rem; opacity: 0.7; margin-bottom: 0.4rem;">${label}</p>
+            <audio id="${id}"
+                   src="${src}"
+                   controls
+                   style="width: min(300px, 90vw);"
+                   preload="none"
+                   aria-label="${label}">
+                Your browser does not support audio.
+            </audio>
+        </div>
+    `;
 }

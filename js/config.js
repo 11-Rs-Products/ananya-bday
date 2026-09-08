@@ -6,12 +6,14 @@ const CONFIG = {
         specialAbilities: [
             "Sending the perfect sticker at the worst possible time",
             "[Personal joke / Special Ability 1]",
-            "[Personal joke / Special Ability 2]"
+            "[Personal joke / Special Ability 2]",
+            "Having the balls to do things nobody else would"
         ],
         stats: [
             { label: "Sticker Usage", percentage: 100 },
             { label: "Random Adventures", percentage: 82 },
-            { label: "Normal Conversations", percentage: 11 }
+            { label: "Normal Conversations", percentage: 1 },
+            { label: "Niggi", percentage: 147, overflow: true }
         ]
     },
     witnesses: [
@@ -96,6 +98,13 @@ const CONFIG = {
             context: "Context: Unknown",
             importance: "The photographic evidence that we occasionally behaved normally.",
             image: "assets/images/placeholder_evidence2.png"
+        },
+        {
+            id: "ev3",
+            title: "EXHIBIT: BALLS",
+            context: "Description: Unquantifiable balls. Possibly the highest ever recorded.",
+            importance: "Classified.",
+            image: "assets/images/placeholder_evidence1.png"
         }
     ],
     seriousPart: {
@@ -125,6 +134,7 @@ const CONFIG = {
         "Last1s Consolation",
         "[More questionable decisions]",
         "[HER NAME] became an important part of the story",
+        "Balls were had",
         "Today"
     ],
     futurePart: {
