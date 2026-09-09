@@ -337,7 +337,7 @@ function bindStickerArchive() {
         playSticker(0);
     });
 
-    // Jump directly to all 69 stickers
+    // Jump directly to all stickers
     jumpVaultBtn?.addEventListener('click', () => {
         startActions?.classList.add('hidden');
         displayArea?.classList.add('hidden');
@@ -404,7 +404,7 @@ function bindStickerArchive() {
         // Update button text on last exhibit
         if (nextBtn) {
             if (index === CONFIG.stickers.length - 1) {
-                nextBtn.innerHTML = 'UNLOCK FULL VAULT (69 STICKERS) &rarr;';
+                nextBtn.innerHTML = 'UNLOCK FULL VAULT (' + CONFIG.allStickers.length + ' STICKERS) &rarr;';
             } else {
                 nextBtn.innerHTML = 'NEXT EXHIBIT &rarr;';
             }
@@ -425,7 +425,7 @@ function bindStickerArchive() {
     }
 
 
-    // Populate all 69 stickers in the vault grid
+    // Populate all stickers in the vault grid
     populateStickerVault();
 
     // Random sticker picker button
@@ -440,7 +440,7 @@ function bindStickerArchive() {
     bindStickerLightbox();
 }
 
-// ── Populate 69-Sticker Vault ──────────────────────────
+// ── Populate Sticker Vault ──────────────────────────
 function populateStickerVault() {
     const grid = document.getElementById('sticker-vault-grid');
     if (!grid) return;

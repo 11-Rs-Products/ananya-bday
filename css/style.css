@@ -451,7 +451,7 @@ ul li { margin-bottom: 0.4rem; }
 }
 .masonry-layout {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 1.2rem;
 }
 
@@ -2550,4 +2550,37 @@ body.theme-matrix .terminal-text {
     border: 1px solid var(--primary-color);
     box-shadow: 0 4px 20px rgba(255, 45, 85, 0.2);
     margin-bottom: 2rem;
+}
+
+/* Enhanced Audio Player Styling for Default <audio> elements */
+.enhanced-audio-player audio {
+    border-radius: 30px;
+    width: 100%;
+    height: 45px;
+    outline: none;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    transition: all 0.3s ease;
+}
+
+.enhanced-audio-player audio:hover {
+    box-shadow: 0 6px 15px rgba(255, 45, 85, 0.3);
+    transform: scale(1.02);
+}
+
+.enhanced-audio-player audio::-webkit-media-controls-panel {
+    background: rgba(30, 30, 45, 0.9);
+    border: 1px solid rgba(255, 45, 85, 0.5);
+}
+
+.enhanced-audio-player audio::-webkit-media-controls-play-button,
+.enhanced-audio-player audio::-webkit-media-controls-mute-button {
+    background-color: rgba(255, 45, 85, 0.8);
+    border-radius: 50%;
+    filter: invert(1);
+}
+
+.enhanced-audio-player audio::-webkit-media-controls-current-time-display,
+.enhanced-audio-player audio::-webkit-media-controls-time-remaining-display {
+    color: #ff2d55;
+    text-shadow: 0 0 5px rgba(255,45,85,0.5);
 }
