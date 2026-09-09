@@ -151,37 +151,100 @@
          ════════════════════════════════════════ -->
     <section id="ch-stickers" class="chapter hidden" aria-label="The Sticker Archives">
         <div class="content-wrapper centered">
-            <p class="subtitle">THE ARCHIVES</p>
+            <p class="subtitle">THE ARCHIVES — SECTION 2</p>
             <h2>The Sticker Investigation</h2>
-            <p class="subtext">"An investigation into the most important form of communication known to mankind."</p>
+            <p class="subtext">"An official inquiry into the most unhinged form of communication known to humanity."</p>
 
-            <!-- Start button (hidden once investigation begins) -->
-            <button id="btn-start-stickers" class="primary-btn" aria-label="Begin Investigation">
-                BEGIN INVESTIGATION
-            </button>
+            <!-- Start controls -->
+            <div id="sticker-start-actions" class="sticker-actions-row">
+                <button id="btn-start-stickers" class="primary-btn" aria-label="Begin Investigation">
+                    🕵️ BEGIN INVESTIGATION (10 EXHIBITS)
+                </button>
+                <button id="btn-jump-vault" class="secondary-btn" aria-label="Jump to all stickers">
+                    📂 BROWSE COMPLETE VAULT (69 STICKERS) &darr;
+                </button>
+            </div>
 
-            <!-- Sticker display, filled by JS -->
+            <!-- Sticker exhibit display, filled by JS -->
             <div id="sticker-display-area" class="hidden sticker-exhibit">
-                <p class="exhibit-label" id="sticker-exhibit-num">EXHIBIT A</p>
+                <div class="exhibit-header-bar">
+                    <p class="exhibit-label" id="sticker-exhibit-num">EXHIBIT 1 OF 10</p>
+                    <button id="btn-skip-vault" class="text-link-btn" title="Skip to vault">Skip to Full Vault &darr;</button>
+                </div>
+
                 <p class="exhibit-category" id="sticker-category">CATEGORY</p>
 
                 <div class="sticker-img-wrapper" id="sticker-img-wrapper">
                     <img id="current-sticker-img" src="" alt="Sticker Exhibit">
-                    <span id="sticker-placeholder-emoji" style="font-size:5rem;">🖼️</span>
+                    <span id="sticker-placeholder-emoji" style="display:none; font-size:5rem;">🖼️</span>
                 </div>
 
                 <p class="exhibit-desc" id="sticker-description">Description</p>
                 <p class="narration-status" id="sticker-audio-status" style="display:none;">▶ NARRATION PLAYING...</p>
-                <button id="btn-next-sticker" class="primary-btn hidden" aria-label="Click to Continue">
-                    CLICK TO CONTINUE
-                </button>
+
+                <div class="exhibit-controls-row">
+                    <button id="btn-prev-sticker" class="secondary-btn hidden" aria-label="Previous Sticker">
+                        &larr; PREVIOUS
+                    </button>
+                    <button id="btn-next-sticker" class="primary-btn hidden" aria-label="Continue">
+                        CONTINUE &rarr;
+                    </button>
+                </div>
             </div>
 
-            <button id="btn-finish-stickers" class="next-chapter-btn primary-btn hidden" data-next="ch-witnesses">
-                PROCEED TO WITNESSES &rarr;
-            </button>
+            <!-- ── THE COMPLETE STICKER VAULT (ALL 69 STICKERS) ── -->
+            <div id="sticker-vault-area" class="sticker-vault-section hidden">
+                <div class="vault-divider">
+                    <span class="vault-divider-line"></span>
+                    <span class="vault-divider-badge">DECLASSIFIED ARCHIVE</span>
+                    <span class="vault-divider-line"></span>
+                </div>
+
+                <div class="vault-header">
+                    <p class="subtitle" style="margin-bottom:0.2rem;">DOSSIER 069 — FULL DEPOSITORY</p>
+                    <h3 class="vault-title">THE COMPLETE STICKER VAULT</h3>
+                    <p class="vault-subtitle">
+                        Every single unhinged sticker recovered from the group archives. 
+                        <strong>69 items</strong> in total. Tap any sticker to inspect in full resolution.
+                    </p>
+
+                    <div class="vault-stat-bar">
+                        <span class="vault-stat-pill">📦 <strong>69</strong> STICKERS RECOVERED</span>
+                        <span class="vault-stat-pill">⚠️ HAZARD LEVEL: SEVERE</span>
+                        <button id="btn-random-sticker" class="secondary-btn vault-random-btn" title="Pick a random sticker">
+                            🎲 RANDOM STICKER
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Grid populated by JS with all 69 stickers -->
+                <div id="sticker-vault-grid" class="sticker-vault-grid"></div>
+
+                <div class="vault-footer">
+                    <p class="vault-footer-note">
+                        "You have now witnessed the full psychiatric profile through WhatsApp stickers."
+                    </p>
+                    <button id="btn-finish-stickers" class="next-chapter-btn primary-btn" data-next="ch-witnesses">
+                        PROCEED TO WITNESS TESTIMONY &rarr;
+                    </button>
+                </div>
+            </div>
         </div>
     </section>
+
+    <!-- Sticker Lightbox Modal -->
+    <div id="sticker-lightbox" class="lightbox-backdrop hidden" role="dialog" aria-modal="true">
+        <div class="lightbox-card">
+            <button id="lightbox-close" class="lightbox-close-btn" aria-label="Close modal">&times;</button>
+            <div class="lightbox-img-wrapper">
+                <img id="lightbox-img" src="" alt="Classified Sticker Full Preview">
+            </div>
+            <div class="lightbox-info">
+                <span id="lightbox-counter" class="lightbox-badge">STICKER #1 / 69</span>
+                <p id="lightbox-tip">Click outside or press ESC to close</p>
+            </div>
+        </div>
+    </div>
 
     <!-- ════════════════════════════════════════
          CHAPTER 3 — FIVE WITNESSES
@@ -378,6 +441,6 @@
 
 </div><!-- #app-container -->
 
-<script type="module" src="js/main.js?v=8"></script>
+<script type="module" src="js/main.js?v=10"></script>
 </body>
 </html>

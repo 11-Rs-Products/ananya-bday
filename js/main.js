@@ -4,9 +4,9 @@
  * sticker archive, serious part text reveal, final reveal sequence.
  */
 
-import CONFIG from './config.js?v=4';
-import { initChaos } from './chaos.js?v=4';
-import { initCRTAndThemes, initBGMPlayer, getConfetti } from './immersion.js?v=5';
+import CONFIG from './config.js?v=10';
+import { initChaos } from './chaos.js?v=10';
+import { initCRTAndThemes, initBGMPlayer, getConfetti } from './immersion.js?v=10';
 
 // ── State ──────────────────────────────────────────────
 let currentChapterId = 'ch-intro';
@@ -297,34 +297,69 @@ function populateBirthdayReveal() {
     });
 }
 
-// ── Sticker Archive Logic ──────────────────────────────
+// ── Sticker Archive & Vault Logic ──────────────────────
 function bindStickerArchive() {
+    const startActions   = document.getElementById('sticker-start-actions');
     const startBtn       = document.getElementById('btn-start-stickers');
+    const jumpVaultBtn   = document.getElementById('btn-jump-vault');
+    const skipVaultBtn   = document.getElementById('btn-skip-vault');
     const finishBtn      = document.getElementById('btn-finish-stickers');
     const nextBtn        = document.getElementById('btn-next-sticker');
+    const prevBtn        = document.getElementById('btn-prev-sticker');
     const displayArea    = document.getElementById('sticker-display-area');
-    const EXHIBIT_LETTERS = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
+    const vaultArea      = document.getElementById('sticker-vault-area');
+    const randomBtn      = document.getElementById('btn-random-sticker');
 
     currentStickerIndex = 0;
 
-    startBtn.addEventListener('click', () => {
-        startBtn.classList.add('hidden');
-        displayArea.classList.remove('hidden');
+    // Start curated investigation
+    startBtn?.addEventListener('click', () => {
+        startActions?.classList.add('hidden');
+        displayArea?.classList.remove('hidden');
         playSticker(0);
     });
 
-    nextBtn.addEventListener('click', () => {
+    // Jump directly to all 69 stickers
+    jumpVaultBtn?.addEventListener('click', () => {
+        startActions?.classList.add('hidden');
+        displayArea?.classList.add('hidden');
+        revealVault();
+    });
+
+    // Skip to vault from within exhibit
+    skipVaultBtn?.addEventListener('click', () => {
+        revealVault();
+    });
+
+    // Previous exhibit
+    prevBtn?.addEventListener('click', () => {
+        if (currentStickerIndex > 0) {
+            currentStickerIndex--;
+            playSticker(currentStickerIndex);
+        }
+    });
+
+    // Next exhibit
+    nextBtn?.addEventListener('click', () => {
         currentStickerIndex++;
         if (currentStickerIndex < CONFIG.stickers.length) {
             playSticker(currentStickerIndex);
         } else {
-            displayArea.classList.add('hidden');
-            finishBtn.classList.remove('hidden');
+            // Reached the end of curated exhibits -> reveal full vault!
+            revealVault();
         }
     });
 
+    function revealVault() {
+        displayArea?.classList.add('hidden');
+        vaultArea?.classList.remove('hidden');
+        vaultArea?.scrollIntoView({ behavior: 'smooth' });
+    }
+
     function playSticker(index) {
         const sticker = CONFIG.stickers[index];
+        if (!sticker) return;
+
         const imgWrapper   = document.getElementById('sticker-img-wrapper');
         const imgEl        = document.getElementById('current-sticker-img');
         const placeholderEl= document.getElementById('sticker-placeholder-emoji');
@@ -334,39 +369,46 @@ function bindStickerArchive() {
         const exhibitEl    = document.getElementById('sticker-exhibit-num');
 
         // Reset
-        nextBtn.classList.add('hidden');
-        imgWrapper.classList.remove('revealed');
-        statusEl.style.display = 'block';
+        nextBtn?.classList.add('hidden');
+        if (prevBtn) {
+            if (index > 0) {
+                prevBtn.classList.remove('hidden');
+            } else {
+                prevBtn.classList.add('hidden');
+            }
+        }
 
-        exhibitEl.textContent = `EXHIBIT ${EXHIBIT_LETTERS[index] || index + 1}`;
-        categoryEl.textContent = sticker.category;
-        descEl.textContent = sticker.description;
-        statusEl.textContent = `▶ NARRATION PLAYING: "${sticker.narrationText}"`;
+        imgWrapper?.classList.remove('revealed');
+        if (statusEl) statusEl.style.display = 'block';
 
-        // Attempt to load actual audio
+        if (exhibitEl) exhibitEl.textContent = `EXHIBIT ${index + 1} OF ${CONFIG.stickers.length}`;
+        if (categoryEl) categoryEl.textContent = sticker.category;
+        if (descEl) descEl.textContent = sticker.description;
+        if (statusEl) statusEl.textContent = `▶ NARRATION: "${sticker.narrationText}"`;
+
+        // Update button text on last exhibit
+        if (nextBtn) {
+            if (index === CONFIG.stickers.length - 1) {
+                nextBtn.innerHTML = 'UNLOCK FULL VAULT (69 STICKERS) &rarr;';
+            } else {
+                nextBtn.innerHTML = 'NEXT EXHIBIT &rarr;';
+            }
+        }
+
+        // Attempt to load audio
         const audio = document.getElementById('global-audio-player');
-        if (audio && sticker.audioPath) {
+        if (audio && sticker.audioPath && !sticker.audioPath.includes('placeholder')) {
             audio.src = sticker.audioPath;
             audio.play().then(() => {
-                // Reveal sticker image mid-playback
                 setTimeout(() => {
-                    imgWrapper.classList.add('revealed');
-                    if (sticker.image && !sticker.image.includes('placeholder')) {
-                        imgEl.src = sticker.image;
-                        imgEl.style.display = 'block';
-                        placeholderEl.style.display = 'none';
-                    } else {
-                        imgEl.style.display = 'none';
-                        placeholderEl.style.display = 'block';
-                    }
-                }, 800);
+                    revealImage(imgWrapper, imgEl, placeholderEl, sticker.image);
+                }, 700);
 
                 audio.onended = () => {
-                    statusEl.style.display = 'none';
-                    nextBtn.classList.remove('hidden');
+                    if (statusEl) statusEl.style.display = 'none';
+                    nextBtn?.classList.remove('hidden');
                 };
             }).catch(() => {
-                // Fallback: simulate 3-second narration
                 simulateNarration(imgWrapper, imgEl, placeholderEl, sticker, statusEl);
             });
         } else {
@@ -374,21 +416,104 @@ function bindStickerArchive() {
         }
     }
 
-    function simulateNarration(imgWrapper, imgEl, placeholderEl, sticker, statusEl) {
-        // Image revealed after 1 second
-        setTimeout(() => {
-            imgWrapper.classList.add('revealed');
-            imgEl.src = sticker.image;
-            placeholderEl.style.display = 'none';
-        }, 1000);
+    function revealImage(imgWrapper, imgEl, placeholderEl, imageSrc) {
+        if (!imgWrapper || !imgEl) return;
+        imgWrapper.classList.add('revealed');
+        if (imageSrc) {
+            imgEl.src = imageSrc;
+            imgEl.style.display = 'block';
+            if (placeholderEl) placeholderEl.style.display = 'none';
+        }
+    }
 
-        // "Narration ends" after 3 seconds → show CLICK TO CONTINUE
+    function simulateNarration(imgWrapper, imgEl, placeholderEl, sticker, statusEl) {
+        // Reveal sticker after 600ms
+        setTimeout(() => {
+            revealImage(imgWrapper, imgEl, placeholderEl, sticker.image);
+        }, 600);
+
+        // Narration completes after 2s
         clearTimeout(stickerAudioSimulationTimer);
         stickerAudioSimulationTimer = setTimeout(() => {
-            statusEl.style.display = 'none';
-            document.getElementById('btn-next-sticker').classList.remove('hidden');
-        }, 3000);
+            if (statusEl) statusEl.style.display = 'none';
+            nextBtn?.classList.remove('hidden');
+        }, 2000);
     }
+
+    // Populate all 69 stickers in the vault grid
+    populateStickerVault();
+
+    // Random sticker picker button
+    randomBtn?.addEventListener('click', () => {
+        const stickers = CONFIG.allStickers || [];
+        if (!stickers.length) return;
+        const randIndex = Math.floor(Math.random() * stickers.length);
+        openStickerLightbox(stickers[randIndex], randIndex);
+    });
+
+    // Lightbox handlers
+    bindStickerLightbox();
+}
+
+// ── Populate 69-Sticker Vault ──────────────────────────
+function populateStickerVault() {
+    const grid = document.getElementById('sticker-vault-grid');
+    if (!grid) return;
+    grid.innerHTML = '';
+
+    const allStickers = CONFIG.allStickers || [];
+    allStickers.forEach((path, idx) => {
+        const card = document.createElement('div');
+        card.className = 'vault-sticker-card';
+        // Give each card a subtle organic tilt between -4deg and +4deg
+        const rot = (Math.sin(idx * 1.7) * 4).toFixed(1);
+        card.style.setProperty('--rot', `${rot}deg`);
+        card.title = `Sticker #${idx + 1} — Click to inspect`;
+        card.innerHTML = `
+            <span class="vault-card-num">#${idx + 1}</span>
+            <img src="${path}" alt="Classified Sticker ${idx + 1}" loading="lazy">
+        `;
+        card.addEventListener('click', () => {
+            openStickerLightbox(path, idx);
+        });
+        grid.appendChild(card);
+    });
+}
+
+// ── Sticker Lightbox Modal ─────────────────────────────
+let activeLightboxIndex = 0;
+
+function openStickerLightbox(path, index) {
+    activeLightboxIndex = index;
+    const modal = document.getElementById('sticker-lightbox');
+    const img   = document.getElementById('lightbox-img');
+    const count = document.getElementById('lightbox-counter');
+    if (!modal || !img) return;
+
+    img.src = path;
+    if (count) count.textContent = `STICKER #${index + 1} OF ${(CONFIG.allStickers || []).length}`;
+    modal.classList.remove('hidden');
+}
+
+function closeStickerLightbox() {
+    const modal = document.getElementById('sticker-lightbox');
+    modal?.classList.add('hidden');
+}
+
+function bindStickerLightbox() {
+    const modal = document.getElementById('sticker-lightbox');
+    const closeBtn = document.getElementById('lightbox-close');
+
+    closeBtn?.addEventListener('click', closeStickerLightbox);
+    modal?.addEventListener('click', (e) => {
+        if (e.target === modal) closeStickerLightbox();
+    });
+
+    window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal && !modal.classList.contains('hidden')) {
+            closeStickerLightbox();
+        }
+    });
 }
 
 // ── Final Reveal Sequence ──────────────────────────────
