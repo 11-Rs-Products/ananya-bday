@@ -1,12 +1,12 @@
 const CONFIG = {
     subject: {
-        name: "[HER NAME]",
-        aliases: ["[Nickname 1]", "[Nickname 2]", "[Nickname 3]"],
-        occupation: "[Funny description of occupation]",
+        name: "Ananya Verma",
+        aliases: ["Niggi", "Sukhi", "Barista"],
+        occupation: "Chotu, owns a daru a tent",
         specialAbilities: [
             "Sending the perfect sticker at the worst possible time",
-            "[Personal joke / Special Ability 1]",
-            "[Personal joke / Special Ability 2]",
+            "Collecting all sorts of wierd and disgusting shit",
+            "Has very beautifool blue hair",
             "Having the balls to do things nobody else would"
         ],
         stats: [
@@ -245,22 +245,10 @@ const CONFIG = {
     ],
     seriousPart: {
         text: [
-            "Okay. We've made enough jokes.",
-            "So here's the part we actually wanted to tell you.",
-            "This year hasn't always been easy.",
-            "There have been days where things didn't go the way you wanted.",
-            "There have been exams that demanded more from you than you thought you had.",
-            "There have probably been moments where you wondered whether all this effort was actually leading somewhere.",
-            "But you are not defined by one exam.",
-            "You are not defined by one result.",
-            "Your timeline does not have to look like someone else's.",
-            "We believe in you.",
-            "We don't know exactly what the next few months will look like.",
-            "But we trust that you will find your way."
+            "I know things haven't always been easy lately, especially with all the exams and everything that's been going on."
         ],
         audioFiles: [
-            "assets/audio/placeholder_motivation1.mp3",
-            "assets/audio/placeholder_motivation2.mp3"
+            "assets/audio/Video Project 9.m4a"
         ]
     },
     last1sLore: [
@@ -269,7 +257,7 @@ const CONFIG = {
         "Last1s Standing",
         "Last1s Consolation",
         "[More questionable decisions]",
-        "[HER NAME] became an important part of the story",
+        "Ananya became an important part of the story",
         "Balls were had",
         "Today"
     ],
@@ -284,7 +272,7 @@ const CONFIG = {
         ]
     },
     birthdayReveal: {
-        title: "HAPPY BIRTHDAY, [HER NAME]",
+        title: "HAPPY BIRTHDAY, ANANYA",
         audioFiles: [
             "assets/audio/placeholder_bday1.mp3",
             "assets/audio/placeholder_bday2.mp3"

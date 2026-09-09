@@ -168,13 +168,29 @@ function scheduleDrop(el) {
 
 // ── System Popups ─────────────────────────────────────────────────────
 function startPopups() {
-    const POSITIONS = ['popup-bottom-left', 'popup-bottom-right', 'popup-top-right', 'popup-center-left'];
+    const ALL_POSITIONS = [
+        'popup-top-left',
+        'popup-top-right',
+        'popup-bottom-right',
+        'popup-center-right',
+        'popup-bottom-left',
+        'popup-center-left'
+    ];
 
     function showPopup() {
         if (!chaosActive) return;
 
+        const isRadioExpanded = document.body.classList.contains('radio-open') || 
+                                document.getElementById('mini-radio-widget')?.classList.contains('expanded');
+
+        // If radio box is expanded, filter out bottom-left and center-left positions to avoid overlap
+        let availablePositions = ALL_POSITIONS;
+        if (isRadioExpanded) {
+            availablePositions = ['popup-top-left', 'popup-top-right', 'popup-bottom-right', 'popup-center-right'];
+        }
+
         const msg = POPUP_MESSAGES[Math.floor(Math.random() * POPUP_MESSAGES.length)];
-        const pos = POSITIONS[Math.floor(Math.random() * POSITIONS.length)];
+        const pos = availablePositions[Math.floor(Math.random() * availablePositions.length)];
 
         // Remove any existing popup in that position to avoid stacking
         document.querySelector(`.sys-popup.${pos}`)?.remove();

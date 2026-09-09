@@ -7,11 +7,12 @@
 import CONFIG from './config.js?v=10';
 import { initChaos } from './chaos.js?v=10';
 import { initCRTAndThemes, initBGMPlayer, getConfetti } from './immersion.js?v=10';
+import { initMiniRadio, radioEngine } from './radio.js?v=10';
+
 
 // ── State ──────────────────────────────────────────────
 let currentChapterId = 'ch-intro';
 let currentStickerIndex = 0;
-let stickerAudioSimulationTimer = null;
 
 // ── Init ───────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
@@ -30,6 +31,16 @@ document.addEventListener('DOMContentLoaded', () => {
     bindArchivistMascot();
     initCRTAndThemes();
     initBGMPlayer();
+
+    initMiniRadio();
+    
+    // Pause radio engine when any audio tag is played
+    document.addEventListener('play', (e) => {
+        if (e.target.tagName === 'AUDIO' && radioEngine && radioEngine.isPlaying) {
+            radioEngine.pause();
+        }
+    }, true);
+
 });
 
 // ── Navigation ─────────────────────────────────────────
@@ -365,7 +376,6 @@ function bindStickerArchive() {
         const placeholderEl= document.getElementById('sticker-placeholder-emoji');
         const categoryEl   = document.getElementById('sticker-category');
         const descEl       = document.getElementById('sticker-description');
-        const statusEl     = document.getElementById('sticker-audio-status');
         const exhibitEl    = document.getElementById('sticker-exhibit-num');
 
         // Reset
@@ -379,12 +389,10 @@ function bindStickerArchive() {
         }
 
         imgWrapper?.classList.remove('revealed');
-        if (statusEl) statusEl.style.display = 'block';
 
-        if (exhibitEl) exhibitEl.textContent = `EXHIBIT ${index + 1} OF ${CONFIG.stickers.length}`;
+        if (exhibitEl) exhibitEl.textContent = ;
         if (categoryEl) categoryEl.textContent = sticker.category;
         if (descEl) descEl.textContent = sticker.description;
-        if (statusEl) statusEl.textContent = `▶ NARRATION: "${sticker.narrationText}"`;
 
         // Update button text on last exhibit
         if (nextBtn) {
@@ -395,25 +403,8 @@ function bindStickerArchive() {
             }
         }
 
-        // Attempt to load audio
-        const audio = document.getElementById('global-audio-player');
-        if (audio && sticker.audioPath && !sticker.audioPath.includes('placeholder')) {
-            audio.src = sticker.audioPath;
-            audio.play().then(() => {
-                setTimeout(() => {
-                    revealImage(imgWrapper, imgEl, placeholderEl, sticker.image);
-                }, 700);
-
-                audio.onended = () => {
-                    if (statusEl) statusEl.style.display = 'none';
-                    nextBtn?.classList.remove('hidden');
-                };
-            }).catch(() => {
-                simulateNarration(imgWrapper, imgEl, placeholderEl, sticker, statusEl);
-            });
-        } else {
-            simulateNarration(imgWrapper, imgEl, placeholderEl, sticker, statusEl);
-        }
+        revealImage(imgWrapper, imgEl, placeholderEl, sticker.image);
+        nextBtn?.classList.remove('hidden');
     }
 
     function revealImage(imgWrapper, imgEl, placeholderEl, imageSrc) {
@@ -426,19 +417,6 @@ function bindStickerArchive() {
         }
     }
 
-    function simulateNarration(imgWrapper, imgEl, placeholderEl, sticker, statusEl) {
-        // Reveal sticker after 600ms
-        setTimeout(() => {
-            revealImage(imgWrapper, imgEl, placeholderEl, sticker.image);
-        }, 600);
-
-        // Narration completes after 2s
-        clearTimeout(stickerAudioSimulationTimer);
-        stickerAudioSimulationTimer = setTimeout(() => {
-            if (statusEl) statusEl.style.display = 'none';
-            nextBtn?.classList.remove('hidden');
-        }, 2000);
-    }
 
     // Populate all 69 stickers in the vault grid
     populateStickerVault();
@@ -632,7 +610,7 @@ function bindArchivistMascot() {
         "Warning: The subject's sticker deployment rate exceeds international safety standards.",
         "My surveillance report indicates zero normal conversations have occurred here.",
         "Meow. (Archivist Translation: Prepare your emotional stability for the final chapter).",
-        "Top Secret: Six people spent way too much time compiling this evidence for [HER NAME].",
+        "Top Secret: Six people spent way too much time compiling this evidence for Ananya.",
         "File #042 status: 100% chance of falling cats, dogs, and questionable memories.",
         "Stop interrogating me and hit 'ENTER THE ARCHIVES' already!"
     ];

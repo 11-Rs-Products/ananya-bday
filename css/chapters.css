@@ -166,7 +166,8 @@
     line-height: 1.9;
     max-width: 560px;
     margin: 0 auto 1.2rem;
-    color: var(--text-secondary, #e8e8f0);
+    color: #ffffff;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
 }
 
 .calm-theme .primary-btn {
@@ -661,7 +662,20 @@
 }
 
 /* System popup positioning helpers */
-.popup-bottom-left  { bottom: 20px; left: 20px; }
-.popup-bottom-right { bottom: 20px; right: 20px; }
-.popup-top-right    { top: 80px; right: 20px; }
-.popup-center-left  { top: 40%; left: 10px; }
+.popup-bottom-left  { bottom: 75px; left: 20px; }
+.popup-bottom-right { bottom: 85px; right: 20px; }
+.popup-top-right    { top: 70px; right: 20px; }
+.popup-top-left     { top: 70px; left: 20px; }
+.popup-center-left  { top: 40%; left: 20px; }
+.popup-center-right { top: 40%; right: 20px; }
+
+/* Shift popups clear off the radio deck if spawned when radio is open */
+body.radio-open .popup-bottom-left {
+    left: 360px;
+    bottom: 20px;
+}
+body.radio-open .popup-center-left {
+    left: 360px;
+    top: 40%;
+}
+
