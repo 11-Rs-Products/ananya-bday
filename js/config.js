@@ -1,7 +1,7 @@
 const CONFIG = {
     subject: {
         name: "Ananya Verma",
-        aliases: ["Niggi", "Sukhi", "Resident Barista"],
+        aliases: ["Niggi", "Sukhi", "Resident Barista", "hizru"],
         occupation: "Certified Chotu & CEO of the local Daaru Ka Tent",
         specialAbilities: [
             "Deploying the exact right sticker at the absolute worst psychological moment",
