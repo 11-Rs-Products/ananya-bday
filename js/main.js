@@ -4,10 +4,10 @@
  * sticker archive, serious part text reveal, final reveal sequence.
  */
 
-import CONFIG from './config.js?v=10';
+import CONFIG from './config.js?v=11';
 import { initChaos } from './chaos.js?v=10';
 import { initCRTAndThemes, initBGMPlayer, getConfetti } from './immersion.js?v=10';
-import { initMiniRadio, radioEngine } from './radio.js?v=10';
+import { initMiniRadio, radioEngine } from './radio.js?v=12';
 
 
 // ── State ──────────────────────────────────────────────
@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initBGMPlayer();
 
     initMiniRadio();
-    
+
     // Pause radio engine when any audio tag is played
     document.addEventListener('play', (e) => {
         if (e.target.tagName === 'AUDIO' && radioEngine && radioEngine.isPlaying) {
@@ -82,32 +82,39 @@ function bindNavigation() {
 
     document.getElementById('btn-secret-file')?.addEventListener('click', () => {
         goToChapter('ch-secret');
+        setTimeout(() => getConfetti().fire(160), 300);
+    });
+
+    document.getElementById('btn-cert-confetti')?.addEventListener('click', () => {
+        getConfetti().fire(180);
     });
 }
 
-// ── Warning Screen Logic ───────────────────────────────
 function bindWarning() {
     const noBtn = document.getElementById('btn-warning-no');
     const yesBtn = document.getElementById('btn-warning-yes');
-    const fuckYouMsg = document.getElementById('fuck-you-msg');
+    const yesBtnOverlay = document.getElementById('btn-warning-yes-overlay');
+    const overlay = document.getElementById('fuck-you-overlay');
 
     noBtn.addEventListener('click', () => {
-        // Show FUCK YOU
-        fuckYouMsg.classList.remove('hidden');
+        // Trigger full screen BANG overlay and screen shake
+        if (overlay) overlay.classList.remove('hidden');
+        document.body.classList.add('screen-shake');
+        setTimeout(() => document.body.classList.remove('screen-shake'), 450);
 
-        // Disable NO to prevent spam (but don't hide it)
+        // Also reveal YES on the underlying screen in case overlay is dismissed
+        yesBtn.classList.remove('hidden');
         noBtn.disabled = true;
         noBtn.style.opacity = '0.5';
-
-        // After 1.5s reveal YES
-        setTimeout(() => {
-            yesBtn.classList.remove('hidden');
-        }, 1500);
     });
 
-    yesBtn.addEventListener('click', () => {
+    const proceedToSubject = () => {
+        if (overlay) overlay.classList.add('hidden');
         goToChapter('ch-subject');
-    });
+    };
+
+    yesBtn.addEventListener('click', proceedToSubject);
+    yesBtnOverlay?.addEventListener('click', proceedToSubject);
 }
 
 // ── Populate: Subject Profile ──────────────────────────
@@ -215,7 +222,7 @@ function populateEvidence() {
     });
 }
 
-window.openEvidence = function(id) {
+window.openEvidence = function (id) {
     const item = CONFIG.evidence.find(e => e.id === id);
     if (!item) return;
     // Simple expand — for now just an alert; can be upgraded to a modal
@@ -252,7 +259,7 @@ function populateLore() {
     const container = document.getElementById('lore-timeline');
     container.innerHTML = '';
 
-    CONFIG.last1sLore.forEach((item, i) => {
+    CONFIG.LAST1sLore.forEach((item, i) => {
         const emoji = ['🌱', '🤔', '🏆', '🎪', '😅', '⭐', '🎂'][i] || '→';
         container.innerHTML += `
             <div class="timeline-item">
@@ -310,16 +317,16 @@ function populateBirthdayReveal() {
 
 // ── Sticker Archive & Vault Logic ──────────────────────
 function bindStickerArchive() {
-    const startActions   = document.getElementById('sticker-start-actions');
-    const startBtn       = document.getElementById('btn-start-stickers');
-    const jumpVaultBtn   = document.getElementById('btn-jump-vault');
-    const skipVaultBtn   = document.getElementById('btn-skip-vault');
-    const finishBtn      = document.getElementById('btn-finish-stickers');
-    const nextBtn        = document.getElementById('btn-next-sticker');
-    const prevBtn        = document.getElementById('btn-prev-sticker');
-    const displayArea    = document.getElementById('sticker-display-area');
-    const vaultArea      = document.getElementById('sticker-vault-area');
-    const randomBtn      = document.getElementById('btn-random-sticker');
+    const startActions = document.getElementById('sticker-start-actions');
+    const startBtn = document.getElementById('btn-start-stickers');
+    const jumpVaultBtn = document.getElementById('btn-jump-vault');
+    const skipVaultBtn = document.getElementById('btn-skip-vault');
+    const finishBtn = document.getElementById('btn-finish-stickers');
+    const nextBtn = document.getElementById('btn-next-sticker');
+    const prevBtn = document.getElementById('btn-prev-sticker');
+    const displayArea = document.getElementById('sticker-display-area');
+    const vaultArea = document.getElementById('sticker-vault-area');
+    const randomBtn = document.getElementById('btn-random-sticker');
 
     currentStickerIndex = 0;
 
@@ -371,12 +378,12 @@ function bindStickerArchive() {
         const sticker = CONFIG.stickers[index];
         if (!sticker) return;
 
-        const imgWrapper   = document.getElementById('sticker-img-wrapper');
-        const imgEl        = document.getElementById('current-sticker-img');
-        const placeholderEl= document.getElementById('sticker-placeholder-emoji');
-        const categoryEl   = document.getElementById('sticker-category');
-        const descEl       = document.getElementById('sticker-description');
-        const exhibitEl    = document.getElementById('sticker-exhibit-num');
+        const imgWrapper = document.getElementById('sticker-img-wrapper');
+        const imgEl = document.getElementById('current-sticker-img');
+        const placeholderEl = document.getElementById('sticker-placeholder-emoji');
+        const categoryEl = document.getElementById('sticker-category');
+        const descEl = document.getElementById('sticker-description');
+        const exhibitEl = document.getElementById('sticker-exhibit-num');
 
         // Reset
         nextBtn?.classList.add('hidden');
@@ -390,7 +397,7 @@ function bindStickerArchive() {
 
         imgWrapper?.classList.remove('revealed');
 
-        if (exhibitEl) exhibitEl.textContent = ;
+        if (exhibitEl) exhibitEl.textContent = `EXHIBIT ${index + 1}`;
         if (categoryEl) categoryEl.textContent = sticker.category;
         if (descEl) descEl.textContent = sticker.description;
 
@@ -464,7 +471,7 @@ let activeLightboxIndex = 0;
 function openStickerLightbox(path, index) {
     activeLightboxIndex = index;
     const modal = document.getElementById('sticker-lightbox');
-    const img   = document.getElementById('lightbox-img');
+    const img = document.getElementById('lightbox-img');
     const count = document.getElementById('lightbox-counter');
     if (!modal || !img) return;
 
@@ -518,9 +525,9 @@ function bindRevealSequence() {
 
 function startRevealSequence() {
     const loadingEl = document.getElementById('loading-sequence');
-    const revealEl  = document.getElementById('reveal-content');
-    const fileMsg   = document.getElementById('file-found-msg');
-    const showEndBtn= document.getElementById('btn-show-end');
+    const revealEl = document.getElementById('reveal-content');
+    const fileMsg = document.getElementById('file-found-msg');
+    const showEndBtn = document.getElementById('btn-show-end');
 
     const statusMessages = [
         'Decrypting classified birthday archives...',
@@ -630,7 +637,7 @@ function bindArchivistMascot() {
             const osc = audioCtx.createOscillator();
             const gain = audioCtx.createGain();
             osc.type = type;
-            
+
             // Cute pitch sweep (meow / chirp effect)
             const now = audioCtx.currentTime;
             osc.frequency.setValueAtTime(frequency, now);

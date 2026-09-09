@@ -7,30 +7,30 @@
  */
 
 const POPUP_MESSAGES = [
-    { title: "WITS NEWSLETTER REJECTED", body: "WITS newsletter rejected by the council of niggaz"},
-    { title: "SYSTEM WARNING",      body: "PYTHON FAILED AGAIN" },
-    { title: "INTERN UPDATE",       body: "The dog accidentally unplugged something." },
-    { title: "CLASSIFIED",          body: "You were not meant to see this popup." },
-    { title: "ALERT",               body: "Evidence levels: critical. Proceed with caution." },
-    { title: "BALLS DETECTED",      body: "Unusual amount of balls found in this archive." },
-    { title: "BALLS REPORT",        body: "Current balls level: MAXIMUM." },
-    { title: "BALLS REPORT",        body: "Current balls level: MAXIMUM." },
-    { title: "⚠️ BALLS WARNING",    body: "Balls count exceeds safe threshold. Continuing anyway." },
-    { title: "LAST1S BALLS DEPT.",  body: "Filed under: Balls. Category: Balls. Priority: Balls." },
-    { title: "ERROR: BALLS",        body: "An unknown number of balls have gone missing. [FIND BALLS]" },
-    { title: "INTERN REPORT",       body: "The intern dropped the balls. All of them." },
-    { title: "CAT ASSESSMENT",      body: "The archivist has reviewed the balls. Verdict: balls." },
-    { title: "BALLS AUDIT",         body: "This document contains 47% more balls than legally required." },
-    { title: "🐶 DOG ALERT",        body: "Dog detected falling from sky. This is normal." },
-    { title: "WEATHER UPDATE",      body: "Current forecast: 100% chance of cats and dogs." },
-    { title: "METEOROLOGY",         body: "Scientists baffled by ongoing cat/dog precipitation." },
-    { title: "🐾 PAWS ALERT",       body: "Paw count exceeding acceptable limits per square metre." },
-    { title: "RAIN REPORT",         body: "It is raining. Cats. And dogs. Please shelter indoors." }
+    { title: "WITS NEWSLETTER REJECTED", body: "WITS newsletter rejected by the council of niggaz" },
+    { title: "SYSTEM WARNING", body: "PYTHON FAILED AGAIN" },
+    { title: "INTERN UPDATE", body: "The dog accidentally unplugged something." },
+    { title: "CLASSIFIED", body: "You were not meant to see this popup." },
+    { title: "ALERT", body: "Evidence levels: critical. Proceed with caution." },
+    { title: "BALLS DETECTED", body: "Unusual amount of balls found in this archive." },
+    { title: "BALLS REPORT", body: "Current balls level: MAXIMUM." },
+    { title: "BALLS REPORT", body: "Current balls level: MAXIMUM." },
+    { title: "⚠️ BALLS WARNING", body: "Balls count exceeds safe threshold. Continuing anyway." },
+    { title: "LAST1s BALLS DEPT.", body: "Filed under: Balls. Category: Balls. Priority: Balls." },
+    { title: "ERROR: BALLS", body: "An unknown number of balls have gone missing. [FIND BALLS]" },
+    { title: "INTERN REPORT", body: "The intern dropped the balls. All of them." },
+    { title: "CAT ASSESSMENT", body: "The archivist has reviewed the balls. Verdict: balls." },
+    { title: "BALLS AUDIT", body: "This document contains 47% more balls than legally required." },
+    { title: "🐶 DOG ALERT", body: "Dog detected falling from sky. This is normal." },
+    { title: "WEATHER UPDATE", body: "Current forecast: 100% chance of cats and dogs." },
+    { title: "METEOROLOGY", body: "Scientists baffled by ongoing cat/dog precipitation." },
+    { title: "🐾 PAWS ALERT", body: "Paw count exceeding acceptable limits per square metre." },
+    { title: "RAIN REPORT", body: "It is raining. Cats. And dogs. Please shelter indoors." }
 ];
 
 // The full cast of cats and dogs
 const CHAOS_TEXTS = [
-    "ERROR 404", "LAST1S", "???", "WHY", "AAAAAA", "SEND HELP",
+    "ERROR 404", "LAST1s", "???", "WHY", "AAAAAA", "SEND HELP",
     "wait what", "huh?", "bruh", "no thoughts", "404",
     "pagal hai vo aurat", "classified", "TOP SECRET", "DO NOT OPEN",
     "balls", "BALLS", "balls.", "balls???", "no balls",
@@ -125,18 +125,18 @@ function scheduleDrop(el) {
     }
 
     // 20% chance of a text word falling instead of a cat/dog
-    const useText  = Math.random() < 0.2;
-    const content  = useText
+    const useText = Math.random() < 0.2;
+    const content = useText
         ? CHAOS_TEXTS[Math.floor(Math.random() * CHAOS_TEXTS.length)]
         : RAIN_POOL[Math.floor(Math.random() * RAIN_POOL.length)];
-    const size     = useText
+    const size = useText
         ? (0.6 + Math.random() * 0.8)                  // text: 0.6rem – 1.4rem
         : (1.3 + Math.random() * 2.8);                 // emoji: 1.3rem – 4.1rem
-    const leftPos  = -5 + Math.random() * 110;
+    const leftPos = -5 + Math.random() * 110;
     const duration = 1.6 + Math.random() * 4;
-    const drift    = (Math.random() - 0.5) * 120;
-    const spin     = useText ? 0 : (Math.random() - 0.5) * 900; // text stays upright
-    const opacity  = 0.25 + Math.random() * 0.45;
+    const drift = (Math.random() - 0.5) * 120;
+    const spin = useText ? 0 : (Math.random() - 0.5) * 900; // text stays upright
+    const opacity = 0.25 + Math.random() * 0.45;
 
     // Reset animation by removing and re-adding the element trick
     el.style.cssText = `
@@ -180,8 +180,8 @@ function startPopups() {
     function showPopup() {
         if (!chaosActive) return;
 
-        const isRadioExpanded = document.body.classList.contains('radio-open') || 
-                                document.getElementById('mini-radio-widget')?.classList.contains('expanded');
+        const isRadioExpanded = document.body.classList.contains('radio-open') ||
+            document.getElementById('mini-radio-widget')?.classList.contains('expanded');
 
         // If radio box is expanded, filter out bottom-left and center-left positions to avoid overlap
         let availablePositions = ALL_POSITIONS;

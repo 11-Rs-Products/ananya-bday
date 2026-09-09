@@ -105,6 +105,24 @@ class MiniRadioEngine {
             }
         });
 
+        this.audioEl.addEventListener('durationchange', () => {
+            if (this.onProgressUpdate && this.audioEl.duration) {
+                this.onProgressUpdate(this.audioEl.currentTime, this.audioEl.duration);
+            }
+        });
+
+        this.audioEl.addEventListener('loadedmetadata', () => {
+            if (this.onProgressUpdate && this.audioEl.duration) {
+                this.onProgressUpdate(this.audioEl.currentTime, this.audioEl.duration);
+            }
+        });
+
+        this.audioEl.addEventListener('seeked', () => {
+            if (this.onProgressUpdate && this.audioEl.duration) {
+                this.onProgressUpdate(this.audioEl.currentTime, this.audioEl.duration);
+            }
+        });
+
         this.audioEl.addEventListener('ended', () => {
             this.nextTrack();
         });
@@ -212,8 +230,17 @@ class MiniRadioEngine {
     }
 
     seek(percent) {
-        if (this.audioEl && this.audioEl.duration) {
-            this.audioEl.currentTime = (percent / 100) * this.audioEl.duration;
+        if (this.audioEl && !isNaN(this.audioEl.duration) && isFinite(this.audioEl.duration) && this.audioEl.duration > 0) {
+            const clampedPercent = Math.max(0, Math.min(100, percent));
+            const targetTime = (clampedPercent / 100) * this.audioEl.duration;
+            try {
+                this.audioEl.currentTime = targetTime;
+            } catch (err) {
+                console.warn("Audio seek error:", err);
+            }
+            if (this.onProgressUpdate) {
+                this.onProgressUpdate(targetTime, this.audioEl.duration);
+            }
         }
     }
 
@@ -234,6 +261,8 @@ export const radioEngine = new MiniRadioEngine();
 // ════════════════════════════════════════════════════════════
 let isExpanded = false;
 let isScrubbing = false;
+let scrubTimeout = null;
+let lastThrottledSeekTime = 0;
 let animFrameId = null;
 
 export function initMiniRadio() {
@@ -267,6 +296,7 @@ export function initMiniRadio() {
     const btnMute = document.getElementById('radio-btn-mute');
     const volSlider = document.getElementById('radio-volume-slider');
     const progressBar = document.getElementById('radio-progress-bar');
+    const curTimeEl = document.getElementById('radio-current-time');
 
     if (btnPlay) {
         btnPlay.addEventListener('click', () => {
@@ -295,18 +325,58 @@ export function initMiniRadio() {
     }
 
     if (progressBar) {
-        progressBar.addEventListener('mousedown', () => isScrubbing = true);
-        progressBar.addEventListener('touchstart', () => isScrubbing = true, {passive: true});
-        progressBar.addEventListener('mouseup', () => isScrubbing = false);
-        progressBar.addEventListener('touchend', () => isScrubbing = false);
-        
+        let hasMoved = false;
+
+        const startScrub = () => {
+            isScrubbing = true;
+            hasMoved = false;
+            if (scrubTimeout) clearTimeout(scrubTimeout);
+        };
+
+        const updateScrubPreview = (percent) => {
+            const dur = radioEngine.audioEl.duration;
+            if (dur && isFinite(dur) && dur > 0) {
+                const previewSec = (percent / 100) * dur;
+                if (curTimeEl) curTimeEl.textContent = formatTime(previewSec);
+            }
+        };
+
+        const commitSeek = (percent) => {
+            radioEngine.seek(percent);
+            updateScrubPreview(percent);
+            if (scrubTimeout) clearTimeout(scrubTimeout);
+            scrubTimeout = setTimeout(() => {
+                isScrubbing = false;
+            }, 350);
+        };
+
+        progressBar.addEventListener('pointerdown', startScrub);
+        progressBar.addEventListener('mousedown', startScrub);
+        progressBar.addEventListener('touchstart', startScrub, { passive: true });
+
         progressBar.addEventListener('input', (e) => {
-            radioEngine.seek(parseFloat(e.target.value));
+            isScrubbing = true;
+            hasMoved = true;
+            const val = parseFloat(e.target.value);
+            updateScrubPreview(val);
         });
+
         progressBar.addEventListener('change', (e) => {
-            radioEngine.seek(parseFloat(e.target.value));
-            isScrubbing = false;
+            const val = parseFloat(e.target.value);
+            commitSeek(val);
         });
+
+        // Global release handler in case mouse/finger is released outside the slider bounds
+        const handleGlobalRelease = () => {
+            if (isScrubbing) {
+                const val = parseFloat(progressBar.value);
+                commitSeek(val);
+            }
+        };
+
+        window.addEventListener('pointerup', handleGlobalRelease);
+        window.addEventListener('mouseup', handleGlobalRelease);
+        window.addEventListener('touchend', handleGlobalRelease);
     }
 
     // Connect Engine Callbacks
@@ -437,12 +507,13 @@ function updateProgressUI(currentSec, totalSec) {
     const durTimeEl = document.getElementById('radio-duration-time');
     const progressBar = document.getElementById('radio-progress-bar');
 
-    if (curTimeEl) curTimeEl.textContent = formatTime(currentSec);
-    if (durTimeEl) durTimeEl.textContent = formatTime(totalSec);
-
-    if (progressBar && totalSec > 0 && !isScrubbing) {
-        progressBar.value = (currentSec / totalSec) * 100;
+    if (!isScrubbing) {
+        if (curTimeEl) curTimeEl.textContent = formatTime(currentSec);
+        if (progressBar && totalSec > 0) {
+            progressBar.value = (currentSec / totalSec) * 100;
+        }
     }
+    if (durTimeEl && totalSec > 0) durTimeEl.textContent = formatTime(totalSec);
 }
 
 function formatTime(seconds) {

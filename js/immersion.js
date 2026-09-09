@@ -10,8 +10,8 @@
 // ════════════════════════════════════════════════════════════
 const THEMES = [
     { id: 'theme-default', label: 'ORIGINAL' },
-    { id: 'theme-dark',    label: 'DARK DOSSIER' },
-    { id: 'theme-matrix',  label: 'CYBER MATRIX' }
+    { id: 'theme-dark', label: 'DARK DOSSIER' },
+    { id: 'theme-matrix', label: 'CYBER MATRIX' }
 ];
 let currentThemeIndex = 0;
 let crtActive = false;
@@ -22,7 +22,7 @@ export function initCRTAndThemes() {
     const crtOverlay = document.getElementById('crt-overlay');
 
     // Restore saved CRT state
-    const savedCRT = localStorage.getItem('last1s_crt') === 'true';
+    const savedCRT = localStorage.getItem('LAST1s_crt') === 'true';
     if (savedCRT && crtBtn && crtOverlay) {
         crtActive = true;
         crtOverlay.classList.add('active');
@@ -36,12 +36,12 @@ export function initCRTAndThemes() {
             crtOverlay.classList.toggle('active', crtActive);
             crtBtn.classList.toggle('active', crtActive);
             crtBtn.querySelector('.hud-label').textContent = crtActive ? 'CRT: ON' : 'CRT: OFF';
-            localStorage.setItem('last1s_crt', String(crtActive));
+            localStorage.setItem('LAST1s_crt', String(crtActive));
         });
     }
 
     // Restore saved Theme state
-    const savedTheme = localStorage.getItem('last1s_theme');
+    const savedTheme = localStorage.getItem('LAST1s_theme');
     if (savedTheme) {
         const foundIdx = THEMES.findIndex(t => t.id === savedTheme);
         if (foundIdx !== -1) {
@@ -64,7 +64,7 @@ export function initCRTAndThemes() {
                 document.body.classList.add(nextTheme.id);
             }
             themeBtn.querySelector('.hud-label').textContent = nextTheme.label;
-            localStorage.setItem('last1s_theme', nextTheme.id);
+            localStorage.setItem('LAST1s_theme', nextTheme.id);
         });
     }
 }
@@ -98,10 +98,10 @@ class ChiptuneBGM {
         ];
 
         this.bassline = [
-            C4/2, C4/2, G4/2, G4/2, C4/2, C4/2, G4/2, G4/2,
-            G4/2, G4/2, D4/2, D4/2, C4/2, C4/2, G4/2, G4/2,
-            C4/2, C4/2, E4/2, E4/2, F4/2, F4/2, F4/2, F4/2,
-            F4/2, F4/2, C4/2, C4/2, G4/2, G4/2, C4/2, C4/2
+            C4 / 2, C4 / 2, G4 / 2, G4 / 2, C4 / 2, C4 / 2, G4 / 2, G4 / 2,
+            G4 / 2, G4 / 2, D4 / 2, D4 / 2, C4 / 2, C4 / 2, G4 / 2, G4 / 2,
+            C4 / 2, C4 / 2, E4 / 2, E4 / 2, F4 / 2, F4 / 2, F4 / 2, F4 / 2,
+            F4 / 2, F4 / 2, C4 / 2, C4 / 2, G4 / 2, G4 / 2, C4 / 2, C4 / 2
         ];
     }
 

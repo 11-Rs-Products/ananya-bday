@@ -1,25 +1,26 @@
 const CONFIG = {
     subject: {
         name: "Ananya Verma",
-        aliases: ["Niggi", "Sukhi", "Barista"],
-        occupation: "Chotu, owns a daru a tent",
+        aliases: ["Niggi", "Sukhi", "Resident Barista"],
+        occupation: "Certified Chotu & CEO of the local Daaru Ka Tent",
         specialAbilities: [
-            "Sending the perfect sticker at the worst possible time",
-            "Collecting all sorts of wierd and disgusting shit",
-            "Has very beautifool blue hair",
-            "Having the balls to do things nobody else would"
+            "Deploying the exact right sticker at the absolute worst psychological moment",
+            "Hoarding an ungodly collection of weird, cursed, and questionable internet artifacts",
+            "Rocking suspiciously majestic blue hair with undeniable main-character energy",
+            "Possessing the undisputed balls to do things nobody else would dare attempt",
+            "Providing aggressive emotional support followed by immediate violence"
         ],
         stats: [
-            { label: "Sticker Usage", percentage: 100 },
-            { label: "Random Adventures", percentage: 82 },
-            { label: "Normal Conversations", percentage: 1 },
-            { label: "Niggi", percentage: 147, overflow: true }
+            { label: "Sticker Warfare", percentage: 100 },
+            { label: "Random Chaotic Quests", percentage: 88 },
+            { label: "Normal Human Conversations", percentage: 2 },
+            { label: "Pure Niggi Energy", percentage: 147, overflow: true }
         ]
     },
     witnesses: [
         {
             id: 1,
-            name: "[Friend 1 Name]",
+            name: "Abhita",
             role: "[Narrator / Funny Role]",
             context: "[How they know her / How long]",
             description: "[One extremely inaccurate sentence describing her.]",
@@ -27,7 +28,7 @@ const CONFIG = {
         },
         {
             id: 2,
-            name: "[Friend 2 Name]",
+            name: "Ksreya",
             role: "[Comic Relief / Funny Role]",
             context: "[How they know her / How long]",
             description: "[One extremely inaccurate sentence describing her.]",
@@ -35,7 +36,7 @@ const CONFIG = {
         },
         {
             id: 3,
-            name: "[Friend 3 Name]",
+            name: "Himansii",
             role: "[Memory Keeper / Funny Role]",
             context: "[How they know her / How long]",
             description: "[One extremely inaccurate sentence describing her.]",
@@ -43,7 +44,7 @@ const CONFIG = {
         },
         {
             id: 4,
-            name: "[Friend 4 Name]",
+            name: "Amrutansii",
             role: "[Emotional Support / Funny Role]",
             context: "[How they know her / How long]",
             description: "[One extremely inaccurate sentence describing her.]",
@@ -51,7 +52,7 @@ const CONFIG = {
         },
         {
             id: 5,
-            name: "[Friend 5 Name]",
+            name: "Vinita",
             role: "[Funny Role]",
             context: "[How they know her / How long]",
             description: "[One extremely inaccurate sentence describing her.]",
@@ -59,7 +60,7 @@ const CONFIG = {
         },
         {
             id: 6,
-            name: "[Friend 6 Name]",
+            name: "Reyansii",
             role: "[Final Message / Funny Role]",
             context: "[How they know her / How long]",
             description: "[One extremely inaccurate sentence describing her.]",
@@ -251,11 +252,11 @@ const CONFIG = {
             "assets/audio/Video Project 9.m4a"
         ]
     },
-    last1sLore: [
-        "Last1s was formed",
+    LAST1sLore: [
+        "LAST1s was formed",
         "[Questionable decisions were made]",
-        "Last1s Standing",
-        "Last1s Consolation",
+        "LAST1s Standing",
+        "LAST1s Consolation",
         "[More questionable decisions]",
         "Ananya became an important part of the story",
         "Balls were had",
