@@ -1,17 +1,16 @@
 /**
- * js/immersion.js — Visual Polish & Immersion Suite
- * 1. Retro CRT scanline filter & theme mode controller
- * 2. Web Audio procedural 8-bit / Lo-Fi Birthday BGM tape player
- * 3. Physics-based high performance Canvas Confetti & Streamer Cannon
+ * js/immersion.js — Mithai Ki Dukan · Visual Ambience Suite
+ * 1. Theme mode controller (Sakura / Dark)
+ * 2. Web Audio procedural birthday BGM synthesizer
+ * 3. Physics-based Canvas Confetti & Petal Shower Cannon
  */
 
 // ════════════════════════════════════════════════════════════
 // 1. THEMES & CRT SCANLINE CONTROLLER
 // ════════════════════════════════════════════════════════════
 const THEMES = [
-    { id: 'theme-default', label: 'ORIGINAL' },
-    { id: 'theme-dark', label: 'DARK DOSSIER' },
-    { id: 'theme-matrix', label: 'CYBER MATRIX' }
+    { id: 'theme-default', label: 'SAKURA' },
+    { id: 'theme-dark', label: 'MOONLIGHT' },
 ];
 let currentThemeIndex = 0;
 let crtActive = false;
@@ -21,13 +20,13 @@ export function initCRTAndThemes() {
     const themeBtn = document.getElementById('btn-toggle-theme');
     const crtOverlay = document.getElementById('crt-overlay');
 
-    // Restore saved CRT state
-    const savedCRT = localStorage.getItem('LAST1s_crt') === 'true';
+    // Restore saved CRT state (kept for backward compat, unused in new design)
+    const savedCRT = localStorage.getItem('MKD_crt') === 'true';
     if (savedCRT && crtBtn && crtOverlay) {
         crtActive = true;
         crtOverlay.classList.add('active');
         crtBtn.classList.add('active');
-        crtBtn.querySelector('.hud-label').textContent = 'CRT: ON';
+        if (crtBtn.querySelector('.hud-label')) crtBtn.querySelector('.hud-label').textContent = 'CRT: ON';
     }
 
     if (crtBtn && crtOverlay) {
@@ -35,13 +34,13 @@ export function initCRTAndThemes() {
             crtActive = !crtActive;
             crtOverlay.classList.toggle('active', crtActive);
             crtBtn.classList.toggle('active', crtActive);
-            crtBtn.querySelector('.hud-label').textContent = crtActive ? 'CRT: ON' : 'CRT: OFF';
-            localStorage.setItem('LAST1s_crt', String(crtActive));
+            if (crtBtn.querySelector('.hud-label')) crtBtn.querySelector('.hud-label').textContent = crtActive ? 'CRT: ON' : 'CRT: OFF';
+            localStorage.setItem('MKD_crt', String(crtActive));
         });
     }
 
     // Restore saved Theme state
-    const savedTheme = localStorage.getItem('LAST1s_theme');
+    const savedTheme = localStorage.getItem('MKD_theme');
     if (savedTheme) {
         const foundIdx = THEMES.findIndex(t => t.id === savedTheme);
         if (foundIdx !== -1) {
@@ -49,7 +48,7 @@ export function initCRTAndThemes() {
             if (THEMES[currentThemeIndex].id !== 'theme-default') {
                 document.body.classList.add(THEMES[currentThemeIndex].id);
             }
-            if (themeBtn) {
+            if (themeBtn && themeBtn.querySelector('.hud-label')) {
                 themeBtn.querySelector('.hud-label').textContent = THEMES[currentThemeIndex].label;
             }
         }
@@ -63,8 +62,8 @@ export function initCRTAndThemes() {
             if (nextTheme.id !== 'theme-default') {
                 document.body.classList.add(nextTheme.id);
             }
-            themeBtn.querySelector('.hud-label').textContent = nextTheme.label;
-            localStorage.setItem('LAST1s_theme', nextTheme.id);
+            if (themeBtn.querySelector('.hud-label')) themeBtn.querySelector('.hud-label').textContent = nextTheme.label;
+            localStorage.setItem('MKD_theme', nextTheme.id);
         });
     }
 }
@@ -230,8 +229,9 @@ export class ConfettiCannon {
         this.ctx = this.canvas.getContext('2d');
         this.particles = [];
         this.animationFrame = null;
-        this.colors = ['#ff2d55', '#ffd60a', '#06d6a0', '#1c1c2e', '#ff007f', '#4cc9f0', '#ffffff'];
-        this.emojis = ['🎂', '🎉', '🎈', '⭐', '💖', '🐱', '🐶', '✨'];
+        // Sakura garden palette for confetti
+        this.colors = ['#F4A7C0', '#EFA6B8', '#F8D7E3', '#704653', '#B7C9AE', '#FFF1E6', '#D4889A'];
+        this.emojis = ['🌸', '🍮', '🌺', '✿', '🍡', '⭐', '💕', '🌷'];
 
         this.resize();
         window.addEventListener('resize', () => this.resize());

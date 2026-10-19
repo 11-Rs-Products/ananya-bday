@@ -1,291 +1,267 @@
 const CONFIG = {
     subject: {
-        name: "Ananya Verma",
-        aliases: ["Niggi", "Sukhi", "Resident Barista", "hizru"],
-        occupation: "Certified Chotu & CEO of the local Daaru Ka Tent",
+        name: "Ananya Singh",
+        aliases: ["Rasmalai", "Stats 2 topper", "Foundation level senior", "Loudspeaker"],
+        occupation: "Certified Debater & CEO of Mithai ki Dukkan",
         specialAbilities: [
-            "Deploying the exact right sticker at the absolute worst psychological moment",
-            "Hoarding an ungodly collection of weird, cursed, and questionable internet artifacts",
-            "Rocking suspiciously majestic blue hair with undeniable main-character energy",
-            "Possessing the undisputed balls to do things nobody else would dare attempt",
-            "Providing aggressive emotional support followed by immediate violence"
+            "Che che",
+            "Debate mein che che",
+            "Meets mein che che",
+            "Did i mention che che?",
+            "Acchi bacchi hai, dil ki kafi acchi hai, loye ya"
         ],
         stats: [
-            { label: "Sticker Usage", percentage: 100 },
-            { label: "Random Adventures", percentage: 82 },
-            { label: "Normal Conversations", percentage: 1 },
-            { label: "Niggi", percentage: 147, overflow: true }
+            { label: "Chii yaar", percentage: 100 },
+            { label: "Vanshikapaglu", percentage: 82 },
+            { label: "Stats2 mein marks", percentage: 1 },
+            { label: "Gir ke liye pyaar", percentage: 147, overflow: true }
         ]
     },
     witnesses: [
         {
             id: 1,
-            name: "Abhita",
-            role: "Chief Enabler & Co-Conspirator",
-            context: "Only rejected piece of Last1s, survived exactly 1 year.",
-            description: "Has witnessed exactly 47 incidents of questionable sticker deployments and still hasn't called the authorities.",
+            name: "Abhinav-Balmithai",
+            role: "Rage-baitter",
             image: "assets/images/placeholder_friend.png"
         },
         {
             id: 2,
-            name: "Ksreya",
-            role: "Resident Chaos Theorist",
-            context: "1 year of absolute, unfiltered madness.",
-            description: "Claims to be the voice of reason but is usually the one handing Ananya the metaphorical matches.",
+            name: "Kshitij-Kalakand",
+            role: "Pyara-baccha",
             image: "assets/images/placeholder_friend.png"
         },
         {
             id: 3,
-            name: "Himansii",
-            role: "Archive Keeper of Cursed Artifacts",
-            context: "Shared trauma spanning exactly 1 year.",
-            description: "Responsible for documenting Ananya's blue hair phases and making sure the sticker vault doesn't leak into the mainstream internet.",
+            name: "Himanshu-Balushahi",
+            role: "Kaand ho gya",
             image: "assets/images/placeholder_friend.png"
         },
         {
             id: 4,
-            name: "Amrutansii",
-            role: "Tactical Emotional Support Target",
-            context: "Trapped in the Daaru Ka Tent for 1 year.",
-            description: "The primary victim of Ananya's aggressive emotional support and immediate follow-up violence.",
+            name: "Amrutanshu-Ghewar",
+            role: "Tactical Emotional Support",
             image: "assets/images/placeholder_friend.png"
         },
         {
             id: 5,
-            name: "Vinita",
-            role: "Unofficial PR Manager",
-            context: "1 year of trying to explain Ananya to normal people.",
-            description: "Spends 80% of her time apologizing for Ananya's group chat behavior and the other 20% participating in it.",
+            name: "Vinay-Gulabjamun",
+            role: "Bandar and billa loverr",
             image: "assets/images/placeholder_friend.png"
         },
         {
             id: 6,
-            name: "Reyansii",
-            role: "Mastermind of the Documentation",
-            context: "Fellow Last1s idiot, surviving 1 year of the Ananya Experience.",
-            description: "Orchestrated this entire classified operation just to prove that her 'Niggi energy' is a quantifiable threat to society.",
+            name: "Reyansh-Rasgulla",
+            role: "Bestfriend",
             image: "assets/images/placeholder_friend.png"
         }
     ],
     stickers: [
         {
             id: "sticker1",
-            category: "EMOTIONAL SUPPORT",
-            description: "Stickers deployed when words have failed and aggressive comfort is required.",
-            image: "assets/stickers/few/emotionalsupport.webp",
+            image: "assets/stickers/few/Screenshot 2026-10-19 at 10.49.05 PM.png",
             audioPath: "assets/audio/placeholder_sticker1.mp3",
             narrationText: "[Friend 1 voice: Ye le aur randirona band kr]"
         },
         {
             id: "sticker2",
-            category: "VIOLENCE & RETALIATION",
-            description: "Stickers deployed when words have failed and patience has permanently exited.",
-            image: "assets/stickers/few/violence.webp",
+            image: "assets/stickers/few/Screenshot 2026-10-19 at 10.49.15 PM.png",
             audioPath: "assets/audio/placeholder_sticker2.mp3",
             narrationText: "[Friend 2 voice: Dosto side hona, mujhe iski gand me bans dalna hai]"
         },
-
+        {
+            id: "sticker3",
+            image: "assets/stickers/few/Screenshot 2026-10-19 at 10.49.47 PM.png",
+            audioPath: "assets/audio/placeholder_sticker2.mp3",
+            narrationText: "[Friend 3 voice: Chill out, it's a joke not a dick, don't take it so hard]"
+        },
         {
             id: "sticker4",
-            category: "CRISIS DE-ESCALATION",
-            description: "Deployed when someone commits the crime of taking themselves too seriously.",
-            image: "assets/stickers/few/UBfc-04ZU5EvW7tn6rCCWWTuCKWvivQSTY+ROh4a3M4=.webp",
-            audioPath: "assets/audio/placeholder_sticker2.mp3",
-            narrationText: "[Friend 4 voice: Chill out, it's a joke not a dick, don't take it so hard]"
+            image: "assets/stickers/few/Screenshot 2026-10-19 at 10.49.54 PM.png",
+            audioPath: "assets/audio/placeholder_sticker1.mp3",
+            narrationText: "[Friend 4 voice: Dur reh]"
         },
         {
             id: "sticker5",
-            category: "BOUNDARY CONTROL",
-            description: "Extreme social distancing protocol deployed against uninvited opinions.",
-            image: "assets/stickers/few/tyvbXKsypl+sL6DHUZW1CJ3e2gf1vSme4yFCUmHrOaM=.webp",
-            audioPath: "assets/audio/placeholder_sticker1.mp3",
-            narrationText: "[Friend 5 voice: Dur reh]"
+            image: "assets/stickers/few/Screenshot 2026-10-19 at 10.50.01 PM.png",
+            audioPath: "assets/audio/placeholder_sticker2.mp3",
+            narrationText: "[Friend 5 voice: Tham ja bawli gand]"
         },
         {
             id: "sticker6",
-            category: "EMERGENCY BRAKES",
-            description: "The emergency handbrake deployed when Ananya is doing entirely too much.",
-            image: "assets/stickers/few/CG9jkYw0jI-K59EDSPZopVbf8aZLIWNypxARKe4v6wQ=.webp",
-            audioPath: "assets/audio/placeholder_sticker2.mp3",
-            narrationText: "[Friend 6 voice: Tham ja bawli gand]"
-        },
-        {
-            id: "sticker7",
-            category: "AFFECTIONATE THREATS",
-            description: "The purest expression of long-distance love and emotional attachment.",
-            image: "assets/stickers/few/XRnfiK5p2BG3xLYiyasiUo1ukQnQfb-isiRcoRoI63I=.webp",
+            image: "assets/stickers/few/Screenshot 2026-10-19 at 10.50.08 PM.png",
             audioPath: "assets/audio/placeholder_sticker1.mp3",
             narrationText: "[All friends: Time mile to kabhi chud lena miss u ❤️]"
         },
         {
-            id: "sticker8",
-            category: "ANCIENT WISDOM",
-            description: "Philosophical poetry analyzing the human condition and nearby company.",
-            image: "assets/stickers/few/rhxVD0yVIzj1BdpCzrtK4yWa0MlNR5aB6K-PaMc8E5A=.webp",
+            id: "sticker7",
+            image: "assets/stickers/few/Screenshot 2026-10-19 at 10.50.15 PM.png",
             audioPath: "assets/audio/placeholder_sticker2.mp3",
             narrationText: "[Friend 1 voice: Kahat kabir sansar mai bhati-bhati ke log...]"
         },
         {
-            id: "sticker9",
-            category: "DAILY DISCIPLINE",
-            description: "A balanced timetable of wholesome nutrition followed by midnight violence.",
-            image: "assets/stickers/few/uVygro9KhvG07wB9mzW4HJeHRcCBfwJgGWfYOhOwDJk=.webp",
+            id: "sticker8",
+            image: "assets/stickers/few/Screenshot 2026-10-19 at 10.50.25 PM.png",
             audioPath: "assets/audio/placeholder_sticker1.mp3",
             narrationText: "[Friend 2 voice: Din mai Salt, Raat mai Assault]"
         },
         {
-            id: "sticker10",
-            category: "CONVERSATION ENDER",
-            description: "The nuclear option when an argument needs to stop immediately.",
-            image: "assets/stickers/few/EiIwCtan+dThbPcFig2e52wnhONE5YldzI9dvrqyd3I=.webp",
+            id: "sticker9",
+            image: "assets/stickers/few/Screenshot 2026-10-19 at 11.31.23 PM.png",
             audioPath: "assets/audio/placeholder_sticker2.mp3",
-            narrationText: "[Friend 3 voice: Kam bol Fati hui chaddi]"
+            narrationText: "[Friend 3 voice: Absolute cinema]"
+        },
+        {
+            id: "sticker10",
+            image: "assets/stickers/few/Screenshot 2026-10-19 at 11.31.34 PM.png",
+            audioPath: "assets/audio/placeholder_sticker1.mp3",
+            narrationText: "[Friend 4 voice: Ye dekho iska naya tamasha]"
         },
         {
             id: "sticker11",
-            category: "PUBLIC WARNING",
-            description: "Crucial intelligence advisory warning against highly suspicious individuals.",
-            image: "assets/stickers/few/zc1okEC1msiA-HwqyHcS7St8uHZugV5A5EpL7REmVFc=.webp",
+            image: "assets/stickers/few/Screenshot 2026-10-19 at 11.31.43 PM.png",
+            audioPath: "assets/audio/placeholder_sticker2.mp3",
+            narrationText: "[Friend 5 voice: We are so back]"
+        },
+        {
+            id: "sticker12",
+            image: "assets/stickers/few/Screenshot 2026-10-19 at 11.32.11 PM.png",
             audioPath: "assets/audio/placeholder_sticker1.mp3",
-            narrationText: "[Friend 4 voice: This person right here... do not trust this guy at all]"
+            narrationText: "[Friend 6 voice: This person right here... do not trust this guy at all]"
+        },
+        {
+            id: "sticker13",
+            image: "assets/stickers/few/Screenshot 2026-10-19 at 11.50.56 PM.png",
+            audioPath: "assets/audio/placeholder_sticker2.mp3",
+            narrationText: "[Friend 1 voice: Ye alag level ka scene hai]"
+        },
+        {
+            id: "sticker14",
+            image: "assets/stickers/few/Screenshot 2026-10-19 at 11.51.09 PM.png",
+            audioPath: "assets/audio/placeholder_sticker1.mp3",
+            narrationText: "[Friend 2 voice: Hassi nahi ruk rahi bhai]"
+        },
+        {
+            id: "sticker15",
+            image: "assets/stickers/few/Screenshot 2026-10-19 at 11.51.22 PM.png",
+            audioPath: "assets/audio/placeholder_sticker2.mp3",
+            narrationText: "[Friend 3 voice: Classic Ananya reaction]"
+        },
+        {
+            id: "sticker16",
+            image: "assets/stickers/few/Screenshot 2026-10-19 at 11.55.56 PM.png",
+            audioPath: "assets/audio/placeholder_sticker1.mp3",
+            narrationText: "[Friend 4 voice: Perfection in a sticker]"
         }
     ],
     allStickers: [
-        "assets/stickers/All/+eebENyzF5UXtY7SsrC4RRnl8nEX35DzXT7PHJiRRws=.webp",
-        "assets/stickers/All/+jDu1DK0T1-LNFVi5APClnY5wq6JBl-ZlfDF0e5woBA=.webp",
-        "assets/stickers/All/+zUfymE4bBy8MvkVoQujK5lDRdWIhEXrRYAZUgarLzE=.webp",
-        "assets/stickers/All/-8ryZm9m2RySsEM3HMEclM7ZdNiA9Bv6zjXe1AifcKM=.webp",
-        "assets/stickers/All/0Lbxz1HXN4ozVAO-DaJnkPMTlDpue5hlA+IevetcGfA=.webp",
-        "assets/stickers/All/12abbd9e-bfff-4693-8224-5226e485cd39.png",
-        "assets/stickers/All/2FQeUORNmtwRqTR-Dn9Zxqg+WETzmGJ85uVbPGf2Q8M=.webp",
-        "assets/stickers/All/3yeOU6T0rT0cFaXJi+YjKztQQIt-N05rRUhPX94VfWQ=.webp",
-        "assets/stickers/All/4li24sfkVUp4fyxkvGaY9HKV2GWpXWfkyapXJX5QmE8=.webp",
-        "assets/stickers/All/4qGcs-8adRcENYAoLUY3HT+0owby7LgAP+qorotxYUk=.webp",
-        "assets/stickers/All/5KB78fMCg0WgT16V7nGjwp17UeEgjjmcYo38kGiKT3o=.webp",
-        "assets/stickers/All/5R1RZoomr2zo1HiU85DM-rEX9z6OEHl3V743QXLZ3Og=.webp",
-        "assets/stickers/All/5q6q45TVGyE5cZBYOJqtF-P8LnitKs3GQUWKoKKB7KM=.webp",
-        "assets/stickers/All/5tuH4iDmmGXkpShTZN9gMJieWxzRaVn-3PJIeDsXwV4=.webp",
-        "assets/stickers/All/709e31b3-c8c1-4041-979a-2d33edb80696.png",
-        "assets/stickers/All/7bFWob3YrKtNCScaWkBq1EF+Aob571lUbZDqIe5l9-A=.webp",
-        "assets/stickers/All/9XMsdBmHlhbro1F8rQyuh0NfUq9m83UPcgk79FJbgd8=.webp",
-        "assets/stickers/All/ABaCdAW6YoE4UOSbZD+YcnOZ1iUooLpZU36tI8gbNqM=.webp",
-        "assets/stickers/All/Bd5SG76ZkEKIPh9i5aQgcroKqVWPxLFXoWWI-TbIVG0=.webp",
-        "assets/stickers/All/Br74OuiZVqqakKmaZNMD66u8Re2iFFO4co4OXsRhSOM=.webp",
-        "assets/stickers/All/CG9jkYw0jI-K59EDSPZopVbf8aZLIWNypxARKe4v6wQ=.webp",
-        "assets/stickers/All/DYYDkhLz4MsfIVjAbnG2VfsueNutYlEjg6mF5ncfevQ=.webp",
-        "assets/stickers/All/Dla9sp4D897MYYAww+oM1srDYy-0Ites8iYvOBHOzhQ=.webp",
-        "assets/stickers/All/EX2-NjMrR3rwBUNbdqohHs+xxoDGmY8smU2e7TuQAnw=.webp",
-        "assets/stickers/All/EiIwCtan+dThbPcFig2e52wnhONE5YldzI9dvrqyd3I=.webp",
-        "assets/stickers/All/FRrNa0uZO7nE+Vd6xfSP+y3v8L-P7PztL-ghtTzMQQk=.webp",
-        "assets/stickers/All/HTebkL48Fx-JkOiSqeEB6anAU6j7RMt3xVGo12SYZRk=.webp",
-        "assets/stickers/All/Ixcm30InNAmpXBjH2yKZp1WHYgsnCztWotUjcVKU6xM=.webp",
-        "assets/stickers/All/J0II8W9wqPYH-HBGLvsulW-JyOxAKpicLa-NHFhO+e4=.webp",
-        "assets/stickers/All/KWXmL72VxRlSp6Vm-EjLsgA-mIgN9aSfH4WewQRGiA4=.webp",
-        "assets/stickers/All/LJOs3eAwqDSAZaY+QgnO-bQZtXtK8aIXFu68FnaYTJ8=.webp",
-        "assets/stickers/All/MLH2OpkjD123FeMyQP0oLUuS5OI3Gzr9N8uiQy7Qal0=.webp",
-        "assets/stickers/All/NPBeP2aw6FxMxNWhamJqzJ6cBPLyeGr-sLmBuMqjc+E=.webp",
-        "assets/stickers/All/NVgWGDnZUsDOljNqgXLFII8hLjCH8nEUyviA7RxibCo=.webp",
-        "assets/stickers/All/OMXZYlhZzGd6hjCxS8h466m9iw5toAH11S25qpM1vxs=.webp",
-        "assets/stickers/All/PhgaKqnWv+CLvm7exAhNBNsMcOLOEVrkss9VLV4Pda8=.webp",
-        "assets/stickers/All/RMLqu7xDEXTw0sfpl6PXDaCcC7A5Cz+Cb5VgxZBNwkM=.webp",
-        "assets/stickers/All/RUvm3sAy6ulR+xjfxrgSIfpxiOzJwYnpzQHs9f9s7vI=.webp",
-        "assets/stickers/All/Ry-NBmHXZ86C4Top02IwxqsdTZw0z2PfsehI6PxJFgs=.webp",
-        "assets/stickers/All/SnsC561VufnDBSPhsVIZwSNq6tFchf9hJe+hVkHnlcs=.webp",
-        "assets/stickers/All/TlBgC0s+z08eKqllJJE-sUrmiBBaYSDq2KFVP31UdOo=.webp",
-        "assets/stickers/All/U+QaE4tNvVFp1ayvV3W2FPH2De-+B9a0UIpt0Q2PZVU=.webp",
-        "assets/stickers/All/UBfc-04ZU5EvW7tn6rCCWWTuCKWvivQSTY+ROh4a3M4=.webp",
-        "assets/stickers/All/UyyaBCkY9D3vLTf3CFSN0TLVLDQdAYYTPaPzKwnA7cc=.webp",
-        "assets/stickers/All/V8sCP69qukcRe1yz0cd-Y7-cdBIJsutggQHHhWs97EY=.webp",
-        "assets/stickers/All/VDk+hbJiXDHpdafBlnNl4lahaHwpnCycE75QKw1MclI=.webp",
-        "assets/stickers/All/WBTlDhNGFRCG8qR-uhrpGUfUhdnqsAkDC8HBKHoI5lw=.webp",
-        "assets/stickers/All/WDuzBhjWYpDjAM4EduUN1sSIZzfWSjlIj+iwcFZ7+SM=.webp",
-        "assets/stickers/All/XRnfiK5p2BG3xLYiyasiUo1ukQnQfb-isiRcoRoI63I=.webp",
-        "assets/stickers/All/XmwVlpOL3WSvmcqvZp-YFF3ex-FLys5GAI6DN45j-eA=.webp",
-        "assets/stickers/All/XyUUWgxJnkxYryvS5TyyhFFTsRVYAXEuByju4BcW8iI=.webp",
-        "assets/stickers/All/YRdREAGnsIO8DnHTBz6Ga-ysjX4BpI3ag+0kVZBr038=.webp",
-        "assets/stickers/All/ZPWyVPqfNkYSnr4zEI+Wkbkw9n5ZWl7rqnVmmNJPisE=.webp",
-        "assets/stickers/All/ZZoIPi2PfNCf4zkNzvDPWoWzTaus3d3ql23OX8CNiPg=.webp",
-        "assets/stickers/All/a8M6neXtlyPdmi8G97Zyc0c15+qdqwCqhispUVQC9uA=.webp",
-        "assets/stickers/All/aWW8iywKAsGGrC5ZkRg72Aak2CKUS54Sxp51-atxeGM=.webp",
-        "assets/stickers/All/d5c2LR8dbAZeJvUbd55YELjMj0Kkqo-amMXIJci71CM=.webp",
-        "assets/stickers/All/d60x0RIal3ixMYjTkfn61tWtjAdgllKQac4ZCz1vVs0=.webp",
-        "assets/stickers/All/dYR6V5ui5WOEDe5CNA1osmlD7S9rT2Dq+-jtR9uX9+U=.webp",
-        "assets/stickers/All/deCxx4RcNydnJ4qI33mrYActZj8m8uHlqxQw3BEIOMs=.webp",
-        "assets/stickers/All/dggKVaJprjr1o5OSKWPl1F8FCU93X1bZcgUhUoaJbrg=.webp",
-        "assets/stickers/All/eMfTt5aBwdv7TFdHRbAmAvzGn75lIXVXUOy9u1b-IAw=.webp",
-        "assets/stickers/All/fcc4c949-1ede-4df4-91f2-e04d718a1b5f.png",
-        "assets/stickers/All/hL24CFLCQhp7oXgUz-Z5qtmIQIrhNUth3eEXq7z9ehg=.webp",
-        "assets/stickers/All/j6uYQy3W2u-a8hYN9CLouaN3KAIeNEdU4z8XPCYEqn0=.webp",
-        "assets/stickers/All/jNyWAcGs0zgHhsmPYEqnlUTKlGBxEqFEM6hwVoj9xLI=.webp",
-        "assets/stickers/All/lMyYUX80cbU3g80yako5cP6KPuKsXEZeMJrQvINqiR0=.webp",
-        "assets/stickers/All/lQ-vZBgnxesDBkv9lkRRaBxqF6j85KCwzH26psr2MPE=.webp",
-        "assets/stickers/All/lp0vPbagoLP7wDLjTd4kYdvfeiZUlfdax-BVgNjqgJs=.webp",
-        "assets/stickers/All/n9x0SFGZMc3BXHac-EcC7bc67H+nYfREYufo3OinwOs=.webp",
-        "assets/stickers/All/o1UZhXvKL1Iarxq1FacOOCxb-lkYFbg0gwkSknigw-4=.webp",
-        "assets/stickers/All/oNtNI0eZuafL0LfPZuA5ZVgeEwak2b1HJfW7DKUKTnE=.webp",
-        "assets/stickers/All/ociBdWiDsfduMcYQCMEysoXl+A-Kxb-3E+5mdLOHbsg=.webp",
-        "assets/stickers/All/ppseJrsRcyC19lL6VWNWN4KRLeNfyuP+zj8zpjqe8Mg=.webp",
-        "assets/stickers/All/q0PPDN2HnxdEzPdnUdA8+3g6Ql6VWl3rodIK7ILTuYo=.webp",
-        "assets/stickers/All/qZ+v1QDD6LpL1HfkZJDi6R8S7+eISgFhKlAqF4XhOnk=.webp",
-        "assets/stickers/All/qv-jb+r1KRDfvm8Ioyd+bo1WQEySgCWbSdzGnV+zOxA=.webp",
-        "assets/stickers/All/rhxVD0yVIzj1BdpCzrtK4yWa0MlNR5aB6K-PaMc8E5A=.webp",
-        "assets/stickers/All/rkxcW7xRNRcS9gB7hyjZs5GLfnWG7M3pq7eZCgYWDso=.webp",
-        "assets/stickers/All/rl7UaPzK8PWSx+FJMbMZNqIvePhGPjEkvpN0pT+dJkM=.webp",
-        "assets/stickers/All/tBdDaU97T5xgLo+Pn81sMniAanhcZ9mxZg4mNwGwJFM=.webp",
-        "assets/stickers/All/tyvbXKsypl+sL6DHUZW1CJ3e2gf1vSme4yFCUmHrOaM=.webp",
-        "assets/stickers/All/uVygro9KhvG07wB9mzW4HJeHRcCBfwJgGWfYOhOwDJk=.webp",
-        "assets/stickers/All/vMbXWwbispfi8zDVQvAwpB+CqrtZ8VZ7rKeqhp5kD9s=.webp",
-        "assets/stickers/All/wWVmM-lmVy89A-fIzdJJEZWPNXL3VgCTJOfgOB7fgps=.webp",
-        "assets/stickers/All/xEpImU6elfWZEGZGOc6QwdIO6kq1C9Db89bWK7Z9-O8=.webp",
-        "assets/stickers/All/xQMOx20o35E5+nfrPSKQGzz5XCynOyWYirtVpmQ1-mc=.webp",
-        "assets/stickers/All/xoonsPnfYHWPdAq3CBfNHz9b+ZwHHpyP23XbuW8aw+M=.webp",
-        "assets/stickers/All/yR78nLUEdl6f9s0bDci5I7r+hNO7+vDtVmNKB8V-FQI=.webp",
-        "assets/stickers/All/yS1BpOvxKcF7dzaNrwdskSUVVkb0hv9tQtraziBHsp0=.webp",
-        "assets/stickers/All/zc1okEC1msiA-HwqyHcS7St8uHZugV5A5EpL7REmVFc=.webp",
-        "assets/stickers/All/zmMnadx6WEg5B6wBU6FFrn5mXqCskzSlpfWt7E2x2kw=.webp"
+        "assets/stickers/few/Screenshot 2026-10-19 at 10.49.05 PM.png",
+        "assets/stickers/few/Screenshot 2026-10-19 at 10.49.15 PM.png",
+        "assets/stickers/few/Screenshot 2026-10-19 at 10.49.47 PM.png",
+        "assets/stickers/few/Screenshot 2026-10-19 at 10.49.54 PM.png",
+        "assets/stickers/few/Screenshot 2026-10-19 at 10.50.01 PM.png",
+        "assets/stickers/few/Screenshot 2026-10-19 at 10.50.08 PM.png",
+        "assets/stickers/few/Screenshot 2026-10-19 at 10.50.15 PM.png",
+        "assets/stickers/few/Screenshot 2026-10-19 at 10.50.25 PM.png",
+        "assets/stickers/few/Screenshot 2026-10-19 at 11.31.23 PM.png",
+        "assets/stickers/few/Screenshot 2026-10-19 at 11.31.34 PM.png",
+        "assets/stickers/few/Screenshot 2026-10-19 at 11.31.43 PM.png",
+        "assets/stickers/few/Screenshot 2026-10-19 at 11.32.11 PM.png",
+        "assets/stickers/few/Screenshot 2026-10-19 at 11.50.56 PM.png",
+        "assets/stickers/few/Screenshot 2026-10-19 at 11.51.09 PM.png",
+        "assets/stickers/few/Screenshot 2026-10-19 at 11.51.22 PM.png",
+        "assets/stickers/few/Screenshot 2026-10-19 at 11.55.56 PM.png"
     ],
     evidence: [
         {
-            id: "ev1",
-            title: "INCIDENT #001",
-            context: "Location: Classified.",
+            id: "tuntun1",
+            title: "Tun Tun Chronicles · I",
+            context: "Tun Tun Moment #1 ♡",
             importance: "Extremely high.",
-            image: "assets/images/incidents/20260203_004909.jpg"
+            image: "assets/images/tuntun_1.jpeg"
         },
         {
-            id: "ev2",
-            title: "INCIDENT #002",
-            context: "Location: Classified.",
+            id: "tuntun2",
+            title: "Tun Tun Chronicles · II",
+            context: "Tun Tun Moment #2 ♡",
             importance: "Extremely high.",
-            image: "assets/images/incidents/20260212_134153.jpg"
+            image: "assets/images/tuntun_2.jpeg"
         },
         {
-            id: "ev3",
-            title: "INCIDENT #003",
-            context: "Location: Classified.",
+            id: "tuntun3",
+            title: "Tun Tun Chronicles · III",
+            context: "Tun Tun Moment #3 ♡",
             importance: "Extremely high.",
-            image: "assets/images/incidents/DSC08489.JPG"
+            image: "assets/images/tuntun_3.jpeg"
         },
         {
-            id: "ev4",
-            title: "INCIDENT #004",
-            context: "Location: Classified.",
+            id: "tuntun4",
+            title: "Tun Tun Chronicles · IV",
+            context: "Tun Tun Moment #4 ♡",
             importance: "Extremely high.",
-            image: "assets/images/incidents/DSC0E8472.jpg"
+            image: "assets/images/tuntun_4.jpeg"
         },
         {
-            id: "ev5",
-            title: "INCIDENT #005",
-            context: "Location: Classified.",
+            id: "tuntun5",
+            title: "Tun Tun Chronicles · V",
+            context: "Tun Tun Moment #5 ♡",
             importance: "Extremely high.",
-            image: "assets/images/incidents/IMG-20260304-WA0117.jpg"
+            image: "assets/images/tuntun_5.jpeg"
         },
         {
-            id: "ev6",
-            title: "INCIDENT #006",
-            context: "Location: Classified.",
+            id: "img_wa1",
+            title: "Memory Incident · 01",
+            context: "Moments from our adventures ♡",
             importance: "Extremely high.",
-            image: "assets/images/incidents/IMG-20260304-WA0126.jpg"
+            image: "assets/images/WhatsApp Image 20-10-19 at 23.36.47.jpeg"
+        },
+        {
+            id: "img_wa2",
+            title: "Memory Incident · 02",
+            context: "Golden memories with Ananya",
+            importance: "Extremely high.",
+            image: "assets/images/WhatsApp Image 2026-10-19 at 23.23.26.jpeg"
+        },
+        {
+            id: "img_wa3",
+            title: "Memory Incident · 03",
+            context: "Smiles that never fade",
+            importance: "Extremely high.",
+            image: "assets/images/WhatsApp Image 2026-10-19 at 23.25.00.jpeg"
+        },
+        {
+            id: "img_wa4",
+            title: "Memory Incident · 04",
+            context: "A snapshot of pure happiness",
+            importance: "Extremely high.",
+            image: "assets/images/WhatsApp Image 2026-10-19 at 23.36.45.jpeg"
+        },
+        {
+            id: "img_wa5",
+            title: "Memory Incident · 05",
+            context: "Together through it all",
+            importance: "Extremely high.",
+            image: "assets/images/WhatsApp Image 2026-10-19 at 23.36.47.jpeg"
+        },
+        {
+            id: "img_wa6",
+            title: "Memory Incident · 06",
+            context: "Unforgettable times",
+            importance: "Extremely high.",
+            image: "assets/images/WhatsApp Image 2026-10-19 at 23.36.48.jpeg"
+        },
+        {
+            id: "img_wa7",
+            title: "Memory Incident · 07",
+            context: "Cherished moments we love",
+            importance: "Extremely high.",
+            image: "assets/images/WhatsApp Image 202610-19 at 23.25.00.jpeg"
+        },
+        {
+            id: "img_sleeping",
+            title: "The Sleeping Beauty",
+            context: "Caught peacefully sleeping ♡",
+            importance: "Extremely high.",
+            image: "assets/images/sleeping_ananya.jpeg"
         }
     ],
     seriousPart: {
@@ -302,17 +278,57 @@ const CONFIG = {
             "assets/audio/Video Project 9.m4a"
         ]
     },
-    LAST1sLore: [
-        "LAST1s was formed",
-        "[Questionable decisions were made]",
-        "Ananya became an important part of the story",
-        "Mental Peace was disrupted",
-        "Last1Standing - Margazhi'26",
-        "[More questionable decisions]",
-        "Last1Standing - Paradox'26",
-        "[More questionable decisions]",
-        "LAST1Culturals - Saavan'26",
-        "Balls"
+    rasgullaRecipe: [
+        {
+            step: "Step 01",
+            title: "Boil the Milk",
+            desc: "Take 1 litre of full cream cow's milk in a heavy-bottomed pan and bring it to a gentle boil, stirring occasionally."
+        },
+        {
+            step: "Step 02",
+            title: "Curdle into Fresh Chenna",
+            desc: "Turn off heat, let it cool for 2 mins, then slowly add 2 tbsp lemon juice (or vinegar) mixed with 2 tbsp water until the greenish whey separates completely."
+        },
+        {
+            step: "Step 03",
+            title: "Strain & Rinse",
+            desc: "Pour into a muslin / cheesecloth over a colander. Rinse the curdled chenna thoroughly with cold water to wash away all sourness."
+        },
+        {
+            step: "Step 04",
+            title: "Hang & Drain Moisture",
+            desc: "Tie the cloth tightly and hang it for 30–45 minutes to drain excess whey. The chenna should remain soft and slightly moist, not completely dry."
+        },
+        {
+            step: "Step 05",
+            title: "Knead into a Smooth Dough",
+            desc: "Transfer chenna to a flat plate. Knead gently using the heel of your palm for 5–7 minutes until it turns completely smooth, silky, and non-sticky. Add 1 tsp cornflour or maida for binding."
+        },
+        {
+            step: "Step 06",
+            title: "Roll into Crack-free Balls",
+            desc: "Pinch small portions and gently roll them between your palms into tiny, perfectly smooth balls with no cracks (they will double in size while cooking!)."
+        },
+        {
+            step: "Step 07",
+            title: "Prepare the Light Sugar Syrup",
+            desc: "In a wide, deep pot, combine 1 cup sugar with 4 to 5 cups water and 3 crushed cardamom pods. Bring to a rolling, vigorous boil."
+        },
+        {
+            step: "Step 08",
+            title: "Boil the Rasgullas",
+            desc: "Gently drop the chenna balls one by one into the boiling syrup. Cover tightly with a lid and cook on high flame for 10 minutes without opening."
+        },
+        {
+            step: "Step 09",
+            title: "Check Doneness & Ice Shock",
+            desc: "Uncover, stir gently, and cook for another 5 minutes. Drop one rasgulla in a cup of fresh water — if it sinks to the bottom, it's perfectly cooked!"
+        },
+        {
+            step: "Step 10",
+            title: "Rest, Chill & Serve",
+            desc: "Transfer with syrup into a bowl, let it cool to room temperature, then chill in the fridge for 2–3 hours. Serve juicy, spongy, and sweet!"
+        }
     ],
     futurePart: {
         text: [
@@ -328,8 +344,8 @@ const CONFIG = {
         title: "HAPPY BIRTHDAY, ANANYA",
         audioFiles: [
             "assets/audio/bday wishes/VN20260909_232308.mp3",
-            "assets/audio/bday wishes/Voice 260908_001126.m4a",
-            "assets/audio/bday wishes/WhatsApp Audio 2026-09-07 at 23.13.44.opus",
+            "assets/audio/bday wishes/Voice 260908_001126.mp3",
+            "assets/audio/bday wishes/whatsapp-audio-2026-09-07-at-231344-dtecdjer_vOfkm3b8.ogg",
             "assets/audio/bday wishes/WhatsApp Audio 2026-09-08 at 14.06.13.opus",
             "assets/audio/bday wishes/WhatsApp Audio 2026-09-08 at 22.03.48.opus",
             "assets/audio/bday wishes/WhatsApp Audio 2026-09-09 at 19.41.40.opus"

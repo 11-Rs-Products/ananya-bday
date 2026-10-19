@@ -4,174 +4,148 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-    <title>A Highly Unofficial Documentation — LAST1s</title>
-    <meta name="description" content="A LAST1s production. Six people. One birthday. Questionable amounts of evidence.">
+    <title>Mithai Ki Dukan — A Birthday Garden for Ananya</title>
+    <meta name="description" content="A little shop filled with a whole lot of love. A birthday surprise from your five favourite people.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600;700&family=Permanent+Marker&family=VT323&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&family=Dancing+Script:wght@500;700&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css?v=14">
-    <link rel="stylesheet" href="css/chapters.css?v=14">
+    <link rel="stylesheet" href="css/style.css?v=27">
+    <link rel="stylesheet" href="css/chapters.css?v=27">
 </head>
 
 <body>
-    <!-- ░░░ IMMERSION LAYERS ░░░ -->
+    <!-- ░░░ AMBIENT LAYERS ░░░ -->
     <div id="crt-overlay" class="crt-overlay" aria-hidden="true"></div>
     <canvas id="confetti-canvas" class="confetti-canvas" aria-hidden="true"></canvas>
 
-    <!-- ░░░ RETRO HUD & IMMERSION CONTROLS ░░░ -->
-    <aside id="retro-hud" class="retro-hud" aria-label="System Immersion HUD">
-        <div class="hud-item cassette-item" id="hud-cassette" title="Retro 8-Bit Birthday Chiptune BGM">
-            <button id="btn-toggle-bgm" class="hud-btn bgm-btn" aria-label="Toggle Retro Birthday BGM">
-                <span class="cassette-icon">📼</span>
-                <span class="cassette-reels" aria-hidden="true">
-                    <span class="reel reel-left"></span>
-                    <span class="reel reel-right"></span>
-                </span>
+    <!-- ░░░ HUD CONTROLS (top-right) ░░░ -->
+    <aside id="retro-hud" class="retro-hud" aria-label="Accessibility Controls">
+        <div class="hud-item cassette-item" id="hud-cassette" title="Toggle background music">
+            <button id="btn-toggle-bgm" class="hud-btn bgm-btn" aria-label="Toggle background music">
+                <span class="cassette-icon">🎵</span>
                 <span class="hud-label">BGM: OFF</span>
-                <span class="eq-bars" aria-hidden="true">
-                    <span class="eq-bar"></span><span class="eq-bar"></span><span class="eq-bar"></span>
-                </span>
             </button>
         </div>
         <div class="hud-item">
-            <button id="btn-toggle-crt" class="hud-btn crt-btn" aria-label="Toggle CRT Scanline Filter">
-                <span class="hud-icon">📺</span>
-                <span class="hud-label">CRT: OFF</span>
-            </button>
-        </div>
-        <div class="hud-item">
-            <button id="btn-toggle-theme" class="hud-btn theme-btn" aria-label="Toggle Dossier Theme">
-                <span class="hud-icon">🎨</span>
-                <span class="hud-label">ORIGINAL</span>
+            <button id="btn-toggle-theme" class="hud-btn theme-btn" aria-label="Toggle colour theme">
+                <span class="hud-icon">🌙</span>
+                <span class="hud-label">SAKURA</span>
             </button>
         </div>
     </aside>
 
     <div id="app-container">
 
-        <!-- ░░░ CHAOS LAYER — floating background elements ░░░ -->
+        <!-- ░░░ PETAL RAIN LAYER ░░░ -->
         <div id="chaos-layer" aria-hidden="true"></div>
 
         <!-- ════════════════════════════════════════
-         SCREEN 1 — INTRO / OPENING
+         SCREEN 1 — OPENING
          ════════════════════════════════════════ -->
         <section id="ch-intro" class="chapter active" aria-label="Opening Screen">
             <div class="content-wrapper centered">
-                <p class="subtitle">LAST1s PRESENTS</p>
 
-                <h1 class="main-title glitch-heading">
-                    A Highly Unofficial Documentation of <span class="placeholder">ANANYA NIGGI</span>
-                </h1>
+                <p class="intro-presents">Mithai Ki Dukan presents</p>
 
-                <p class="subtext">Six people. Many questionable memories. An unreasonable amount of evidence.</p>
+                <!-- Logo -->
+                <div class="intro-logo-wrapper">
+                    <img src="assets/images/mkd_logo.jpg" alt="Mithai Ki Dukan — A Sweet Shop" width="340">
+                </div>
 
-                <button id="btn-enter-archives" class="primary-btn" aria-label="Enter the Archives">
-                    ENTER THE ARCHIVES &rarr;
+                <p class="intro-tagline">A little shop filled with a whole lot of love.</p>
+
+                <p class="intro-support-text">A birthday surprise from your five favourite people.</p>
+
+                <button id="btn-enter-archives" class="primary-btn" aria-label="Let's begin">
+                    Let's begin ♡
                 </button>
 
-                <!-- Interactive Archivist Mascot Widget -->
+                <!-- Sweet Companion (replaces old Archivist) -->
                 <div id="archivist-widget" class="archivist-widget" role="button" tabindex="0"
-                    aria-label="Interact with The Archivist" title="Click The Archivist for classified logs">
-                    <div class="archivist-bubble" id="archivist-bubble">
-                        <div class="bubble-header">
-                            <span class="bubble-tag" id="archivist-tag">ARCHIVIST LOG #001</span>
-                            <span class="bubble-count" id="archivist-count">CLICKS: 0</span>
+                    aria-label="Talk to the Sweet Shop helper" title="Click the Tun Tun Mausi for a little note">
+                    <div class="sweet-companion">
+                        <div class="sweet-companion-bubble" id="archivist-bubble">
+                            <p id="archivist-text">Psst… tap me for a little secret ♡</p>
                         </div>
-                        <p class="bubble-text" id="archivist-text">Psst... click me for classified intel.</p>
-                    </div>
-                    <div class="archivist-badge">
-                        <div class="archivist-avatar-frame">
-                            <div class="archivist-avatar" id="archivist-avatar">🕵️🐱</div>
-                            <span class="archivist-radar-ring" aria-hidden="true"></span>
-                        </div>
-                        <div class="archivist-details">
-                            <div class="archivist-header">
-                                <span class="archivist-name">THE ARCHIVIST</span>
-                                <span class="archivist-live-badge"><span class="status-dot"></span> LIVE</span>
+                        <div class="sweet-companion-badge">
+                            <span class="sweet-avatar" id="archivist-avatar">🍮</span>
+                            <div>
+                                <span class="sweet-name">Tun Tun Mausi</span>
+                                <span class="sweet-role">Shop Owner · Always Sweet</span>
                             </div>
-                            <div class="archivist-dept">DEPT. OF QUESTIONABLE EVIDENCE</div>
-                        </div>
-                        <div class="archivist-tap-hint">
-                            <span>INTERROGATE</span>
-                            <span class="tap-icon">🔍</span>
+                            <div class="sweet-tap-hint">
+                                <span>✿ tap</span>
+                            </div>
                         </div>
                     </div>
                 </div>
+
             </div>
         </section>
 
         <!-- ════════════════════════════════════════
-         SCREEN 2 — WARNING
+         SCREEN 2 — GENTLE ENTRY
          ════════════════════════════════════════ -->
-        <section id="ch-warning" class="chapter hidden" aria-label="Warning Screen">
+        <section id="ch-warning" class="chapter hidden" aria-label="Entry Screen">
             <div class="content-wrapper centered">
-                <p class="subtitle" style="text-align:center;">ADVISORY PROTOCOL // LEVEL 6 CLASSIFICATION</p>
-                <h2 style="text-align:center;">⚠️ SYSTEM SECURITY WARNING ⚠️</h2>
 
-                <div class="warning-box">
-                    <div class="warning-hazard-stripe"></div>
-                    <div class="warning-header-bar">
-                        <span>SECURITY ADVISORY — LAST1s PROTOCOL</span>
-                        <span class="warning-badge">CRITICAL</span>
-                    </div>
+                <div class="entry-card">
+                    <span class="floral-icon">🌸</span>
+                    <p class="subtitle">Before you enter</p>
+                    <h2>Welcome to the shop</h2>
+                    <p class="subtext">
+                        This little corner of the internet was made with a lot of love, a little sweetness, and
+                        five very enthusiastic hearts.
+                    </p>
 
-                    <div class="warning-body">
-                        <p class="warning-prompt">ACCESS TO THIS DOSSIER REQUIRES CAUTION. THE FOLLOWING CONTAINS:</p>
-                        <ul class="warning-list">
-                            <li class="warning-item">
-                                <span class="warning-icon">🌪️</span>
-                                <span class="warning-text"><strong>UNCONTROLLED NONSENSE:</strong> Excessive, uncurated amounts of pure unhinged chaos.</span>
-                            </li>
-                            <li class="warning-item">
-                                <span class="warning-icon">📦</span>
-                                <span class="warning-text"><strong>CONTRABAND STICKERS:</strong> 69+ recovered WhatsApp stickers deployed with hostile intent.</span>
-                            </li>
-                            <li class="warning-item">
-                                <span class="warning-icon">📸</span>
-                                <span class="warning-text"><strong>UNAUTHORIZED SURVEILLANCE:</strong> Photographic evidence collected without subject's consent.</span>
-                            </li>
-                            <li class="warning-item">
-                                <span class="warning-icon">👥</span>
-                                <span class="warning-text"><strong>QUESTIONABLE WITNESSES:</strong> Six biased individuals who think they know <span class="placeholder">Ananya</span>.</span>
-                            </li>
-                            <li class="warning-item">
-                                <span class="warning-icon">⚖️</span>
-                                <span class="warning-text"><strong>ZERO OBJECTIVITY:</strong> Absolutely no emotional or editorial neutrality whatsoever.</span>
-                            </li>
-                            <li class="warning-item">
-                                <span class="warning-icon">⚡</span>
-                                <span class="warning-text"><strong>CRITICAL HAZARD:</strong> An unreasonable, undocumented, and exponential amount of balls.</span>
-                            </li>
-                        </ul>
-                    </div>
+                    <p style="font-size:0.9rem; color:var(--text-muted); margin-bottom:0.5rem;">Inside you'll find:</p>
+                    <ul class="entry-list">
+                        <li>
+                            <span class="entry-list-icon">🌸</span>
+                            <span><strong>A garden of memories</strong> — moments we've shared and loved.</span>
+                        </li>
+                        <li>
+                            <span class="entry-list-icon">🍡</span>
+                            <span><strong>A sticker collection</strong> — 92+ carefully selected treasures.</span>
+                        </li>
+                        <li>
+                            <span class="entry-list-icon">📷</span>
+                            <span><strong>Photographs</strong> — from all the little adventures.</span>
+                        </li>
+                        <li>
+                            <span class="entry-list-icon">🎙️</span>
+                            <span><strong>Voice messages</strong> — words straight from the heart.</span>
+                        </li>
+                        <li>
+                            <span class="entry-list-icon">💌</span>
+                            <span><strong>A birthday message</strong> — just for you.</span>
+                        </li>
+                    </ul>
 
-                    <div class="warning-footer-notice">
-                        <span>RISK LEVEL: 100% HAZARDOUS</span>
-                        <span>CLEARANCE: REQUIRED</span>
+                    <p class="proceed-question">Ready to step inside?</p>
+
+                    <div class="warning-actions">
+                        <button id="btn-warning-no" class="primary-btn no-btn" aria-label="Not yet">Not yet</button>
+                        <button id="btn-warning-yes" class="primary-btn yes-btn hidden" aria-label="Yes, let me in">
+                            Yes, take me in ♡
+                        </button>
                     </div>
                 </div>
 
-                <p class="proceed-question">DO YOU WISH TO PROCEED?</p>
-
-                <div class="warning-actions">
-                    <button id="btn-warning-no" class="primary-btn no-btn" aria-label="No">NO</button>
-                    <button id="btn-warning-yes" class="primary-btn yes-btn hidden" aria-label="Yes, let me in">YES, LET
-                        ME IN &rarr;</button>
-                </div>
             </div>
 
-            <!-- Full-Screen Explosive "BANG" Modal Overlay -->
+            <!-- Gentle "Oh no" overlay -->
             <div id="fuck-you-overlay" class="bang-overlay hidden" aria-live="assertive">
                 <div class="bang-backdrop"></div>
                 <div class="bang-card">
-                    <div class="bang-warning-tag">⚠️ ACCESS OVERRIDE TRIGGERED ⚠️</div>
-                    <h1 id="fuck-you-msg" class="bang-text">FUCK YOU.</h1>
-                    <p class="bang-subtext">"Did you honestly think you had a choice?"</p>
-                    <div class="bang-actions">
-                        <button id="btn-warning-yes-overlay" class="primary-btn yes-btn bang-yes-btn">
-                            OKAY FINE, LET ME IN &rarr;
+                    <div class="bang-warning-tag">🌸</div>
+                    <h2 id="fuck-you-msg" class="bang-text">Oh no, you can't escape all this love ♡</h2>
+                    <p class="bang-subtext">We made this just for you. You have to come in.</p>
+                    <div class="warning-actions" style="margin-top:1.2rem;">
+                        <button id="btn-warning-yes-overlay" class="primary-btn yes-btn">
+                            Okay, let's go! ♡
                         </button>
                     </div>
                 </div>
@@ -179,293 +153,375 @@
         </section>
 
         <!-- ════════════════════════════════════════
-         CHAPTER 1 — THE SUBJECT
+         CHAPTER 1 — ABOUT ANANYA
          ════════════════════════════════════════ -->
-        <section id="ch-subject" class="chapter hidden" aria-label="Subject Profile">
+        <section id="ch-subject" class="chapter hidden" aria-label="About Ananya">
             <div class="content-wrapper file-folder">
-                <!-- Pinned Photo -->
-                <div class="pinned-photo">
-                    <div class="pin"></div>
-                    <img src="assets/images/sleeping_ananya.jpg" alt="The Subject Caught Sleeping">
+
+                <div class="chapter-heading-wrap">
+                    <p class="subtitle">Chapter One · Dossier</p>
+                    <h2>The Subject Profile</h2>
+                    <div class="chapter-sweet-decor">🌸 🔍 🌸</div>
                 </div>
-                
-                <p class="subtitle" style="margin-bottom: 0.2rem;">CLASSIFIED DOSSIER — LAST1s ARCHIVES</p>
-                <h2>THE SUBJECT</h2>
 
-                <!-- Filled by JS from config.js -->
-                <div id="subject-content"></div>
+                <!-- Detective Dossier Layout: Details on left, Photo pinned on right -->
+                <div class="dossier-card">
+                    <!-- Dossier Left Side: Title, Details, Bio -->
+                    <div class="dossier-details">
+                        <div class="dossier-header-badge">DOSSIER #01 · MITHAI KI DUKAN</div>
+                        <h3 class="dossier-subject-name">Ananya</h3>
+                        <p class="dossier-subject-tagline">"The birthday girl. The reason this little shop exists."</p>
 
-                <button class="next-chapter-btn primary-btn" data-next="ch-stickers">
-                    PROCEED TO EXHIBIT HALL &rarr;
-                </button>
+                        <div id="subject-info-table" class="subject-info-grid"></div>
+                    </div>
+
+                    <!-- Pinned Photo on right -->
+                    <div class="pinned-photo" title="Photo evidence: Sleeping Ananya">
+                        <div class="pin"></div>
+                        <div class="photo-paper">
+                            <img src="assets/images/sleeping_ananya.jpeg" alt="The Subject Caught Sleeping">
+                            <p class="photo-paper-caption">Caught sleeping ✿</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Extra Profile Details: Abilities & Assessment Stats -->
+                <div id="subject-extra-content" class="subject-extra-section"></div>
+
+                <div style="text-align:center;">
+                    <button class="next-chapter-btn primary-btn" data-next="ch-stickers">
+                        Visit the Sticker Garden →
+                    </button>
+                </div>
             </div>
         </section>
 
         <!-- ════════════════════════════════════════
-         CHAPTER 2 — STICKER ARCHIVES
+         CHAPTER 2 — STICKER GARDEN
          ════════════════════════════════════════ -->
-        <section id="ch-stickers" class="chapter hidden" aria-label="The Sticker Archives">
+        <section id="ch-stickers" class="chapter hidden" aria-label="The Sticker Garden">
             <div class="content-wrapper centered">
-                <p class="subtitle">THE ARCHIVES — SECTION 2</p>
-                <h2>The Sticker Investigation</h2>
-                <p class="subtext">"An official inquiry into the most unhinged form of communication known to humanity."
-                </p>
+
+                <div class="chapter-heading-wrap">
+                    <p class="subtitle">Chapter Two</p>
+                    <h2>The Sticker Garden</h2>
+                    <div class="chapter-sweet-decor">🌸 🍡 🌸</div>
+                    <p class="subtext">
+                        "A collection of little moments, captured in stickers."
+                    </p>
+                </div>
 
                 <!-- Start controls -->
                 <div id="sticker-start-actions" class="sticker-actions-row">
-                    <button id="btn-start-stickers" class="primary-btn" aria-label="Begin Investigation">
-                        🕵️ BEGIN INVESTIGATION (10 EXHIBITS)
+                    <button id="btn-start-stickers" class="primary-btn" aria-label="Begin sticker journey">
+                        🌸 Explore the Garden (16 exhibits)
                     </button>
                     <button id="btn-jump-vault" class="secondary-btn" aria-label="Jump to all stickers">
-                        📂 BROWSE COMPLETE VAULT (92 STICKERS) &darr;
+                        Browse all 16 stickers ↓
                     </button>
                 </div>
 
-                <!-- Sticker exhibit display, filled by JS -->
+                <!-- Sticker exhibit display -->
                 <div id="sticker-display-area" class="hidden sticker-exhibit">
                     <div class="exhibit-header-bar">
-                        <p class="exhibit-label" id="sticker-exhibit-num">EXHIBIT 1 OF 10</p>
-                        <button id="btn-skip-vault" class="text-link-btn" title="Skip to vault">Skip to Full Vault
-                            &darr;</button>
+                        <p class="exhibit-label" id="sticker-exhibit-num">Exhibit 1 of 16</p>
+                        <button id="btn-skip-vault" class="text-link-btn" title="Skip to full collection">
+                            See all stickers ↓
+                        </button>
                     </div>
-
-                    <p class="exhibit-category" id="sticker-category">CATEGORY</p>
 
                     <div class="sticker-img-wrapper" id="sticker-img-wrapper">
-                        <img id="current-sticker-img" src="" alt="Sticker Exhibit">
-                        <span id="sticker-placeholder-emoji" style="display:none; font-size:5rem;">🖼️</span>
+                        <img id="current-sticker-img" src="" alt="Sticker">
+                        <span id="sticker-placeholder-emoji" style="display:none; font-size:4rem;">🌸</span>
                     </div>
-
-                    <p class="exhibit-desc" id="sticker-description">Description</p>
 
                     <div class="exhibit-controls-row">
                         <button id="btn-prev-sticker" class="secondary-btn hidden" aria-label="Previous Sticker">
-                            &larr; PREVIOUS
+                            ← Previous
                         </button>
                         <button id="btn-next-sticker" class="primary-btn hidden" aria-label="Continue">
-                            CONTINUE &rarr;
+                            Continue →
                         </button>
                     </div>
                 </div>
 
-                <!-- ── THE COMPLETE STICKER VAULT (ALL 92 STICKERS) ── -->
+                <!-- Complete Sticker Vault -->
                 <div id="sticker-vault-area" class="sticker-vault-section hidden">
                     <div class="vault-divider">
                         <span class="vault-divider-line"></span>
-                        <span class="vault-divider-badge">DECLASSIFIED ARCHIVE</span>
+                        <span class="vault-divider-badge">The Full Garden</span>
                         <span class="vault-divider-line"></span>
                     </div>
 
                     <div class="vault-header">
-                        <p class="subtitle" style="margin-bottom:0.2rem;">DOSSIER 069 — FULL DEPOSITORY</p>
-                        <h3 class="vault-title">THE COMPLETE STICKER VAULT</h3>
+                        <h3 class="vault-title">All 16 Stickers</h3>
                         <p class="vault-subtitle">
-                            Every single unhinged sticker recovered from the group archives.
-                            <strong>69 items</strong> in total. Tap any sticker to inspect in full resolution.
+                            Every single sticker from the group archives. Tap any to see it in full.
                         </p>
-
                         <div class="vault-stat-bar">
-                            <span class="vault-stat-pill">📦 <strong>69</strong> STICKERS RECOVERED</span>
-                            <span class="vault-stat-pill">⚠️ HAZARD LEVEL: SEVERE</span>
+                            <span class="vault-stat-pill">🌸 <strong>16</strong> stickers collected</span>
+                            <span class="vault-stat-pill">✿ Sent with love</span>
                             <button id="btn-random-sticker" class="secondary-btn vault-random-btn"
                                 title="Pick a random sticker">
-                                🎲 RANDOM STICKER
+                                🎲 Surprise me
                             </button>
                         </div>
                     </div>
 
-                    <!-- Grid populated by JS with all 92 stickers -->
+                    <!-- Grid populated by JS -->
                     <div id="sticker-vault-grid" class="sticker-vault-grid"></div>
 
                     <div class="vault-footer">
                         <p class="vault-footer-note">
-                            You have now witnessed the full psychiatric profile through WhatsApp stickers.
+                            "Every sticker tells a little story of its own."
                         </p>
                         <button id="btn-finish-stickers" class="next-chapter-btn primary-btn" data-next="ch-witnesses">
-                            PROCEED TO WITNESS TESTIMONY &rarr;
+                            Meet the five friends →
                         </button>
                     </div>
                 </div>
+
             </div>
         </section>
 
         <!-- Sticker Lightbox Modal -->
-        <div id="sticker-lightbox" class="lightbox-backdrop hidden" role="dialog" aria-modal="true">
+        <div id="sticker-lightbox" class="lightbox-backdrop hidden" role="dialog" aria-modal="true"
+            aria-label="Sticker preview">
             <div class="lightbox-card">
-                <button id="lightbox-close" class="lightbox-close-btn" aria-label="Close modal">&times;</button>
+                <button id="lightbox-close" class="lightbox-close-btn" aria-label="Close preview">&times;</button>
                 <div class="lightbox-img-wrapper">
-                    <img id="lightbox-img" src="" alt="Classified Sticker Full Preview">
+                    <img id="lightbox-img" src="" alt="Sticker preview">
                 </div>
                 <div class="lightbox-info">
-                    <span id="lightbox-counter" class="lightbox-badge">STICKER #1 / 69</span>
-                    <p id="lightbox-tip">Click outside or press ESC to close</p>
+                    <span id="lightbox-counter" class="lightbox-badge">Sticker 1 / 92</span>
+                    <p>Click outside or press ESC to close</p>
                 </div>
             </div>
         </div>
 
         <!-- ════════════════════════════════════════
-         CHAPTER 3 — FIVE WITNESSES
+         CHAPTER 3 — FIVE FRIENDS
          ════════════════════════════════════════ -->
-        <section id="ch-witnesses" class="chapter hidden" aria-label="The Witnesses">
+        <section id="ch-witnesses" class="chapter hidden" aria-label="The Five Friends">
             <div class="content-wrapper">
-                <p class="subtitle" style="text-align:center;">CASE FILE — WITNESS TESTIMONY</p>
-                <h2 style="text-align:center;">SIX PEOPLE WERE THERE.</h2>
-                <p class="subtext" style="text-align:center; margin-bottom:1.5rem;">
-                    Six witnesses. Six perspectives. One birthday girl.
-                </p>
+
+                <div class="chapter-heading-wrap">
+                    <p class="subtitle">Chapter Three</p>
+                    <h2>Five friends, one birthday girl</h2>
+                    <div class="chapter-sweet-decor">🌸 🧁 🌸</div>
+                    <p class="subtext" style="text-align:center;">
+                        Five perspectives. Five hearts. One very special person.
+                    </p>
+                </div>
 
                 <!-- Filled by JS -->
                 <div id="witnesses-container" class="grid-layout"></div>
 
                 <div style="text-align:center;">
                     <button class="next-chapter-btn primary-btn" data-next="ch-evidence">
-                        EXAMINE THE EVIDENCE &rarr;
+                        See the memory garden →
                     </button>
                 </div>
             </div>
         </section>
 
         <!-- ════════════════════════════════════════
-         CHAPTER 4 — THE EVIDENCE
+         CHAPTER 4 — MEMORY GARDEN (was: Evidence Board)
          ════════════════════════════════════════ -->
-        <section id="ch-evidence" class="chapter hidden" aria-label="The Evidence Board">
+        <section id="ch-evidence" class="chapter hidden" aria-label="The Memory Garden">
             <div class="content-wrapper">
-                <p class="subtitle">CLASSIFIED EVIDENCE BOARD</p>
-                <h2 class="scrapbook-header">THE EVIDENCE</h2>
-                <p class="subtext" style="margin-bottom: 1.5rem;">
-                    Items recovered from various scenes. Context may be missing. Importance: EXTREMELY HIGH.
-                </p>
 
-                <!-- Filled by JS -->
-                <div id="evidence-board" class="masonry-layout"></div>
-
-                <div style="text-align:center; margin-top: 2rem;">
-                    <button class="next-chapter-btn primary-btn" data-next="ch-serious">
-                        PROCEED &rarr;
-                    </button>
+                <div class="chapter-heading-wrap">
+                    <p class="subtitle">Chapter Four</p>
+                    <h2>A garden of memories</h2>
+                    <div class="chapter-sweet-decor">🌸 📷 🌸</div>
+                    <p class="subtext" style="text-align:center; margin-bottom:2rem;">
+                        Photographs from the little adventures we've shared.
+                    </p>
                 </div>
-            </div>
-        </section>
 
-        <!-- ════════════════════════════════════════
-         CHAPTER 5 — THE SERIOUS PART
-         Calm. No chaos. Emotional transition.
-         ════════════════════════════════════════ -->
-        <section id="ch-serious" class="chapter hidden calm-theme" aria-label="The Serious Part">
-            <div class="content-wrapper centered">
-                <h2>Okay.</h2>
+                <!-- Photos Showcase (One by One) -->
+                <div class="photo-showcase-container" id="photo-showcase-container">
+                    <!-- Progress & Counter -->
+                    <div class="showcase-header">
+                        <div class="showcase-counter" id="showcase-counter">Photo 1 of 11</div>
+                        <div class="showcase-actions">
+                            <button id="showcase-autoplay-btn" class="showcase-action-btn" title="Toggle slideshow auto-play">
+                                <span class="play-icon">▶</span> Auto
+                            </button>
+                            <button id="showcase-view-toggle" class="showcase-action-btn" title="Switch between single view and all photos">
+                                <span>▦</span> All Photos
+                            </button>
+                        </div>
+                    </div>
 
-                <!-- Audio voice notes section -->
-                <div class="audio-controls enhanced-audio-player" style="margin: 1.5rem 0;">
-                    <div id="serious-audio-players">
-                        <!-- Audio buttons injected by JS from config -->
+                    <!-- Single Photo Card View -->
+                    <div class="showcase-card-wrapper" id="showcase-single-view">
+                        <button class="showcase-nav-btn prev" id="showcase-prev" aria-label="Previous photograph">‹</button>
+                        
+                        <div class="showcase-polaroid" id="showcase-current-card">
+                            <div class="showcase-badge" id="showcase-badge">🌸 Tun Tun Special</div>
+                            <div class="showcase-photo-frame" id="showcase-photo-frame">
+                                <img id="showcase-img" src="" alt="Ananya Photograph" tabindex="0" title="Click to view full screen">
+                            </div>
+                            <div class="showcase-details">
+                                <h3 class="showcase-title" id="showcase-title"></h3>
+                                <p class="showcase-caption" id="showcase-caption"></p>
+                            </div>
+                        </div>
+
+                        <button class="showcase-nav-btn next" id="showcase-next" aria-label="Next photograph">›</button>
+                    </div>
+
+                    <!-- Dot Indicators -->
+                    <div class="showcase-dots" id="showcase-dots"></div>
+
+                    <!-- Mini Thumbnails Strip -->
+                    <div class="showcase-thumbnails" id="showcase-thumbnails"></div>
+
+                    <!-- All Photos Grid View (Toggled on demand) -->
+                    <div id="evidence-board" class="masonry-layout hidden"></div>
+                </div>
+
+                <!-- Evidence lightbox -->
+                <div id="evidence-lightbox" class="hidden">
+                    <div class="lb-card">
+                        <img id="lb-img" src="" alt="Memory photograph">
+                        <p class="lb-caption" id="lb-caption"></p>
+                        <button class="lb-close" id="lb-close">&times;</button>
                     </div>
                 </div>
 
-                <div id="serious-text-container" style="margin: 1.5rem 0; max-width: 560px;">
-                    <!-- Text paragraphs revealed one by one by JS -->
-                </div>
-
-                <button class="next-chapter-btn primary-btn" data-next="ch-lore" style="margin-top: 2.5rem;">
-                    CONTINUE &rarr;
-                </button>
-            </div>
-        </section>
-
-        <!-- ════════════════════════════════════════
-         CHAPTER 6 — LAST1s LORE
-         ════════════════════════════════════════ -->
-        <section id="ch-lore" class="chapter hidden" aria-label="LAST1s Lore">
-            <div class="content-wrapper">
-                <p class="subtitle" style="text-align:center;">OFFICIAL HISTORY (PROBABLY)</p>
-                <h2 style="text-align:center;">LAST1s</h2>
-                <p class="subtext" style="text-align:center; margin-bottom: 1.5rem;">
-                    One organization. Six idiots. Far too many memories.
-                </p>
-
-                <!-- Filled by JS -->
-                <div id="lore-timeline" class="timeline"></div>
-
-                <p class="disclaimer">* Historical accuracy: unknown. Embellishment levels: critical.</p>
-
                 <div style="text-align:center; margin-top: 2rem;">
-                    <button class="next-chapter-btn primary-btn" data-next="ch-future">
-                        THE FUTURE &rarr;
+                    <button class="next-chapter-btn primary-btn" data-next="ch-lore">
+                        The Rasgulla Recipe →
                     </button>
                 </div>
             </div>
         </section>
 
         <!-- ════════════════════════════════════════
-         CHAPTER 7 — THE FUTURE
-         Calm + warm. Names appear one by one.
+         CHAPTER 5 — THE RASGULLA RECIPE (Mithai Ki Dukan)
          ════════════════════════════════════════ -->
-        <section id="ch-future" class="chapter hidden calm-theme" aria-label="The Future">
+        <section id="ch-lore" class="chapter hidden" aria-label="The Rasgulla Recipe">
+            <div class="content-wrapper">
+
+                <div class="chapter-heading-wrap">
+                    <p class="subtitle">Chapter Five · Mithai Ki Dukan</p>
+                    <h2>The Secret Rasgulla Recipe</h2>
+                    <div class="chapter-sweet-decor">🌸 🍬 🍡 🌸</div>
+                    <p class="subtext" style="text-align:center;">
+                        "Soft, spongy, melt-in-mouth rasgullas cooked in light fragrant cardamom syrup."
+                    </p>
+                </div>
+
+                <div class="lore-intro-card">
+                    <p style="font-family:var(--font-serif); font-style:italic; font-size:1.05rem; color:var(--deep-rose); line-height:1.8; margin:0; text-align:center; font-weight:600;">
+                        🍬 The Official Mithai Ki Dukan Guide to Making Perfect Spongy Rasgullas ✿
+                    </p>
+                </div>
+
+                <h3 style="text-align:center; margin:2rem 0 1rem; font-style:italic;">
+                    Step-by-Step Recipe Guide
+                </h3>
+
+                <!-- Lore timeline filled by JS — rendered as rasgulla recipe cards -->
+                <div id="lore-timeline" class="lore-recipe-grid"></div>
+
+                <p class="disclaimer">* Made with 100% love, chenna, sugar syrup, and extra sweetness for Ananya.</p>
+
+                <div style="text-align:center; margin-top: 2rem;">
+                    <button class="next-chapter-btn primary-btn" data-next="ch-future">
+                        What comes next →
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ════════════════════════════════════════
+         CHAPTER 6 — THE FUTURE
+         ════════════════════════════════════════ -->
+        <section id="ch-future" class="chapter hidden" aria-label="The Future">
             <div class="content-wrapper centered">
-                <div id="future-text-container" style="max-width: 560px; margin: 0 auto 2rem;">
-                    <!-- Text paragraphs revealed by JS -->
+
+                <div class="chapter-heading-wrap">
+                    <p class="subtitle">Chapter Six</p>
+                    <h2>What comes next</h2>
+                    <div class="chapter-sweet-decor">🌸 🌿 🌸</div>
+                </div>
+
+                <div class="future-quote-wrapper" style="max-width:560px; width:100%; margin:0 auto 2rem;">
+                    <div id="future-text-container"></div>
                 </div>
 
                 <div id="friends-grid" class="friends-grid"></div>
 
                 <button class="next-chapter-btn primary-btn" data-next="ch-reveal">
-                    INITIATE FINAL SEQUENCE →
+                    The birthday reveal →
                 </button>
             </div>
         </section>
 
         <!-- ════════════════════════════════════════
-         CHAPTER 8 — BIRTHDAY REVEAL
-         Terminal / dramatic aesthetic
+         CHAPTER 7 — BIRTHDAY REVEAL
          ════════════════════════════════════════ -->
         <section id="ch-reveal" class="chapter hidden" aria-label="Birthday Reveal">
             <div class="content-wrapper centered">
 
                 <!-- Loading sequence shown first -->
-                <div id="loading-sequence">
-                    <p class="terminal-text">FINAL FILE LOADING...</p>
+                <div id="loading-sequence" class="loading-sequence-wrap">
+                    <div class="reveal-petal-row">🌸 🌸 🌸</div>
+                    <p class="loader-text">Gathering all the love…</p>
                     <div class="progress-bar">
                         <div class="fill"></div>
                     </div>
-                    <p class="terminal-text" id="loading-status" style="font-size:1rem; opacity:0.6;">
-                        Decrypting classified birthday archives...
-                    </p>
+                    <p class="terminal-text" id="loading-status">Preparing your birthday garden…</p>
                 </div>
 
                 <!-- Reveal content shown after load bar -->
                 <div id="reveal-content" class="hidden" style="text-align:center;">
-                    <p class="terminal-text" id="file-found-msg" style="font-size:1.4rem;"></p>
+                    <p id="file-found-msg" style="font-family:var(--font-script); font-size:1.2rem; color:var(--soft-rose); margin-bottom:0.5rem;"></p>
 
                     <h1 class="reveal-huge-title" id="reveal-title">
-                        HAPPY BIRTHDAY, <span class="placeholder">ANANYA</span>
+                        Happy Birthday, <span class="placeholder">Ananya</span> ♡
                     </h1>
 
-                    <!-- Audio buttons injected by JS -->
-                    <div id="bday-audio-players" style="margin: 1.5rem 0;"></div>
+                    <p class="reveal-message">
+                        Here's to another year of little joys, beautiful memories, new beginnings,
+                        and all the lovely things waiting for you.
+                    </p>
+
+                    <!-- Birthday audio players injected by JS -->
+                    <div class="bday-audio-section">
+                        <p class="bday-audio-title">🎙️ Birthday wishes, just for you</p>
+                        <div id="bday-audio-players"></div>
+                    </div>
 
                     <div class="reveal-actions">
                         <button id="btn-fire-confetti" class="secondary-btn confetti-btn"
-                            aria-label="Re-fire Celebration Confetti">
-                            🎉 CELEBRATION CANNON 🎉
+                            aria-label="Celebrate with petals">
+                            🌸 Celebrate!
                         </button>
                         <button id="btn-show-end" class="primary-btn" style="display:none;">
-                            OPEN FINAL FILE &rarr;
+                            Open the final message →
                         </button>
                     </div>
                 </div>
 
                 <!-- End screen shown last -->
                 <div id="end-screen" class="hidden" style="text-align:center;">
-                    <hr style="border-color: rgba(0,255,65,0.3); margin: 1.5rem 0;">
-                    <p class="terminal-text">END OF DOCUMENTATION</p>
-                    <p>Subject: <span class="placeholder">ANANYA</span></p>
-                    <p>Status: Still being monitored</p>
-                    <p>Next update: Unknown</p>
-                    <p>Happy Birthday.</p>
-                    <p style="margin-top: 1rem; font-size: 1rem;">— The six idiots from LAST1s</p>
-                    <div style="margin-top: 2rem; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-                        <button class="secondary-btn" onclick="location.reload()">↩ Replay from beginning</button>
-                        <button id="btn-secret-file" class="secondary-btn">📁 Open Secret File</button>
+                    <hr>
+                    <p class="reveal-brand-footer">— Mithai Ki Dukan —</p>
+
+                    <p class="end-sign-off">Made with love, a little sweetness, and lots of memories.</p>
+
+                    <p style="font-size:0.9rem; color:var(--text-muted); margin:0.5rem 0 1.5rem;">
+                        With love, your five favourite people ♡
+                    </p>
+
+                    <div style="margin-top: 1.5rem; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                        <button class="secondary-btn" onclick="location.reload()">↩ From the beginning</button>
+                        <button id="btn-secret-file" class="primary-btn">🌸 Open secret birthday card</button>
                     </div>
                 </div>
 
@@ -473,108 +529,55 @@
         </section>
 
         <!-- ════════════════════════════════════════
-         CHAPTER 9 — SECRET FILE (Easter Egg)
+         CHAPTER 9 — SECRET BIRTHDAY CARD
          ════════════════════════════════════════ -->
-        <section id="ch-secret" class="chapter hidden" aria-label="Secret File">
+        <section id="ch-secret" class="chapter hidden" aria-label="Secret Birthday Card">
             <div class="content-wrapper centered">
 
                 <div class="secret-cert-card certificate">
-                    <!-- Certificate Corner Accents -->
+                    <!-- Corner Accents -->
                     <div class="cert-corner top-left"></div>
                     <div class="cert-corner top-right"></div>
                     <div class="cert-corner bottom-left"></div>
                     <div class="cert-corner bottom-right"></div>
 
-                    <!-- Header Banner -->
+                    <!-- Header -->
                     <div class="cert-header">
                         <div class="cert-badge-row">
-                            <span class="cert-seal-tag">CLASSIFIED DOSSIER // DEPT. 069</span>
-                            <span class="cert-clearance-pill">TOP SECRET</span>
+                            <span class="cert-seal-tag">🌸 Official Certificate</span>
+                            <span class="cert-clearance-pill">With Love ♡</span>
                         </div>
-                        <p class="cert-dept">LAST1s DEPARTMENT OF EXTREMELY SERIOUS AFFAIRS</p>
-                        <h2 class="cert-title">CERTIFICATE OF ACHIEVEMENT</h2>
-                        <p class="cert-subtitle">OFFICIAL DECREE OF SURVIVAL & DISTINGUISHED CHAOS</p>
+                        <p class="cert-dept">Mithai Ki Dukan — Special Recognition Award</p>
+                        <h2 class="cert-title">The Birthday Certificate</h2>
+                        <p class="cert-subtitle">"An official document from your five favourite people."</p>
                     </div>
 
                     <div class="cert-divider-line"></div>
 
-                    <!-- Body Content -->
-                    <div class="cert-body">
-                        <p class="cert-lead">THIS IS TO OFFICIALLY CERTIFY THAT</p>
-                        <div class="cert-name-highlight">
-                            <h1 class="cert-recipient-name"><span class="placeholder">ANANYA VERMA</span></h1>
-                            <p class="cert-alias-text">"Niggi" • "Sukhi" • "Resident Barista"</p>
-                        </div>
-                        <p class="cert-citation">
-                            Has successfully survived another 365 days of being entirely herself. In recognition of her
-                            unparalleled ability to send the perfect sticker at the worst possible time, collect bizarre
-                            artifacts, provide aggressive emotional comfort, and possess the undisputed balls to do
-                            what nobody else would.
-                        </p>
-                        <div class="cert-stats-row">
-                            <div class="cert-stat-item">
-                                <span class="cert-stat-label">VERIFIED WITNESSES</span>
-                                <span class="cert-stat-val">6 / 6 CONFIRMED</span>
-                            </div>
-                            <div class="cert-stat-item">
-                                <span class="cert-stat-label">EVIDENCE LOGGED</span>
-                                <span class="cert-stat-val">69+ ARTIFACTS</span>
-                            </div>
-                            <div class="cert-stat-item">
-                                <span class="cert-stat-label">HAZARD STATUS</span>
-                                <span class="cert-stat-val">LOVED &amp; MONITORED</span>
+                    <!-- Certificate Image Presentation -->
+                    <div class="cert-image-stage" id="cert-image-stage">
+                        <div class="cert-image-frame" title="Click to view full certificate">
+                            <img id="cert-display-img" src="assets/images/cert.jpeg" alt="Official Birthday Certificate for Ananya">
+                            <div class="cert-zoom-overlay">
+                                <span>🔍 Click to view high-res</span>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Signatures & Official Ink Stamp -->
-                    <div class="cert-sign-grid">
-                        <div class="cert-sign-col">
-                            <div class="cert-sig-line">
-                                <span class="cert-signature-name">Abhita</span>
-                                <span class="cert-sig-role">Narrator / Witness #1</span>
-                            </div>
-                            <div class="cert-sig-line">
-                                <span class="cert-signature-name">Ksreya</span>
-                                <span class="cert-sig-role">Comic Relief / Witness #2</span>
-                            </div>
-                        </div>
-
-                        <!-- Center Red Ink Stamp Seal -->
-                        <div class="cert-official-seal">
-                            <div class="seal-inner-circle">
-                                <span class="seal-star">★ ★ ★</span>
-                                <span class="seal-text-top">LAST1s OFFICIAL</span>
-                                <span class="seal-text-main">VERIFIED</span>
-                                <span class="seal-text-sub">100% REAL</span>
-                                <span class="seal-star">★ ★ ★</span>
-                            </div>
-                        </div>
-
-                        <div class="cert-sign-col">
-                            <div class="cert-sig-line">
-                                <span class="cert-signature-name">Himansii &amp; Amrutansii</span>
-                                <span class="cert-sig-role">Memory Keepers</span>
-                            </div>
-                            <div class="cert-sig-line">
-                                <span class="cert-signature-name">Vinita &amp; Reyansii</span>
-                                <span class="cert-sig-role">Emotional Support Unit</span>
-                            </div>
-                        </div>
-                    </div>
+                    <div class="cert-divider-line"></div>
 
                     <div class="cert-footer-meta">
-                        <span>AUTHENTICITY: 100% UNQUESTIONABLE</span>
-                        <span>ISSUED BY: THE SIX IDIOTS OF LAST1s</span>
+                        <span>Issued with love</span>
+                        <span>🌸 Mithai Ki Dukan · Your birthday, always</span>
                     </div>
                 </div>
 
                 <div class="cert-actions-row">
                     <button class="primary-btn" onclick="location.reload()">
-                        ↩ REPLAY FROM BEGINNING
+                        ↩ From the beginning
                     </button>
                     <button id="btn-cert-confetti" class="secondary-btn confetti-btn">
-                        🎉 CELEBRATE WITH CONFETTI 🎉
+                        🌸 Celebrate again
                     </button>
                 </div>
 
@@ -583,17 +586,17 @@
 
     </div><!-- #app-container -->
 
-    <!-- ░░░ MINI RADIO AUDIO DECK (BOTTOM-LEFT INTEGRATED SOUND SOFTWARE) ░░░ -->
-    <div id="mini-radio-widget" class="mini-radio-widget collapsed" aria-label="Mini Radio Sound Software">
+    <!-- ░░░ MINI RADIO — BOTTOM LEFT ░░░ -->
+    <div id="mini-radio-widget" class="mini-radio-widget collapsed" aria-label="Music player">
 
-        <!-- Collapsed Launcher Badge -->
-        <button id="radio-toggle-btn" class="radio-launcher-btn" aria-label="Expand Mini Radio Software">
+        <!-- Collapsed launcher -->
+        <button id="radio-toggle-btn" class="radio-launcher-btn" aria-label="Open music player">
             <div class="radio-badge-pulse"><span class="pulse-dot"></span></div>
             <div class="radio-launcher-info">
-                <span class="radio-launcher-icon">📻</span>
+                <span class="radio-launcher-icon">🎵</span>
                 <div class="radio-launcher-text-wrap">
-                    <span class="radio-launcher-title">LAST1s FM 88.4</span>
-                    <span class="radio-launcher-sub" id="radio-mini-status">MINI SOUND DECK</span>
+                    <span class="radio-launcher-title">Mithai Ki Dukan FM</span>
+                    <span class="radio-launcher-sub" id="radio-mini-status">MUSIC PLAYER</span>
                 </div>
             </div>
             <div class="radio-launcher-eq" id="radio-mini-eq">
@@ -602,33 +605,29 @@
             <span class="radio-expand-icon">▲</span>
         </button>
 
-        <!-- Expanded Sound Software Box -->
+        <!-- Expanded music player -->
         <div id="radio-software-deck" class="radio-software-deck">
-            <!-- Radio Window Header -->
             <div class="radio-header">
                 <div class="radio-header-title">
-                    <span class="radio-header-icon">📻</span>
-                    <span>LAST1s BOOMBOX 88.4 FM</span>
+                    <span class="radio-header-icon">🎵</span>
+                    <span>Mithai Ki Dukan — Music</span>
                 </div>
                 <div class="radio-header-actions">
-                    <span class="radio-signal-badge">🟢 FM LIVE</span>
-                    <button id="radio-close-btn" class="radio-control-btn" aria-label="Minimize Radio"
+                    <span class="radio-signal-badge">🌸 PLAYING</span>
+                    <button id="radio-close-btn" class="radio-control-btn" aria-label="Minimize player"
                         title="Minimize">▼</button>
                 </div>
             </div>
 
-            <!-- Digital LCD Screen -->
+            <!-- LCD Display -->
             <div class="radio-lcd-screen">
                 <div class="lcd-scanlines">
-                    </ <truncated 466 bytes>
+                    <div id="radio-track-name" class="lcd-track-line">— No track playing —</div>
+                    <div id="radio-artist-name" class="lcd-artist-line">Press play to begin</div>
                 </div>
-
-                <!-- Dynamic Canvas Equalizer -->
                 <div class="lcd-visualizer-container">
                     <canvas id="radio-visualizer-canvas" width="280" height="32"></canvas>
                 </div>
-
-                <!-- Progress & Time -->
                 <div class="lcd-progress-wrapper">
                     <span id="radio-current-time" class="radio-time-text">00:00</span>
                     <input type="range" id="radio-progress-bar" class="radio-scrubber" min="0" max="100" value="0"
@@ -637,12 +636,12 @@
                 </div>
             </div>
 
-            <!-- Master Control Buttons & Volume -->
+            <!-- Controls -->
             <div class="radio-master-controls">
                 <div class="radio-playback-buttons">
-                    <button id="radio-btn-prev" class="radio-deck-btn" title="Previous Track">⏮</button>
+                    <button id="radio-btn-prev" class="radio-deck-btn" title="Previous">⏮</button>
                     <button id="radio-btn-play" class="radio-deck-btn play-btn" title="Play/Pause">▶</button>
-                    <button id="radio-btn-next" class="radio-deck-btn" title="Next Track">⏭</button>
+                    <button id="radio-btn-next" class="radio-deck-btn" title="Next">⏭</button>
                 </div>
                 <div class="radio-volume-control">
                     <button id="radio-btn-mute" class="radio-vol-btn" title="Mute/Unmute">🔊</button>
@@ -651,19 +650,21 @@
                 </div>
             </div>
 
-            <!-- Song List / Playlist -->
+            <!-- Playlist -->
             <div class="radio-playlist-section">
                 <div class="playlist-header">
-                    <span>CHANNELS & TRACKS</span>
-                    <span class="playlist-count">10 TRACKS AVAILABLE</span>
+                    <span>PLAYLIST</span>
+                    <span class="playlist-count" id="radio-playlist-count">0 songs</span>
                 </div>
                 <div id="radio-playlist-items" class="playlist-items">
-                    <!-- Playlist rows injected dynamically -->
+                    <!-- Rows injected dynamically by radio.js -->
                 </div>
             </div>
         </div>
 
-        <script type="module" src="js/main.js?v=14"></script>
+        <script type="module" src="js/main.js?v=26"></script>
+    </div>
+
 </body>
 
 </html>

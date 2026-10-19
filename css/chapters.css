@@ -1,852 +1,813 @@
-/* css/chapters.css — Chapter-specific mood overrides */
+/* =====================================================
+   css/chapters.css — Mithai Ki Dukan · Chapter Styles
+   ===================================================== */
 
-/* ═══════════════════════════════════════════
-   CHAOTIC CHAPTERS (Intro, Warning, Subject, Stickers)
-   These should feel alive, messy, unhinged
-   ═══════════════════════════════════════════ */
-
+/* ────────────────────────────────────────────────────────
+   CHAPTER INTRO — Sakura Garden Opening
+───────────────────────────────────────────────────────── */
 #ch-intro {
-    background: var(--bg-ch-intro, var(--bg-color));
-    /* Subtle diagonal stripe texture */
-    background-image: repeating-linear-gradient(-45deg,
-            transparent,
-            transparent 40px,
-            rgba(255, 45, 85, 0.03) 40px,
-            rgba(255, 45, 85, 0.03) 80px);
+    background: var(--bg-ch-intro);
+    overflow: hidden;
 }
 
-#ch-warning {
-    background: var(--bg-ch-warning, #fff0f0);
-    background-image: repeating-linear-gradient(90deg,
-            transparent,
-            transparent 60px,
-            rgba(255, 45, 85, 0.05) 60px,
-            rgba(255, 45, 85, 0.05) 61px);
-}
-
-#ch-subject {
-    background: var(--bg-ch-subject, #fffff0);
-    background-image:
-        radial-gradient(circle, rgba(255, 214, 10, 0.12) 1px, transparent 1px);
-    background-size: 28px 28px;
-}
-
-/* File folder: feels like a dossier pulled from a messy drawer */
-.file-folder {
-    background: var(--bg-surface, #fff);
-    border: 2px solid var(--border-color, #ccc);
-    padding: 2rem;
-    box-shadow: 6px 6px 0 var(--shadow-color, rgba(0, 0, 0, 0.12));
-    position: relative;
-    color: var(--text-color, #333);
-}
-
-.file-folder::before {
-    content: "CONFIDENTIAL";
-    position: absolute;
-    top: 12px;
-    right: 12px;
-    color: var(--primary-color);
-    border: 2px solid var(--primary-color);
-    padding: 2px 8px;
-    font-weight: 700;
-    font-size: 0.7rem;
-    letter-spacing: 2px;
-    transform: rotate(8deg);
-}
-
-/* Stat bars — animated fill on load */
-.stat-fill {
-    animation: fillBar 1.2s cubic-bezier(0.4, 0, 0.2, 1) both;
-    animation-delay: 0.3s;
-}
-
-@keyframes fillBar {
-    from {
-        width: 0 !important;
-    }
-}
-
-/* ── Witness Cards (playful mess, each slightly rotated) ── */
-#ch-witnesses {
-    background: var(--bg-ch-witnesses, #f0fff4);
-    background-image: repeating-linear-gradient(45deg,
-            transparent,
-            transparent 30px,
-            rgba(6, 214, 160, 0.04) 30px,
-            rgba(6, 214, 160, 0.04) 60px);
-}
-
-.witness-card:nth-child(1) {
-    transform: rotate(-1.5deg);
-}
-
-.witness-card:nth-child(2) {
-    transform: rotate(1deg);
-}
-
-.witness-card:nth-child(3) {
-    transform: rotate(-0.5deg);
-}
-
-.witness-card:nth-child(4) {
-    transform: rotate(2deg);
-}
-
-.witness-card:nth-child(5) {
-    transform: rotate(-1deg);
-}
-
-.witness-card:nth-child(6) {
-    transform: rotate(1.5deg);
-}
-
-.witness-card:hover {
-    transform: rotate(0deg) translateY(-5px) scale(1.02) !important;
-}
-
-/* ── Sticker Archive ── */
-#ch-stickers {
-    background: var(--bg-ch-stickers, #fff8f0);
-    background-image: radial-gradient(circle, rgba(255, 45, 85, 0.07) 1px, transparent 1px);
-    background-size: 22px 22px;
-}
-
-/* ═══════════════════════════════════════════
-   SCRAPBOOK / EVIDENCE CHAPTER
-   Warm, textured, handmade
-   ═══════════════════════════════════════════ */
-
-#ch-evidence {
-    background: var(--bg-ch-evidence, #f5ede0);
-    background-image:
-        url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c4a882' fill-opacity='0.07'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-}
-
-.scrapbook-header {
-    font-family: 'Permanent Marker', cursive;
-    font-size: 2.5rem;
-    margin-bottom: 0.5rem;
-    position: relative;
-    display: inline-block;
-}
-
-.scrapbook-header::after {
-    content: "";
-    display: block;
-    height: 3px;
-    background: var(--primary-color);
-    transform: rotate(-1deg);
-    margin-top: -4px;
-}
-
-.tape {
-    display: block;
-    width: 80px;
-    height: 22px;
-    background: rgba(255, 214, 10, 0.5);
-    margin: -14px auto 0;
-    border-radius: 2px;
-    position: relative;
-    z-index: 2;
-}
-
-/* ═══════════════════════════════════════════
-   CALM / EMOTIONAL CHAPTERS
-   All chaos stops. Breathing room. Warmth.
-   ═══════════════════════════════════════════ */
-
-#ch-serious,
-#ch-future {
-    background: var(--bg-ch-calm, #1c1c2e);
-    background-image:
-        radial-gradient(ellipse at 20% 80%, rgba(93, 63, 211, 0.15) 0%, transparent 60%),
-        radial-gradient(ellipse at 80% 20%, rgba(255, 45, 85, 0.08) 0%, transparent 60%);
-    color: #e8e8f0;
-}
-
-/* Override global chaos layer visibility for calm chapters */
-#ch-serious.active~#chaos-layer,
-#ch-future.active~#chaos-layer {
-    opacity: 0;
-    transition: opacity 0.8s;
-}
-
-.calm-theme {
-    color: #ffffff;
-}
-
-.calm-theme h2 {
-    font-family: var(--font-terminal);
-    font-weight: 700;
-    letter-spacing: 4px;
-    font-size: 2.2rem;
-    text-transform: uppercase;
-    color: var(--primary-color);
-    margin-bottom: 1rem;
-}
-
-.calm-theme p {
-    font-family: var(--font-terminal);
-    font-size: 1.45rem;
-    line-height: 1.5;
-    letter-spacing: 1.5px;
-    max-width: 600px;
-    margin: 0 auto 1.2rem;
-    color: #ffffff;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
-}
-
-.calm-theme .primary-btn {
-    background: var(--primary-color) !important;
-    border: 2px solid var(--primary-color) !important;
-    color: #ffffff !important;
-    font-weight: 700 !important;
-    font-size: 1.1rem !important;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    padding: 12px 28px !important;
-    box-shadow: 0 0 15px rgba(255, 45, 85, 0.5), 3px 3px 0 rgba(0, 0, 0, 0.5) !important;
-    opacity: 1 !important;
-    visibility: visible !important;
-    display: inline-block !important;
-    transition: transform 0.15s, box-shadow 0.15s, background-color 0.2s;
-}
-
-.calm-theme .primary-btn:hover {
-    background: #ff476e !important;
-    color: #ffffff !important;
-    border-color: #ff476e !important;
-    transform: translate(-2px, -2px);
-    box-shadow: 0 0 25px rgba(255, 45, 85, 0.8), 4px 4px 0 rgba(0, 0, 0, 0.6) !important;
-}
-
-.calm-theme .placeholder {
-    background: var(--placeholder-bg, rgba(255, 214, 10, 0.2));
-    color: var(--placeholder-text, #ffd60a);
-    border-radius: 3px;
-}
-
-.calm-theme .friend-tag {
-    border: 1.5px solid rgba(255, 255, 255, 0.3);
-    color: #ffffff;
-    background: rgba(255, 255, 255, 0.08);
-    font-family: var(--font-terminal);
-    font-size: 1.25rem;
-    letter-spacing: 1px;
-}
-
-#serious-text-container p,
-#future-text-container p {
-    font-family: var(--font-terminal);
-    font-size: 1.45rem;
-    letter-spacing: 1.5px;
-    line-height: 1.5;
-    color: #ffffff;
-    opacity: 0;
-    transform: translateY(8px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-}
-
-#serious-text-container p.visible,
-#future-text-container p.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* ═══════════════════════════════════════════
-   LAST1s LORE
-   Timeline, slightly chaotic but proud
-   ═══════════════════════════════════════════ */
-
-#ch-lore {
-    background: var(--bg-ch-lore, var(--bg-color));
-    background-image: repeating-linear-gradient(0deg,
-            transparent,
-            transparent 29px,
-            rgba(0, 0, 0, 0.04) 29px,
-            rgba(0, 0, 0, 0.04) 30px);
-}
-
-/* ═══════════════════════════════════════════
-   DRAMATIC BIRTHDAY REVEAL
-   Terminal / hacker aesthetic. Black screen.
-   ═══════════════════════════════════════════ */
-
-#ch-reveal {
-    background: #000;
-    color: #00ff41;
-    font-family: 'VT323', monospace;
-}
-
-#ch-reveal h2,
-#ch-reveal h1 {
-    font-family: 'VT323', monospace;
-    color: #00ff41;
-    letter-spacing: 3px;
-}
-
-/* Reveal Action Buttons — Perfectly Aligned */
-.reveal-actions {
-    display: flex;
-    gap: 14px;
-    justify-content: center;
-    align-items: center;
-    margin-top: 1.5rem;
-    flex-wrap: wrap;
-}
-
-#ch-reveal .reveal-actions button {
-    margin: 0 !important;
-    height: 48px;
-    padding: 0 24px;
-    font-family: 'VT323', monospace;
-    font-size: 1.35rem;
-    letter-spacing: 2px;
-    line-height: 1;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    vertical-align: middle;
-    box-sizing: border-box;
-    border-radius: 4px;
-    cursor: pointer;
-    box-shadow: none;
-    transform: none;
-}
-
-#ch-reveal .reveal-actions .confetti-btn {
-    border: 1.5px dashed rgba(0, 255, 65, 0.6);
-    background: rgba(0, 255, 65, 0.08);
-    color: #00ff41;
-    transition: all 0.2s ease;
-}
-
-#ch-reveal .reveal-actions .confetti-btn:hover {
-    background: rgba(0, 255, 65, 0.2);
-    border-color: #00ff41;
-    color: #ffffff;
-    box-shadow: 0 0 16px rgba(0, 255, 65, 0.4);
-}
-
-#ch-reveal .reveal-actions .primary-btn {
-    border: 1.5px solid #00ff41;
-    background: transparent;
-    color: #00ff41;
-    animation: pulseBtn 2s infinite;
-    transition: all 0.2s ease;
-}
-
-#ch-reveal .reveal-actions .primary-btn:hover {
-    background: #00ff41;
-    color: #000000;
-    box-shadow: 0 0 20px rgba(0, 255, 65, 0.6);
-}
-
-#ch-reveal .secondary-btn {
-    border-color: rgba(0, 255, 65, 0.4);
-    color: rgba(0, 255, 65, 0.7);
-    margin: 0.5rem;
-}
-
-#ch-reveal .secondary-btn:hover {
-    background: rgba(0, 255, 65, 0.1);
-}
-
-#ch-reveal .progress-bar {
-    border-color: #00ff41;
-}
-
-#ch-reveal .progress-bar .fill {
-    background: #00ff41;
-    box-shadow: 0 0 8px #00ff41;
-}
-
-.reveal-huge-title {
-    font-family: 'VT323', monospace;
-    font-size: clamp(3rem, 12vw, 6rem);
-    color: #00ff41;
-    text-shadow: 0 0 20px #00ff41, 0 0 40px rgba(0, 255, 65, 0.4);
-    line-height: 1.1;
-    animation: terminalGlowPulse 3s infinite ease-in-out;
-    margin: 1.5rem 0;
-}
-
-@keyframes terminalGlowPulse {
-
-    0%,
-    100% {
-        text-shadow: 0 0 20px #00ff41, 0 0 40px rgba(0, 255, 65, 0.4);
-        transform: translate(0, 0);
-    }
-
-    20% {
-        text-shadow: -2px 0 0 #ff0055, 2px 0 0 #00ffff, 0 0 25px #00ff41;
-        transform: translate(-1px, 0);
-    }
-
-    40% {
-        text-shadow: 0 0 20px #00ff41, 0 0 40px rgba(0, 255, 65, 0.4);
-        transform: translate(0, 0);
-    }
-
-    60% {
-        text-shadow: 2px 0 0 #ff0055, -2px 0 0 #00ffff, 0 0 25px #00ff41;
-        transform: translate(1px, 0);
-    }
-
-    80% {
-        text-shadow: 0 0 20px #00ff41, 0 0 40px rgba(0, 255, 65, 0.4);
-        transform: translate(0, 0);
-    }
-}
-
-#end-screen p {
-    font-family: 'VT323', monospace;
-    font-size: 1.3rem;
-    margin-bottom: 0.5rem;
-    opacity: 0.8;
-}
-
-#end-screen p:last-of-type {
-    opacity: 1;
-    font-size: 1.5rem;
-    color: #00ff41;
-    margin-top: 1rem;
-}
-
-/* ═══════════════════════════════════════════
-   SECRET FILE / CERTIFICATE
-   ═══════════════════════════════════════════ */
-
-#ch-secret {
-    background: var(--bg-ch-secret, #fffdf0);
-    background-image: radial-gradient(circle at 50% 50%, rgba(192, 160, 98, 0.1) 0%, transparent 70%);
-}
-
-/* ═══════════════════════════════════════════
-   CHAOS LAYER ELEMENTS
-   Floating random stuff in the background
-   ═══════════════════════════════════════════ */
-
-.chaos-item {
-    position: fixed;
-    pointer-events: none;
-    z-index: 1;
-    user-select: none;
-    font-size: 1.5rem;
-    opacity: 0.12;
-    animation: chaosFloat linear infinite;
-    will-change: transform;
-}
-
-@keyframes chaosFloat {
-    0% {
-        transform: translateY(0px) rotate(0deg);
-        opacity: 0.12;
-    }
-
-    50% {
-        opacity: 0.18;
-    }
-
-    100% {
-        transform: translateY(-100vh) rotate(720deg);
-        opacity: 0;
-    }
-}
-
-.chaos-text {
-    font-family: 'Permanent Marker', cursive;
-    font-size: 0.9rem;
-    white-space: nowrap;
-    opacity: 0.08;
-    animation: chaosFloat linear infinite;
-}
-
-/* Audio status blink */
-.narration-status {
-    animation: blink 0.9s infinite;
-}
-
-/* ═══════════════════════════════════════════
-   INTERACTIVE ARCHIVIST MASCOT WIDGET (Option 2 & 3)
-   ═══════════════════════════════════════════ */
-.archivist-widget {
-    margin-top: 2.5rem;
-    position: relative;
-    display: inline-flex;
-    flex-direction: column;
-    align-items: center;
-    cursor: pointer;
-    user-select: none;
-    outline: none;
-    z-index: 15;
-    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.archivist-widget:hover {
-    transform: translateY(-3px);
-}
-
-.archivist-widget:focus-visible .archivist-badge {
-    outline: 2px dashed var(--primary-color);
-    outline-offset: 4px;
-}
-
-/* ── Speech Bubble ── */
-.archivist-bubble {
-    position: relative;
-    background: var(--bg-surface, #ffffff);
-    border: 2px solid var(--border-color, var(--text-color));
-    border-radius: 8px;
-    padding: 10px 14px;
-    margin-bottom: 12px;
-    box-shadow: 3px 3px 0 var(--shadow-color, var(--text-color));
-    max-width: 320px;
-    text-align: left;
-    transform-origin: bottom center;
-    transition: all 0.2s ease;
-}
-
-.archivist-bubble::after,
-.archivist-bubble::before {
+/* Background sakura branch SVG-like decorations (CSS only) */
+#ch-intro::before {
     content: '';
     position: absolute;
-    bottom: -9px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 0;
-    height: 0;
-    border-style: solid;
+    top: 0;
+    left: -80px;
+    width: 350px;
+    height: 350px;
+    background: radial-gradient(circle at 30% 30%, rgba(244,167,192,0.18) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
 }
 
-.archivist-bubble::after {
-    border-width: 8px 7px 0 7px;
-    border-color: var(--bg-surface, #ffffff) transparent transparent transparent;
-    bottom: -7px;
+#ch-intro::after {
+    content: '';
+    position: absolute;
+    bottom: 40px;
+    right: -60px;
+    width: 280px;
+    height: 280px;
+    background: radial-gradient(circle at 70% 70%, rgba(239,166,184,0.15) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
 }
 
-.archivist-bubble::before {
-    border-width: 10px 9px 0 9px;
-    border-color: var(--border-color, var(--text-color)) transparent transparent transparent;
-    bottom: -10px;
+.intro-presents {
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--sakura-pink);
+    margin-bottom: 0.5rem;
+    animation: revealFade 0.8s ease 0.2s both;
 }
 
-.bubble-header {
+/* ────────────────────────────────────────────────────────
+   CHAPTER WARNING — Gentle Entry Screen
+───────────────────────────────────────────────────────── */
+#ch-warning {
+    background: var(--bg-ch-warning);
+}
+
+.warning-box {
+    /* Replaced by entry-card in new design */
+}
+
+/* ────────────────────────────────────────────────────────
+   CHAPTER SUBJECT — About Ananya
+───────────────────────────────────────────────────────── */
+#ch-subject {
+    background: var(--bg-ch-subject);
+}
+
+.subject-abilities-list {
+    list-style: none;
+    margin: 0 0 1.5rem;
+    text-align: left;
+}
+
+.subject-abilities-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.7rem;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid var(--border-subtle);
+    font-size: 0.92rem;
+    color: var(--text-body);
+}
+
+.subject-abilities-list li:last-child { border-bottom: none; }
+
+.ability-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 0.1rem; }
+
+/* Stat bars heading */
+.stats-heading {
+    font-family: var(--font-serif);
+    font-size: 1.1rem;
+    color: var(--deep-rose);
+    font-style: italic;
+    margin: 1.5rem 0 1rem;
+}
+
+/* ────────────────────────────────────────────────────────
+   CHAPTER STICKERS — Sweet Garden of Stickers
+───────────────────────────────────────────────────────── */
+#ch-stickers {
+    background: var(--bg-ch-stickers);
+}
+
+/* Override exhibit label style */
+#sticker-exhibit-num {
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--sakura-pink);
+}
+
+/* Narration text below exhibit image */
+.narration-text-block {
+    background: var(--glass-bg);
+    border-left: 3px solid var(--sakura-pink);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: 0.8rem 1.2rem;
+    margin: 0.5rem 0 1rem;
+    font-style: italic;
+    font-size: 0.88rem;
+    color: var(--soft-brown);
+    text-align: left;
+}
+
+/* ────────────────────────────────────────────────────────
+   CHAPTER WITNESSES — Letters from Friends
+───────────────────────────────────────────────────────── */
+#ch-witnesses {
+    background: var(--bg-ch-witnesses);
+}
+
+/* Friend message card hover enhancements */
+.witness-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius-lg);
+    background: linear-gradient(135deg, rgba(248,215,227,0.1), transparent);
+    pointer-events: none;
+}
+
+/* Audio message badge */
+.audio-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: var(--blush-pink);
+    border: 1px solid var(--border-subtle);
+    border-radius: 50px;
+    padding: 4px 10px;
+    font-size: 0.72rem;
+    color: var(--deep-rose);
+    margin-top: 0.5rem;
+}
+
+/* ────────────────────────────────────────────────────────
+   CHAPTER EVIDENCE — Memory Garden
+───────────────────────────────────────────────────────── */
+#ch-evidence {
+    background: var(--bg-ch-evidence);
+}
+
+/* ────────────────────────────────────────────────────────
+   PHOTO SHOWCASE (One-by-one memory gallery)
+───────────────────────────────────────────────────────── */
+.photo-showcase-container {
+    max-width: 680px;
+    margin: 0 auto 2.5rem;
+}
+
+.showcase-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 4px;
-    gap: 8px;
+    margin-bottom: 1.2rem;
+    padding: 0 0.5rem;
 }
 
-.bubble-tag {
-    font-family: var(--font-terminal);
+.showcase-counter {
+    font-family: var(--font-serif);
     font-size: 0.95rem;
-    color: var(--primary-color);
-    letter-spacing: 1px;
-    font-weight: 700;
+    font-weight: 600;
+    color: var(--deep-rose);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
 }
 
-.bubble-count {
-    font-family: var(--font-terminal);
-    font-size: 0.85rem;
-    color: var(--text-muted, #666);
-    letter-spacing: 0.5px;
+.showcase-actions {
+    display: flex;
+    gap: 0.6rem;
 }
 
-.bubble-text {
-    font-size: 0.92rem;
-    line-height: 1.35;
-    color: var(--text-color, #222);
-    margin: 0;
-    font-weight: 500;
-}
-
-/* ── Archivist Badge Bar ── */
-.archivist-badge {
+.showcase-action-btn {
+    background: var(--card-bg);
+    border: 1.5px solid var(--border-subtle);
+    color: var(--deep-rose);
+    border-radius: var(--radius-sm);
+    padding: 0.35rem 0.8rem;
+    font-size: 0.82rem;
+    font-family: var(--font-sans);
+    cursor: pointer;
+    transition: all 0.2s ease;
     display: flex;
     align-items: center;
-    gap: 12px;
-    background: var(--bg-surface, #ffffff);
-    border: 2px solid var(--border-color, var(--text-color));
-    border-radius: 999px;
-    padding: 6px 16px 6px 8px;
-    box-shadow: 4px 4px 0 var(--shadow-color, var(--text-color));
-    transition: all 0.15s ease;
+    gap: 0.35rem;
 }
 
-.archivist-widget:hover .archivist-badge {
-    box-shadow: 5px 5px 0 var(--primary-color);
-    border-color: var(--border-color, var(--text-color));
+.showcase-action-btn:hover {
+    background: var(--petal-light);
+    border-color: var(--sakura-pink);
+    transform: translateY(-1px);
 }
 
-.archivist-widget:active .archivist-badge {
-    transform: translate(2px, 2px);
-    box-shadow: 2px 2px 0 var(--shadow-color, var(--text-color));
+.showcase-action-btn.active {
+    background: var(--sakura-pink);
+    color: #fff;
+    border-color: var(--sakura-pink);
 }
 
-/* ── Avatar Frame & Pulse ── */
-.archivist-avatar-frame {
+/* Single View Polaroid Stage */
+.showcase-card-wrapper {
     position: relative;
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    background: var(--bg-surface-alt, #fff0f3);
-    border: 2px solid var(--border-color, var(--text-color));
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 0.8rem;
+    margin-bottom: 1.4rem;
 }
 
-.archivist-avatar {
-    font-size: 1.55rem;
-    display: inline-block;
-    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+.showcase-nav-btn {
+    background: var(--card-bg);
+    border: 1.5px solid var(--border-subtle);
+    color: var(--deep-rose);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
     line-height: 1;
+    cursor: pointer;
+    box-shadow: 0 4px 14px var(--shadow);
+    transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    flex-shrink: 0;
+    user-select: none;
 }
 
-.archivist-widget:hover .archivist-avatar {
-    transform: scale(1.15) rotate(-6deg);
-}
-
-.archivist-avatar.react-click {
-    animation: archivistJolt 0.35s ease;
-}
-
-.archivist-radar-ring {
-    position: absolute;
-    inset: -4px;
-    border-radius: 50%;
-    border: 2px solid var(--primary-color);
-    opacity: 0;
-    pointer-events: none;
-}
-
-.archivist-widget:hover .archivist-radar-ring {
-    animation: radarPulse 1.4s infinite ease-out;
-}
-
-/* ── Meta Details ── */
-.archivist-details {
-    display: flex;
-    flex-direction: column;
-    text-align: left;
-}
-
-.archivist-header {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-}
-
-.archivist-name {
-    font-family: var(--font-main);
-    font-weight: 700;
-    font-size: 0.88rem;
-    letter-spacing: 0.5px;
-    color: var(--text-color);
-}
-
-.archivist-live-badge {
-    font-family: var(--font-terminal);
-    font-size: 0.8rem;
-    color: var(--accent-green, #059669);
-    display: inline-flex;
-    align-items: center;
-    gap: 3px;
-    font-weight: bold;
-}
-
-.status-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--accent-green, #10b981);
-    display: inline-block;
-    animation: blink 1s infinite alternate;
-}
-
-.archivist-dept {
-    font-family: var(--font-terminal);
-    font-size: 0.8rem;
-    color: var(--text-muted, #666);
-    letter-spacing: 0.5px;
-}
-
-/* ── Tap Hint ── */
-.archivist-tap-hint {
-    margin-left: 6px;
-    background: var(--accent-yellow);
-    color: #111;
-    border: 1.5px solid var(--text-color);
-    padding: 3px 8px;
-    border-radius: 4px;
-    font-family: var(--font-terminal);
-    font-size: 0.85rem;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    letter-spacing: 0.5px;
-    transition: transform 0.15s;
-}
-
-.archivist-widget:hover .archivist-tap-hint {
-    background: var(--primary-color);
+.showcase-nav-btn:hover:not(:disabled) {
+    background: var(--sakura-pink);
     color: #fff;
-    transform: scale(1.05);
+    border-color: var(--sakura-pink);
+    transform: scale(1.12);
+    box-shadow: 0 6px 20px rgba(244,167,192,0.4);
 }
 
-/* Floating spark particles spawned on click */
-.archivist-spark {
-    position: fixed;
-    pointer-events: none;
-    font-size: 1.3rem;
-    z-index: 9999;
-    animation: sparkFloat 0.7s forwards ease-out;
+.showcase-nav-btn:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+    transform: none;
 }
 
-@keyframes sparkFloat {
-    0% {
-        opacity: 1;
-        transform: translate(0, 0) scale(0.6) rotate(0deg);
-    }
-
-    100% {
-        opacity: 0;
-        transform: translate(var(--tx, 20px), var(--ty, -40px)) scale(1.3) rotate(var(--tr, 45deg));
-    }
-}
-
-@keyframes archivistJolt {
-    0% {
-        transform: scale(1);
-    }
-
-    30% {
-        transform: scale(1.35) rotate(12deg);
-    }
-
-    60% {
-        transform: scale(0.9) rotate(-8deg);
-    }
-
-    100% {
-        transform: scale(1) rotate(0deg);
-    }
-}
-
-@keyframes radarPulse {
-    0% {
-        transform: scale(0.95);
-        opacity: 0.8;
-    }
-
-    100% {
-        transform: scale(1.4);
-        opacity: 0;
-    }
-}
-
-/* System popup positioning helpers */
-.popup-bottom-left {
-    bottom: 75px;
-    left: 20px;
-}
-
-.popup-bottom-right {
-    bottom: 85px;
-    right: 20px;
-}
-
-.popup-top-right {
-    top: 70px;
-    right: 20px;
-}
-
-.popup-top-left {
-    top: 70px;
-    left: 20px;
-}
-
-.popup-center-left {
-    top: 40%;
-    left: 20px;
-}
-
-.popup-center-right {
-    top: 40%;
-    right: 20px;
-}
-
-/* Shift popups clear off the radio deck if spawned when radio is open */
-body.radio-open .popup-bottom-left {
-    left: 360px;
-    bottom: 20px;
-}
-
-body.radio-open .popup-center-left {
-    left: 360px;
-    top: 40%;
-}
-
-/* Pinned Photo in Subject Dossier */
-.pinned-photo {
-    position: absolute;
-    top: -20px;
-    right: 20px;
-    width: 180px;
-    height: auto;
-    padding: 8px 8px 35px 8px; /* Polaroid style */
-    background: #fdfdfd;
-    box-shadow: 4px 6px 15px rgba(0, 0, 0, 0.4), inset 0 0 5px rgba(0,0,0,0.1);
-    transform: rotate(6deg);
-    z-index: 10;
-    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.pinned-photo:hover {
-    transform: rotate(1deg) scale(1.08);
-}
-
-.pinned-photo img {
+.showcase-polaroid {
+    position: relative;
+    background: var(--card-bg);
+    border: 2px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: 1.1rem 1.1rem 1.4rem;
+    box-shadow: 0 12px 36px var(--shadow), 0 2px 8px rgba(112,70,83,0.06);
     width: 100%;
-    height: auto;
-    display: block;
-    filter: sepia(0.1) contrast(1.1);
+    max-width: 480px;
+    margin: 0 auto;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* The physical push pin */
-.pinned-photo .pin {
+.showcase-polaroid:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 44px rgba(112,70,83,0.18);
+}
+
+.showcase-badge {
     position: absolute;
-    top: 8px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 14px;
-    height: 14px;
-    background: #ff2d55;
-    border-radius: 50%;
-    box-shadow: inset -2px -2px 4px rgba(0,0,0,0.5), 2px 4px 6px rgba(0,0,0,0.4);
+    top: -12px;
+    left: 20px;
+    background: linear-gradient(135deg, #F4A7C0, #EFA6B8);
+    color: #fff;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.75rem;
+    border-radius: 999px;
+    box-shadow: 0 4px 12px rgba(244,167,192,0.5);
     z-index: 2;
+    transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
-.pinned-photo .pin::after {
-    content: '';
-    position: absolute;
-    top: 3px;
-    left: 3px;
-    width: 4px;
-    height: 4px;
-    background: rgba(255,255,255,0.8);
+.showcase-badge.badge-memory {
+    background: linear-gradient(135deg, #B7C9AE, #98B38E);
+    box-shadow: 0 4px 12px rgba(183,201,174,0.5);
+}
+
+.showcase-photo-frame {
+    position: relative;
+    width: 100%;
+    min-height: 380px;
+    max-height: 520px;
+    background: rgba(253, 232, 240, 0.45);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    cursor: zoom-in;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px;
+}
+
+.showcase-photo-frame img {
+    max-width: 100%;
+    max-height: 500px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    border-radius: var(--radius-sm);
+    transition: opacity 0.3s ease, transform 0.4s ease;
+    box-shadow: 0 4px 16px rgba(112,70,83,0.1);
+}
+
+.showcase-photo-frame img.animating {
+    opacity: 0;
+    transform: scale(0.96);
+}
+
+.showcase-details {
+    margin-top: 1.1rem;
+    text-align: center;
+}
+
+.showcase-title {
+    font-family: var(--font-serif);
+    font-size: 1.15rem;
+    color: var(--deep-rose);
+    margin: 0 0 0.3rem;
+}
+
+.showcase-caption {
+    font-family: var(--font-script);
+    font-size: 1.15rem;
+    color: var(--soft-brown);
+    margin: 0;
+}
+
+/* Dots */
+.showcase-dots {
+    display: flex;
+    justify-content: center;
+    gap: 0.45rem;
+    margin-bottom: 1.2rem;
+    flex-wrap: wrap;
+}
+
+.showcase-dot {
+    width: 9px;
+    height: 9px;
     border-radius: 50%;
+    background: var(--border-subtle);
+    border: none;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    padding: 0;
+}
+
+.showcase-dot:hover {
+    background: var(--sakura-pink);
+    transform: scale(1.2);
+}
+
+.showcase-dot.active {
+    width: 22px;
+    border-radius: 999px;
+    background: var(--deep-rose);
+}
+
+/* Thumbnails strip */
+.showcase-thumbnails {
+    display: flex;
+    gap: 0.5rem;
+    overflow-x: auto;
+    padding: 0.4rem 0.2rem 0.8rem;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border-subtle) transparent;
+}
+
+.showcase-thumbnails::-webkit-scrollbar {
+    height: 4px;
+}
+.showcase-thumbnails::-webkit-scrollbar-thumb {
+    background: var(--border-subtle);
+    border-radius: 4px;
+}
+
+.showcase-thumb-item {
+    position: relative;
+    flex: 0 0 60px;
+    height: 60px;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all 0.2s ease;
+    background: var(--petal-light);
+}
+
+.showcase-thumb-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+}
+
+.showcase-thumb-item:hover img,
+.showcase-thumb-item.active img {
+    opacity: 1;
+}
+
+.showcase-thumb-item.active {
+    border-color: var(--deep-rose);
+    transform: scale(1.08);
+    box-shadow: 0 3px 10px rgba(112,70,83,0.25);
+}
+
+.showcase-thumb-item.is-tuntun::after {
+    content: "🌸";
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+    font-size: 0.65rem;
+    line-height: 1;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.5);
 }
 
 @media (max-width: 600px) {
-    .pinned-photo {
-        width: 120px;
-        top: -10px;
-        right: 10px;
+    .showcase-photo-frame {
+        min-height: 280px;
+        max-height: 380px;
+    }
+    .showcase-nav-btn {
+        width: 38px;
+        height: 38px;
+        font-size: 1.5rem;
     }
 }
+#evidence-lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(112,70,83,0.6);
+    backdrop-filter: blur(12px);
+    z-index: 8000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    animation: revealFade 0.3s ease;
+}
+
+#evidence-lightbox.hidden { display: none; }
+
+#evidence-lightbox .lb-card {
+    background: var(--card-bg);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    max-width: 700px;
+    width: 100%;
+    box-shadow: 0 20px 60px rgba(112,70,83,0.3);
+    animation: bloomIn 0.3s ease;
+}
+
+#evidence-lightbox .lb-card img {
+    width: 100%;
+    max-height: 70vh;
+    object-fit: contain;
+    border-radius: var(--radius-md);
+    margin-bottom: 1rem;
+    display: block;
+}
+
+#evidence-lightbox .lb-caption {
+    font-family: var(--font-script);
+    font-size: 1.1rem;
+    color: var(--deep-rose);
+    text-align: center;
+}
+
+#evidence-lightbox .lb-close {
+    display: block;
+    margin: 1rem auto 0;
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--text-muted);
+    transition: color 0.2s, transform 0.2s;
+}
+
+#evidence-lightbox .lb-close:hover {
+    color: var(--deep-rose);
+    transform: rotate(90deg);
+}
+
+/* ────────────────────────────────────────────────────────
+   CHAPTER SERIOUS — The Quiet Corner
+───────────────────────────────────────────────────────── */
+#ch-serious {
+    background: var(--bg-ch-calm);
+}
+
+.serious-intro-note {
+    font-family: var(--font-serif);
+    font-size: 1.4rem;
+    font-style: italic;
+    color: var(--deep-rose);
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.serious-audio-section {
+    background: var(--card-bg);
+    border: 1.5px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem 2rem;
+    box-shadow: 0 4px 20px var(--shadow);
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.serious-audio-title {
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    color: var(--deep-rose);
+    font-style: italic;
+    margin-bottom: 1rem;
+}
+
+.serious-text-section {
+    background: var(--card-bg);
+    border: 1.5px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    box-shadow: 0 4px 20px var(--shadow);
+    margin-bottom: 2rem;
+}
+
+/* ────────────────────────────────────────────────────────
+   CHAPTER LORE — Mithai Ki Dukan Story
+───────────────────────────────────────────────────────── */
+#ch-lore {
+    background: var(--bg-ch-lore);
+}
+
+.lore-intro-card {
+    background: var(--card-bg);
+    border: 1.5px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    box-shadow: 0 4px 20px var(--shadow);
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.lore-recipe-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0;
+}
+
+.lore-recipe-item {
+    background: var(--card-bg);
+    border: 1.5px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    padding: 1.2rem;
+    text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 3px 12px var(--shadow);
+}
+
+.lore-recipe-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(112,70,83,0.15);
+}
+
+.lore-recipe-step-badge {
+    display: inline-block;
+    background: var(--petal-light);
+    color: var(--deep-rose);
+    border: 1px solid var(--border-subtle);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 0.2rem 0.6rem;
+    border-radius: 50px;
+    margin-bottom: 0.6rem;
+}
+
+.lore-recipe-emoji { font-size: 2.2rem; margin-bottom: 0.5rem; display: block; }
+
+.lore-recipe-name {
+    font-family: var(--font-serif);
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--deep-rose);
+    display: block;
+    margin-bottom: 0.3rem;
+}
+
+.lore-recipe-desc {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+    display: block;
+}
+
+/* ────────────────────────────────────────────────────────
+   CHAPTER FUTURE — What Comes Next
+───────────────────────────────────────────────────────── */
+#ch-future {
+    background: var(--bg-ch-calm);
+}
+
+.future-quote-wrapper {
+    background: var(--card-bg);
+    border: 1.5px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    box-shadow: 0 4px 20px var(--shadow);
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+.future-quote-wrapper::before {
+    content: '"';
+    position: absolute;
+    top: -14px;
+    left: 24px;
+    font-family: var(--font-serif);
+    font-size: 4rem;
+    color: var(--sakura-pink);
+    line-height: 1;
+    opacity: 0.5;
+}
+
+/* ────────────────────────────────────────────────────────
+   CHAPTER REVEAL — Birthday Celebration
+───────────────────────────────────────────────────────── */
+#ch-reveal {
+    background: var(--bg-ch-reveal);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Ambient glow orbs in the background */
+#ch-reveal::before {
+    content: '';
+    position: absolute;
+    top: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(244,167,192,0.25) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+    animation: gentlePulse 4s ease infinite;
+}
+
+.loading-sequence-wrap {
+    text-align: center;
+    max-width: 400px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.reveal-petal-row {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    animation: gentleFloat 3s ease-in-out infinite;
+}
+
+.reveal-brand-footer {
+    font-family: var(--font-script);
+    font-size: 1.1rem;
+    color: var(--soft-brown);
+    margin-top: 1.5rem;
+    opacity: 0.8;
+}
+
+/* Birthday audio section */
+.bday-audio-section {
+    background: var(--card-bg);
+    border: 1.5px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem 2rem;
+    margin: 1.5rem 0;
+    box-shadow: 0 4px 20px var(--shadow);
+}
+
+.bday-audio-title {
+    font-family: var(--font-serif);
+    font-size: 0.95rem;
+    font-style: italic;
+    color: var(--deep-rose);
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+/* ────────────────────────────────────────────────────────
+   CHAPTER SECRET — Birthday Certificate
+───────────────────────────────────────────────────────── */
+#ch-secret {
+    background: var(--bg-ch-secret);
+}
+
+/* ────────────────────────────────────────────────────────
+   POPUP NOTIFICATIONS (gentle version)
+───────────────────────────────────────────────────────── */
+.chaos-popup {
+    position: fixed;
+    background: var(--card-bg);
+    border: 1.5px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    padding: 1rem 1.2rem;
+    max-width: 240px;
+    box-shadow: 0 6px 24px var(--shadow);
+    z-index: 2000;
+    backdrop-filter: blur(8px);
+    animation: popupIn 0.3s ease both;
+    pointer-events: none;
+}
+
+@keyframes popupIn {
+    from { opacity: 0; transform: translateY(10px) scale(0.95); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.chaos-popup.popping-out {
+    animation: popupOut 0.3s ease both;
+}
+
+@keyframes popupOut {
+    from { opacity: 1; transform: translateY(0) scale(1); }
+    to   { opacity: 0; transform: translateY(-6px) scale(0.95); }
+}
+
+.popup-header {
+    font-family: var(--font-serif);
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--deep-rose);
+    margin-bottom: 0.4rem;
+}
+
+.popup-body {
+    font-size: 0.78rem;
+    color: var(--text-body);
+    line-height: 1.5;
+}
+
+/* ────────────────────────────────────────────────────────
+   SCRAPBOOK SECTION HEADING
+───────────────────────────────────────────────────────── */
+.scrapbook-header {
+    font-family: var(--font-serif);
+}
+
+/* Evidence board full heading treatment */
+.evidence-section-intro {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+/* ────────────────────────────────────────────────────────
+   RESPONSIVE CHAPTER ADJUSTMENTS
+───────────────────────────────────────────────────────── */
+@media (max-width: 600px) {
+    .lore-recipe-grid { grid-template-columns: 1fr 1fr; }
+    .serious-audio-section { padding: 1rem 1.2rem; }
+    .future-quote-wrapper { padding: 1.5rem 1.2rem; }
+    .bday-audio-section { padding: 1rem 1.2rem; }
+}
+
+/* ────────────────────────────────────────────────────────
+   GLITCH HEADING — Removed; graceful serif instead
+───────────────────────────────────────────────────────── */
+.glitch-heading {
+    /* Removed glitch effect; now just a beautiful serif heading */
+    font-family: var(--font-serif);
+    color: var(--deep-rose);
+}
+
+/* ────────────────────────────────────────────────────────
+   THEME DARK ADJUSTMENTS
+───────────────────────────────────────────────────────── */
+body.theme-dark #ch-intro    { background: var(--bg-ch-intro); }
+body.theme-dark #ch-warning  { background: var(--bg-ch-warning); }
+body.theme-dark #ch-serious,
+body.theme-dark #ch-future,
+body.theme-dark #ch-reveal   { background: var(--bg-ch-calm); }
