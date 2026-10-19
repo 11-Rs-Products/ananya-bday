@@ -344,11 +344,11 @@ const CONFIG = {
         title: "HAPPY BIRTHDAY, ANANYA",
         audioFiles: [
             "assets/audio/bday wishes/VN20260909_232308.mp3",
-            "assets/audio/bday wishes/Voice 260908_001126.mp3",
-            "assets/audio/bday wishes/whatsapp-audio-2026-09-07-at-231344-dtecdjer_vOfkm3b8.ogg",
-            "assets/audio/bday wishes/WhatsApp Audio 2026-09-08 at 14.06.13.opus",
-            "assets/audio/bday wishes/WhatsApp Audio 2026-09-08 at 22.03.48.opus",
-            "assets/audio/bday wishes/WhatsApp Audio 2026-09-09 at 19.41.40.opus"
+            "assets/audio/bday wishes/voice-260908-001126.mp3",
+            "assets/audio/bday wishes/whatsapp-audio-2026-09-07-at-231344-dtecdjer_vOfkm3b8.mp3",
+            "assets/audio/bday wishes/WhatsApp Audio 2026-09-08 at 14.06.13.mp3",
+            "assets/audio/bday wishes/WhatsApp Audio 2026-09-08 at 22.03.48.mp3",
+            "assets/audio/bday wishes/WhatsApp Audio 2026-09-09 at 19.41.40.mp3"
         ]
     }
 };

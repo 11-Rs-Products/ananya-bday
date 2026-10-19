@@ -10,73 +10,38 @@
 export const RADIO_PLAYLIST = [
     {
         id: 'track-1',
-        title: "Aari Aari",
-        artist: "Dhurandhar The Revenge",
-        src: "songs/Aari Aari Dhurandhar The Revenge 320 Kbps.mp3",
-        icon: "🔥"
+        title: "Bairan Barsaat",
+        artist: "Mithai Ki Dukan Lounge",
+        src: "songs/Bairan Barsaat.mp3",
+        icon: "🌧️"
     },
     {
         id: 'track-2',
-        title: "Blinding Lights",
-        artist: "The Weeknd",
-        src: "songs/The_Weeknd_-_Blinding_Lights_(mp3.pm).mp3",
-        icon: "⚡"
-    },
-    {
-        id: 'track-3',
-        title: "Starboy",
-        artist: "The Weeknd ft. Daft Punk",
-        src: "songs/The_Weeknd_ft._Daft_Punk_-_Starboy_(mp3.pm).mp3",
-        icon: "⭐"
-    },
-    {
-        id: 'track-4',
-        title: "Didi",
-        artist: "Dhurandhar The Revenge",
-        src: "songs/Didi Dhurandhar The Revenge 320 Kbps.mp3",
-        icon: "💃"
-    },
-    {
-        id: 'track-5',
-        title: "High For This",
-        artist: "The Weeknd",
-        src: "songs/TheWeeknd_-_High_For_This_(mp3.pm).mp3",
-        icon: "🌙"
-    },
-    {
-        id: 'track-6',
-        title: "Main Aur Tu",
-        artist: "Dhurandhar The Revenge",
-        src: "songs/Main Aur Tu Dhurandhar The Revenge 320 Kbps.mp3",
-        icon: "💖"
-    },
-    {
-        id: 'track-7',
-        title: "Lutt Le Gaya",
-        artist: "Dhurandhar",
-        src: "songs/Lutt Le Gaya Dhurandhar 320 Kbps.mp3",
-        icon: "🎬"
-    },
-    {
-        id: 'track-8',
-        title: "Ez Ez",
-        artist: "Dhurandhar",
-        src: "songs/Ez Ez Dhurandhar 320 Kbps.mp3",
+        title: "Haseen",
+        artist: "Talwiinder",
+        src: "songs/Haseen - Talwiinder.mp3",
         icon: "✨"
     },
     {
-        id: 'track-9',
-        title: "Hum Pyaar Karne Wale",
-        artist: "Dhurandhar The Revenge",
-        src: "songs/Hum Pyaar Karne Wale Dhurandhar The Revenge 320 Kbps.mp3",
-        icon: "🎶"
+        id: 'track-3',
+        title: "WISHES",
+        artist: "Hasan Raheem x Talwiinder",
+        src: "songs/supreme_-_WISHES_Hasan_Raheem_x_Talwiinder_(mp3.pm).mp3",
+        icon: "💫"
     },
     {
-        id: 'track-10',
-        title: "Rang De Lal Oye Oye",
-        artist: "Dhurandhar The Revenge",
-        src: "songs/Rang De Lal Oye Oye Dhurandhar The Revenge 320 Kbps.mp3",
-        icon: "🔴"
+        id: 'track-4',
+        title: "Pal Pal (Verse)",
+        artist: "Talwiinder",
+        src: "songs/Pal Pal (Talwiinder Verse) - Talwiinder.mp3",
+        icon: "🌸"
+    },
+    {
+        id: 'track-5',
+        title: "Chidiya",
+        artist: "Vilen",
+        src: "songs/Chidiya Vilen.mp3",
+        icon: "🕊️"
     }
 ];
 
@@ -418,6 +383,8 @@ function toggleRadioExpand(forceState) {
 
 function renderPlaylistItems() {
     const container = document.getElementById('radio-playlist-items');
+    const countEl = document.getElementById('radio-playlist-count');
+    if (countEl) countEl.textContent = `${RADIO_PLAYLIST.length} songs`;
     if (!container) return;
 
     container.innerHTML = '';
@@ -460,8 +427,8 @@ function renderPlaylistItems() {
 function updateStateUI(isPlaying, trackIndex) {
     const btnPlay = document.getElementById('radio-btn-play');
     const lcdStatus = document.getElementById('lcd-status-text');
-    const lcdTitle = document.getElementById('lcd-track-title');
-    const lcdArtist = document.getElementById('lcd-track-artist');
+    const lcdTitle = document.getElementById('radio-track-name') || document.getElementById('lcd-track-title');
+    const lcdArtist = document.getElementById('radio-artist-name') || document.getElementById('lcd-track-artist');
     const miniStatus = document.getElementById('radio-mini-status');
     const miniEq = document.getElementById('radio-mini-eq');
 
